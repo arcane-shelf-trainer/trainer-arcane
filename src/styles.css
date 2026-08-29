@@ -160,6 +160,29 @@ h1 {
   color: var(--accent);
 }
 
+/* Le livre : sa couverture et son titre côte à côte. */
+.livre {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  min-height: 150px;
+}
+
+.livre .invite {
+  min-height: 0;
+  text-align: left;
+  max-width: 420px;
+}
+
+.couverture {
+  width: 96px;
+  height: 134px;
+  flex: 0 0 auto;
+  border-radius: 4px;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.35);
+}
+
 .saisie {
   margin: 12px 0 0;
   font-size: 1.05rem;

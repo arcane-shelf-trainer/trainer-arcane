@@ -31,11 +31,11 @@ export const ZONES: Record<string, Zone> = {
   '2I': zone(1398, 62, 1478, 110),
   '2K': zone(1598, 62, 1702, 110),
   // Premier étage, rangée du haut
-  '1A': zone(590, 226, 670, 280),
+  '1A': zone(590, 226, 670, 270),
   '1C': zone(740, 212, 830, 255),
-  '1E': zone(920, 226, 990, 280),
+  '1E': zone(920, 226, 990, 270),
   '1G': zone(1060, 212, 1180, 255),
-  '1I': zone(1250, 226, 1320, 280),
+  '1I': zone(1250, 226, 1320, 270),
   '1K': zone(1400, 205, 1480, 245),
   // Premier étage, alcôve du fond
   '1M': zone(1575, 242, 1660, 282),

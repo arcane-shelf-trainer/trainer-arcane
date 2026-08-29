@@ -33,6 +33,13 @@ l'étagère (section 1A à 1N, 2A à 2Q) de chaque catégorie et de chacun des 4
   chaque section a une zone et qu'aucune zone n'en chevauche une autre.
 - Progression et records en localStorage.
 
+- Les couvertures (`src/assets/couvertures`, 400 SVG, `src/donnees/couvertures.json` pour
+  la correspondance titre vers fichier) viennent du wiki librarian.gamedb.wiki :
+  dessins du wiki aux familles de couleurs du jeu, pas les textures originales.
+  `scripts/nettoyer-couvertures.py` en retire les textes qui donneraient la réponse
+  (section, volumes, pied de page) ; à relancer après tout nouveau téléchargement.
+  Elles s'affichent à côté du titre dans les modes Livres et Chrono.
+
 ## Règles techniques
 
 - Vite + React + TypeScript, aucune librairie supplémentaire. La logique pure vit dans

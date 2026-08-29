@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { LIVRES, SECTIONS } from './jeu/catalogue'
 import { choisir, enregistrer, fiche, maitrise, type Progres } from './jeu/leitner'
 import { Plan, type Filtre, type Resultat } from './Plan'
+import { urlCouverture } from './jeu/couvertures'
 import {
   chargerProgres,
   chargerRecords,
@@ -319,7 +320,21 @@ export function App() {
               </p>
             )}
             <p className="invite-libelle">{mode === 'plan' ? 'Catégorie' : 'Titre'}</p>
-            <p className={`invite${mode === 'plan' ? ' invite-plan' : ''}`}>{question.invite}</p>
+            {mode === 'plan' ? (
+              <p className="invite invite-plan">{question.invite}</p>
+            ) : (
+              <div className="livre">
+                {urlCouverture(question.invite) && (
+                  <img
+                    className="couverture"
+                    src={urlCouverture(question.invite) ?? undefined}
+                    alt=""
+                    draggable={false}
+                  />
+                )}
+                <p className="invite">{question.invite}</p>
+              </div>
+            )}
             <p className="saisie">
               {resultat ? (
                 resultat.correct ? (
