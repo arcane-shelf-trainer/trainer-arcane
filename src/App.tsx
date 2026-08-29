@@ -905,7 +905,7 @@ export function App() {
       <footer>
         <p className="credits">
           {t.credits}{' '}
-          <a href="https://store.steampowered.com/search/?term=Librarian%20Tidy%20Up%20the%20Arcane%20Library" target="_blank" rel="noreferrer">
+          <a href="https://store.steampowered.com/app/4197610/" target="_blank" rel="noreferrer">
             {t.jeu}
           </a>
         </p>
