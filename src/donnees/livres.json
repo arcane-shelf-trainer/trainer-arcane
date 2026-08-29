@@ -1,0 +1,2402 @@
+[
+  {
+    "titre": "A Field Guide to Monsters: Identification and Survival",
+    "categorie": "Monsterology",
+    "section": "1A",
+    "volumes": 10
+  },
+  {
+    "titre": "A Pictorial Guide to the Ecology of Monsters",
+    "categorie": "Monsterology",
+    "section": "1A",
+    "volumes": 10
+  },
+  {
+    "titre": "Behavioral Patterns of Monsters",
+    "categorie": "Monsterology",
+    "section": "1A",
+    "volumes": 10
+  },
+  {
+    "titre": "Ecological Pyramid of Monsters",
+    "categorie": "Monsterology",
+    "section": "1A",
+    "volumes": 10
+  },
+  {
+    "titre": "Living with Monsters: A Guide to Care and Training",
+    "categorie": "Monsterology",
+    "section": "1A",
+    "volumes": 10
+  },
+  {
+    "titre": "Magical Creatures and Their Spells",
+    "categorie": "Monsterology",
+    "section": "1A",
+    "volumes": 10
+  },
+  {
+    "titre": "Monster Field Notes: A Beastmaster's Journey",
+    "categorie": "Monsterology",
+    "section": "1A",
+    "volumes": 10
+  },
+  {
+    "titre": "Monsterology: An Introduction to Forbidden Beast",
+    "categorie": "Monsterology",
+    "section": "1A",
+    "volumes": 10
+  },
+  {
+    "titre": "Monsterology: Language and Vocal Patterns of Monsters",
+    "categorie": "Monsterology",
+    "section": "1A",
+    "volumes": 10
+  },
+  {
+    "titre": "Tears of the Beasts: Records of the Extinct and Forgotten",
+    "categorie": "Monsterology",
+    "section": "1A",
+    "volumes": 10
+  },
+  {
+    "titre": "The Illustrated Bestiary: Creatures of Land, Sky, and Sea",
+    "categorie": "Monsterology",
+    "section": "1A",
+    "volumes": 10
+  },
+  {
+    "titre": "The World Encyclopedia of Dragons",
+    "categorie": "Monsterology",
+    "section": "1A",
+    "volumes": 10
+  },
+  {
+    "titre": "Animal Oracles: Prophesying Match Results",
+    "categorie": "Astrology & Divination",
+    "section": "1B",
+    "volumes": 10
+  },
+  {
+    "titre": "Apocalypse of the Heavens: Omens and Warnings",
+    "categorie": "Astrology & Divination",
+    "section": "1B",
+    "volumes": 10
+  },
+  {
+    "titre": "Book of Constellations: The Thirteen Zodiac Signs That Guide Destiny",
+    "categorie": "Astrology & Divination",
+    "section": "1B",
+    "volumes": 10
+  },
+  {
+    "titre": "One Right Guess in a Hundred Makes a Seer",
+    "categorie": "Astrology & Divination",
+    "section": "1B",
+    "volumes": 10
+  },
+  {
+    "titre": "Prophecy by the Three Witches",
+    "categorie": "Astrology & Divination",
+    "section": "1B",
+    "volumes": 10
+  },
+  {
+    "titre": "Prophecy of the Advent of the Great King of Terror",
+    "categorie": "Astrology & Divination",
+    "section": "1B",
+    "volumes": 10
+  },
+  {
+    "titre": "Prophecy: Angelic Self-Writing",
+    "categorie": "Astrology & Divination",
+    "section": "1B",
+    "volumes": 10
+  },
+  {
+    "titre": "The Abyss of Tarot: A Book of Symbols and Intuition",
+    "categorie": "Astrology & Divination",
+    "section": "1B",
+    "volumes": 10
+  },
+  {
+    "titre": "The Art of Feng Shui: Reading Dragon Veins and Increasing Luck",
+    "categorie": "Astrology & Divination",
+    "section": "1B",
+    "volumes": 10
+  },
+  {
+    "titre": "The Crystal Tome: Practical Scrying and Clairvoyance",
+    "categorie": "Astrology & Divination",
+    "section": "1B",
+    "volumes": 10
+  },
+  {
+    "titre": "The Seer's Journal: Daily Visions of the Future",
+    "categorie": "Astrology & Divination",
+    "section": "1B",
+    "volumes": 10
+  },
+  {
+    "titre": "Voices of the Oracle: Revelations for the Chosen Listener",
+    "categorie": "Astrology & Divination",
+    "section": "1B",
+    "volumes": 10
+  },
+  {
+    "titre": "Seal and Sever: Lost Rites of Curse-Breaking",
+    "categorie": "Curses & Dispels",
+    "section": "1C",
+    "volumes": 10
+  },
+  {
+    "titre": "The Countercurse Compendium: Magic That Bites Back",
+    "categorie": "Curses & Dispels",
+    "section": "1C",
+    "volumes": 10
+  },
+  {
+    "titre": "The Dark Pact: The Birth of a Curse",
+    "categorie": "Curses & Dispels",
+    "section": "1C",
+    "volumes": 10
+  },
+  {
+    "titre": "The Grand Compendium of Curses: 100 Hexes and 100 Dispells",
+    "categorie": "Curses & Dispels",
+    "section": "1C",
+    "volumes": 10
+  },
+  {
+    "titre": "Advanced Curse Analysis: Multiple Structures and Dissolution Process",
+    "categorie": "Curses & Dispels",
+    "section": "1C",
+    "volumes": 3
+  },
+  {
+    "titre": "Breaking the Curse of the Trophyless",
+    "categorie": "Curses & Dispels",
+    "section": "1C",
+    "volumes": 3
+  },
+  {
+    "titre": "Curse-Breaking Arithmancy and Sealing Arts",
+    "categorie": "Curses & Dispels",
+    "section": "1C",
+    "volumes": 3
+  },
+  {
+    "titre": "Introduction to Malediction Systems: Taxonomy, Structure, and Mechanisms",
+    "categorie": "Curses & Dispels",
+    "section": "1C",
+    "volumes": 3
+  },
+  {
+    "titre": "Reverse Ritual Tracing for Curse Source Identification",
+    "categorie": "Curses & Dispels",
+    "section": "1C",
+    "volumes": 3
+  },
+  {
+    "titre": "The Book of Curses: Forgotten Plagues and Their Dispells",
+    "categorie": "Curses & Dispels",
+    "section": "1C",
+    "volumes": 3
+  },
+  {
+    "titre": "The Death's Note",
+    "categorie": "Curses & Dispels",
+    "section": "1C",
+    "volumes": 3
+  },
+  {
+    "titre": "The Lexicon of Curses: Malefic Words and Their Power",
+    "categorie": "Curses & Dispels",
+    "section": "1C",
+    "volumes": 3
+  },
+  {
+    "titre": "A Collection of Chanted Verses: Status Buffing and Nerfing",
+    "categorie": "Bard & Music",
+    "section": "1D",
+    "volumes": 10
+  },
+  {
+    "titre": "Spell Chanting Technique: The Blending of Sound and Spell",
+    "categorie": "Bard & Music",
+    "section": "1D",
+    "volumes": 10
+  },
+  {
+    "titre": "The Chronicle of World Music of Magic",
+    "categorie": "Bard & Music",
+    "section": "1D",
+    "volumes": 10
+  },
+  {
+    "titre": "The Dark Sonata: Music That Attracts Calamity",
+    "categorie": "Bard & Music",
+    "section": "1D",
+    "volumes": 10
+  },
+  {
+    "titre": "Chanting Methods for Resonating with Natural Entities",
+    "categorie": "Bard & Music",
+    "section": "1D",
+    "volumes": 3
+  },
+  {
+    "titre": "Magical Psalms: Methodology for Compiling Chanted Poetry",
+    "categorie": "Bard & Music",
+    "section": "1D",
+    "volumes": 3
+  },
+  {
+    "titre": "Musical Saint: A Great Figure Who Brought Music to the Masses",
+    "categorie": "Bard & Music",
+    "section": "1D",
+    "volumes": 3
+  },
+  {
+    "titre": "The Bard's Book of Spells",
+    "categorie": "Bard & Music",
+    "section": "1D",
+    "volumes": 3
+  },
+  {
+    "titre": "Theoretical Foundations of Enchanted Music",
+    "categorie": "Bard & Music",
+    "section": "1D",
+    "volumes": 3
+  },
+  {
+    "titre": "Theory of Chanting: Principles of Mana Amplification via Voice",
+    "categorie": "Bard & Music",
+    "section": "1D",
+    "volumes": 3
+  },
+  {
+    "titre": "Transcendental Magic Etudes of Execution",
+    "categorie": "Bard & Music",
+    "section": "1D",
+    "volumes": 3
+  },
+  {
+    "titre": "Witches' Hymnal",
+    "categorie": "Bard & Music",
+    "section": "1D",
+    "volumes": 3
+  },
+  {
+    "titre": "A Technique to Turn Wandering Ghosts into Servants",
+    "categorie": "Necromancy",
+    "section": "1E",
+    "volumes": 10
+  },
+  {
+    "titre": "Compendium of Necromancy: The Arts of Management and Maintenance",
+    "categorie": "Necromancy",
+    "section": "1E",
+    "volumes": 10
+  },
+  {
+    "titre": "Compendium of Necromancy: The Beginner's Guide",
+    "categorie": "Necromancy",
+    "section": "1E",
+    "volumes": 10
+  },
+  {
+    "titre": "Foundations of Necromancy: On the Fixation and Severance of Souls",
+    "categorie": "Necromancy",
+    "section": "1E",
+    "volumes": 10
+  },
+  {
+    "titre": "How to Command the Army of the Dead",
+    "categorie": "Necromancy",
+    "section": "1E",
+    "volumes": 10
+  },
+  {
+    "titre": "Necrodefense Compendium: Dealing with Hauntings",
+    "categorie": "Necromancy",
+    "section": "1E",
+    "volumes": 10
+  },
+  {
+    "titre": "Night Parade of One Hundred Demons",
+    "categorie": "Necromancy",
+    "section": "1E",
+    "volumes": 10
+  },
+  {
+    "titre": "Practical Necromancy: Skeleton Edition",
+    "categorie": "Necromancy",
+    "section": "1E",
+    "volumes": 10
+  },
+  {
+    "titre": "Ritual Design Guidelines for the Practicing Necromancer",
+    "categorie": "Necromancy",
+    "section": "1E",
+    "volumes": 10
+  },
+  {
+    "titre": "Rituals of Calling and Commanding the Dead",
+    "categorie": "Necromancy",
+    "section": "1E",
+    "volumes": 10
+  },
+  {
+    "titre": "Theory of the Nether Strata: Analysis of the Afterworld",
+    "categorie": "Necromancy",
+    "section": "1E",
+    "volumes": 10
+  },
+  {
+    "titre": "Zombie: The Secret Rituals for Domination",
+    "categorie": "Necromancy",
+    "section": "1E",
+    "volumes": 10
+  },
+  {
+    "titre": "Beastification and the Threshold of Madness",
+    "categorie": "Transfiguration",
+    "section": "1F",
+    "volumes": 10
+  },
+  {
+    "titre": "Complete Practical Transfiguration: Phases and Sustaining Techniques",
+    "categorie": "Transfiguration",
+    "section": "1F",
+    "volumes": 10
+  },
+  {
+    "titre": "Correlation of Transformation Duration and Mana Depletion",
+    "categorie": "Transfiguration",
+    "section": "1F",
+    "volumes": 10
+  },
+  {
+    "titre": "Foundations of Transformation: Object Alteration and Reassembly",
+    "categorie": "Transfiguration",
+    "section": "1F",
+    "volumes": 10
+  },
+  {
+    "titre": "Humanization: A Transformation Guide for Non-Humans",
+    "categorie": "Transfiguration",
+    "section": "1F",
+    "volumes": 10
+  },
+  {
+    "titre": "Introduction to Inanimate Transfiguration",
+    "categorie": "Transfiguration",
+    "section": "1F",
+    "volumes": 10
+  },
+  {
+    "titre": "Introduction to the Theory of Transfiguration",
+    "categorie": "Transfiguration",
+    "section": "1F",
+    "volumes": 10
+  },
+  {
+    "titre": "Magical Physiology of Therianthropy",
+    "categorie": "Transfiguration",
+    "section": "1F",
+    "volumes": 10
+  },
+  {
+    "titre": "Mastery of Mimicry: Theory and Practice of Visual Imitation",
+    "categorie": "Transfiguration",
+    "section": "1F",
+    "volumes": 10
+  },
+  {
+    "titre": "Preservation of Mental Identity in Therianthropic Spells",
+    "categorie": "Transfiguration",
+    "section": "1F",
+    "volumes": 10
+  },
+  {
+    "titre": "Reducing Metamorphosis Time: How to Minimize Vulnerability",
+    "categorie": "Transfiguration",
+    "section": "1F",
+    "volumes": 10
+  },
+  {
+    "titre": "The Codex of Transfiguration: Detection and Nullification",
+    "categorie": "Transfiguration",
+    "section": "1F",
+    "volumes": 10
+  },
+  {
+    "titre": "Foundations of Magical Item Crafting and Materials",
+    "categorie": "Artifacts & Enchanting",
+    "section": "1G",
+    "volumes": 10
+  },
+  {
+    "titre": "Magical Item's Workshop Series",
+    "categorie": "Artifacts & Enchanting",
+    "section": "1G",
+    "volumes": 10
+  },
+  {
+    "titre": "Practical Enchantment: Offense and Defense Enhancement",
+    "categorie": "Artifacts & Enchanting",
+    "section": "1G",
+    "volumes": 10
+  },
+  {
+    "titre": "The Grand Encyclopedia of Magical Artifacts",
+    "categorie": "Artifacts & Enchanting",
+    "section": "1G",
+    "volumes": 10
+  },
+  {
+    "titre": "Artifacts That Change the World",
+    "categorie": "Artifacts & Enchanting",
+    "section": "1G",
+    "volumes": 3
+  },
+  {
+    "titre": "Compendium of Forbidden Relics",
+    "categorie": "Artifacts & Enchanting",
+    "section": "1G",
+    "volumes": 3
+  },
+  {
+    "titre": "Crystal Catalog: Elemental Properties and Enchantment Mastery",
+    "categorie": "Artifacts & Enchanting",
+    "section": "1G",
+    "volumes": 3
+  },
+  {
+    "titre": "Forging Magical Items",
+    "categorie": "Artifacts & Enchanting",
+    "section": "1G",
+    "volumes": 3
+  },
+  {
+    "titre": "Introduction to Enchantment Theory",
+    "categorie": "Artifacts & Enchanting",
+    "section": "1G",
+    "volumes": 3
+  },
+  {
+    "titre": "Repair and Returning of Enchanted Gear",
+    "categorie": "Artifacts & Enchanting",
+    "section": "1G",
+    "volumes": 3
+  },
+  {
+    "titre": "The Inverse Law of High Grade Armor and Fabric Coverage",
+    "categorie": "Artifacts & Enchanting",
+    "section": "1G",
+    "volumes": 3
+  },
+  {
+    "titre": "The Magic Ring That Steals Reason",
+    "categorie": "Artifacts & Enchanting",
+    "section": "1G",
+    "volumes": 3
+  },
+  {
+    "titre": "Codex of the Stealth Arts",
+    "categorie": "Stealth",
+    "section": "1H",
+    "volumes": 10
+  },
+  {
+    "titre": "Complete Guide to Stealth Magic",
+    "categorie": "Stealth",
+    "section": "1H",
+    "volumes": 10
+  },
+  {
+    "titre": "Hide vs Seek: Magical Warfare of Stealth and Detection",
+    "categorie": "Stealth",
+    "section": "1H",
+    "volumes": 10
+  },
+  {
+    "titre": "Stealth Techniques: Concealment Among Nearby Objects",
+    "categorie": "Stealth",
+    "section": "1H",
+    "volumes": 10
+  },
+  {
+    "titre": "Foundations and Applications of Invisibility Magic",
+    "categorie": "Stealth",
+    "section": "1H",
+    "volumes": 3
+  },
+  {
+    "titre": "Introduction to Stealth Magic: The Art of Shadowing",
+    "categorie": "Stealth",
+    "section": "1H",
+    "volumes": 3
+  },
+  {
+    "titre": "Shadowmages: Shadow Cloning and Teleportation",
+    "categorie": "Stealth",
+    "section": "1H",
+    "volumes": 3
+  },
+  {
+    "titre": "Stealth Arts: Techniques to Becoming Air",
+    "categorie": "Stealth",
+    "section": "1H",
+    "volumes": 3
+  },
+  {
+    "titre": "Tactics of the Bucket: Vision-Sealing Theft",
+    "categorie": "Stealth",
+    "section": "1H",
+    "volumes": 3
+  },
+  {
+    "titre": "The Art of Hiding One's Presence",
+    "categorie": "Stealth",
+    "section": "1H",
+    "volumes": 3
+  },
+  {
+    "titre": "The Art of Shadow-Walking",
+    "categorie": "Stealth",
+    "section": "1H",
+    "volumes": 3
+  },
+  {
+    "titre": "The Book of Ninja: Lurking in the Darkness",
+    "categorie": "Stealth",
+    "section": "1H",
+    "volumes": 3
+  },
+  {
+    "titre": "Chronostatic Illusions: Manipulating the Perception of Time",
+    "categorie": "Illusion",
+    "section": "1I",
+    "volumes": 10
+  },
+  {
+    "titre": "Crafting Visual and Auditory Illusions",
+    "categorie": "Illusion",
+    "section": "1I",
+    "volumes": 10
+  },
+  {
+    "titre": "Enchanting Illusions: Seduction Magic",
+    "categorie": "Illusion",
+    "section": "1I",
+    "volumes": 10
+  },
+  {
+    "titre": "Illusion Magic: The Art of Hypnosis",
+    "categorie": "Illusion",
+    "section": "1I",
+    "volumes": 10
+  },
+  {
+    "titre": "Introduction to Illusion Magic: Truths of the Imaginary",
+    "categorie": "Illusion",
+    "section": "1I",
+    "volumes": 10
+  },
+  {
+    "titre": "Terror Illusions: Spells to Shatter the Enemy's Mind",
+    "categorie": "Illusion",
+    "section": "1I",
+    "volumes": 10
+  },
+  {
+    "titre": "The Art of Illusion Defense: Mental Defences and Protection of the Five Senses",
+    "categorie": "Illusion",
+    "section": "1I",
+    "volumes": 10
+  },
+  {
+    "titre": "The Grand Compendium of Illusion Magic",
+    "categorie": "Illusion",
+    "section": "1I",
+    "volumes": 10
+  },
+  {
+    "titre": "The Illusory Art: Sovereignty over the Five Senses",
+    "categorie": "Illusion",
+    "section": "1I",
+    "volumes": 10
+  },
+  {
+    "titre": "The Infinite Hall: Creating Inescapable Illusory Spaces",
+    "categorie": "Illusion",
+    "section": "1I",
+    "volumes": 10
+  },
+  {
+    "titre": "The Ultimate Illusion: Mirror Flower, Water Moon",
+    "categorie": "Illusion",
+    "section": "1I",
+    "volumes": 10
+  },
+  {
+    "titre": "Where Illusion Ends and Reality Begins",
+    "categorie": "Illusion",
+    "section": "1I",
+    "volumes": 10
+  },
+  {
+    "titre": "A Beginner's Guide: Summoning the Useless Goddess",
+    "categorie": "Summoning",
+    "section": "1J",
+    "volumes": 10
+  },
+  {
+    "titre": "Divine Dragon Summoning: Descent of Bahamut",
+    "categorie": "Summoning",
+    "section": "1J",
+    "volumes": 10
+  },
+  {
+    "titre": "Encyclopedia of 10,000 Summons: The Complete Collection from Heaven to the Abyss",
+    "categorie": "Summoning",
+    "section": "1J",
+    "volumes": 10
+  },
+  {
+    "titre": "Introduction to Summoning: Fundamentals of Otherworldly Contracts",
+    "categorie": "Summoning",
+    "section": "1J",
+    "volumes": 10
+  },
+  {
+    "titre": "Magic Circles and Summoning Syntax Explained",
+    "categorie": "Summoning",
+    "section": "1J",
+    "volumes": 10
+  },
+  {
+    "titre": "Succubus Summoning Techniques and Practical Applications",
+    "categorie": "Summoning",
+    "section": "1J",
+    "volumes": 10
+  },
+  {
+    "titre": "Summoning and Controlling Catastrophic Entities",
+    "categorie": "Summoning",
+    "section": "1J",
+    "volumes": 10
+  },
+  {
+    "titre": "Summoning Magic for Beginners",
+    "categorie": "Summoning",
+    "section": "1J",
+    "volumes": 10
+  },
+  {
+    "titre": "The Book of Summoning and Contracts",
+    "categorie": "Summoning",
+    "section": "1J",
+    "volumes": 10
+  },
+  {
+    "titre": "The Complete Summoning Grimoire",
+    "categorie": "Summoning",
+    "section": "1J",
+    "volumes": 10
+  },
+  {
+    "titre": "Theory and Practice of Hero Summoning from Another World",
+    "categorie": "Summoning",
+    "section": "1J",
+    "volumes": 10
+  },
+  {
+    "titre": "Trans-Temporal Summons and the Law of Causality",
+    "categorie": "Summoning",
+    "section": "1J",
+    "volumes": 10
+  },
+  {
+    "titre": "Advanced Healing Theory: Maintaining Vigor Until Daybreak",
+    "categorie": "Healer & Healing",
+    "section": "1K",
+    "volumes": 10
+  },
+  {
+    "titre": "Fundamentals of Healing and Mana Control",
+    "categorie": "Healer & Healing",
+    "section": "1K",
+    "volumes": 10
+  },
+  {
+    "titre": "Healing Magic for the Reclamation of Mind and Consciousness",
+    "categorie": "Healer & Healing",
+    "section": "1K",
+    "volumes": 10
+  },
+  {
+    "titre": "Introduction to Magical Healing",
+    "categorie": "Healer & Healing",
+    "section": "1K",
+    "volumes": 10
+  },
+  {
+    "titre": "No More \"Healer Diff\": A Comprehensive Guide",
+    "categorie": "Healer & Healing",
+    "section": "1K",
+    "volumes": 10
+  },
+  {
+    "titre": "Spells for Curing Poisons and Diseases",
+    "categorie": "Healer & Healing",
+    "section": "1K",
+    "volumes": 10
+  },
+  {
+    "titre": "The Four Principles of the Healer's Ethics",
+    "categorie": "Healer & Healing",
+    "section": "1K",
+    "volumes": 10
+  },
+  {
+    "titre": "The Grand Compendium of Healing Magic",
+    "categorie": "Healer & Healing",
+    "section": "1K",
+    "volumes": 10
+  },
+  {
+    "titre": "Compendium of Sacred Purification Magic",
+    "categorie": "Holy",
+    "section": "1L",
+    "volumes": 10
+  },
+  {
+    "titre": "Formation and Maintenance of Large Sacred Barriers",
+    "categorie": "Holy",
+    "section": "1L",
+    "volumes": 10
+  },
+  {
+    "titre": "Fundamentals of Holy Power in Undead Annihilation",
+    "categorie": "Holy",
+    "section": "1L",
+    "volumes": 10
+  },
+  {
+    "titre": "Holy Magic: Undead Protection and Purification",
+    "categorie": "Holy",
+    "section": "1L",
+    "volumes": 10
+  },
+  {
+    "titre": "Prolegomena to Holy Magic Theory",
+    "categorie": "Holy",
+    "section": "1L",
+    "volumes": 10
+  },
+  {
+    "titre": "Selection and Application of Targets for Holy Magic",
+    "categorie": "Holy",
+    "section": "1L",
+    "volumes": 10
+  },
+  {
+    "titre": "Spells of Holy Light for Concealing Vital Areas",
+    "categorie": "Holy",
+    "section": "1L",
+    "volumes": 10
+  },
+  {
+    "titre": "Theological Research on Holy Magic",
+    "categorie": "Holy",
+    "section": "1L",
+    "volumes": 10
+  },
+  {
+    "titre": "Book of Spells: Dimension Rift - Expert",
+    "categorie": "Destruction",
+    "section": "1M",
+    "volumes": 10
+  },
+  {
+    "titre": "Book of Spells: Earth - Novice",
+    "categorie": "Destruction",
+    "section": "1M",
+    "volumes": 10
+  },
+  {
+    "titre": "Book of Spells: Fire - Novice",
+    "categorie": "Destruction",
+    "section": "1M",
+    "volumes": 10
+  },
+  {
+    "titre": "Book of Spells: Fluid - Expert",
+    "categorie": "Destruction",
+    "section": "1M",
+    "volumes": 10
+  },
+  {
+    "titre": "Book of Spells: Forest Creation - Expert",
+    "categorie": "Destruction",
+    "section": "1M",
+    "volumes": 10
+  },
+  {
+    "titre": "Book of Spells: Ice - Adept",
+    "categorie": "Destruction",
+    "section": "1M",
+    "volumes": 10
+  },
+  {
+    "titre": "Book of Spells: Light - Adept",
+    "categorie": "Destruction",
+    "section": "1M",
+    "volumes": 10
+  },
+  {
+    "titre": "Book of Spells: Pulverization - Expert",
+    "categorie": "Destruction",
+    "section": "1M",
+    "volumes": 10
+  },
+  {
+    "titre": "Book of Spells: Shadow - Adept",
+    "categorie": "Destruction",
+    "section": "1M",
+    "volumes": 10
+  },
+  {
+    "titre": "Book of Spells: Thunder - Adept",
+    "categorie": "Destruction",
+    "section": "1M",
+    "volumes": 10
+  },
+  {
+    "titre": "Book of Spells: Water - Novice",
+    "categorie": "Destruction",
+    "section": "1M",
+    "volumes": 10
+  },
+  {
+    "titre": "Book of Spells: Wind - Novice",
+    "categorie": "Destruction",
+    "section": "1M",
+    "volumes": 10
+  },
+  {
+    "titre": "Book of Spells: Abyss - Master",
+    "categorie": "Destruction",
+    "section": "1M",
+    "volumes": 5
+  },
+  {
+    "titre": "Book of Spells: Energy - Legendary",
+    "categorie": "Destruction",
+    "section": "1M",
+    "volumes": 5
+  },
+  {
+    "titre": "Book of Spells: Explosion - Legendary",
+    "categorie": "Destruction",
+    "section": "1M",
+    "volumes": 5
+  },
+  {
+    "titre": "Book of Spells: Gravitation - Master",
+    "categorie": "Destruction",
+    "section": "1M",
+    "volumes": 5
+  },
+  {
+    "titre": "Book of Spells: Matter Creation - Master",
+    "categorie": "Destruction",
+    "section": "1M",
+    "volumes": 5
+  },
+  {
+    "titre": "Book of Spells: Psychokinesis - Master",
+    "categorie": "Destruction",
+    "section": "1M",
+    "volumes": 5
+  },
+  {
+    "titre": "Book of Spells: Space - Legendary",
+    "categorie": "Destruction",
+    "section": "1M",
+    "volumes": 5
+  },
+  {
+    "titre": "Book of Spells: Time - Legendary",
+    "categorie": "Destruction",
+    "section": "1M",
+    "volumes": 5
+  },
+  {
+    "titre": "Alchemy Codex: An Introduction to Herbology",
+    "categorie": "Alchemy & Potions",
+    "section": "1N",
+    "volumes": 10
+  },
+  {
+    "titre": "Books of Alchemy: A Practical Guide to Potion Crafting",
+    "categorie": "Alchemy & Potions",
+    "section": "1N",
+    "volumes": 10
+  },
+  {
+    "titre": "Books of Alchemy: Encyclopedia of World Potions",
+    "categorie": "Alchemy & Potions",
+    "section": "1N",
+    "volumes": 10
+  },
+  {
+    "titre": "Books of Alchemy: Homunculus - Chronicle of the Forbidden Creation",
+    "categorie": "Alchemy & Potions",
+    "section": "1N",
+    "volumes": 10
+  },
+  {
+    "titre": "Books of Alchemy: Potion Safety and Storage Manual",
+    "categorie": "Alchemy & Potions",
+    "section": "1N",
+    "volumes": 10
+  },
+  {
+    "titre": "Books of Alchemy: Practical Extraction of High-Purity Essences",
+    "categorie": "Alchemy & Potions",
+    "section": "1N",
+    "volumes": 10
+  },
+  {
+    "titre": "Books of Alchemy: The Laws and Taboos of Chimera Synthesis",
+    "categorie": "Alchemy & Potions",
+    "section": "1N",
+    "volumes": 10
+  },
+  {
+    "titre": "Books of Alchemy: The Little Herbology of the Faefolk",
+    "categorie": "Alchemy & Potions",
+    "section": "1N",
+    "volumes": 10
+  },
+  {
+    "titre": "Books of Alchemy: The Ultimate Secret of the Philosopher's Stone",
+    "categorie": "Alchemy & Potions",
+    "section": "1N",
+    "volumes": 10
+  },
+  {
+    "titre": "Forbidden Alchemy: The Guide to Toxin Brewing and Disposal",
+    "categorie": "Alchemy & Potions",
+    "section": "1N",
+    "volumes": 10
+  },
+  {
+    "titre": "The Alchemist's Encyclopedia: Categories and Efficacy of Ingredients",
+    "categorie": "Alchemy & Potions",
+    "section": "1N",
+    "volumes": 10
+  },
+  {
+    "titre": "The Alchemist's Field Guide: Natural Materials and Foraging",
+    "categorie": "Alchemy & Potions",
+    "section": "1N",
+    "volumes": 10
+  },
+  {
+    "titre": "Tomes of Alchemy: A Beginner's Guide to Modern Synthesis",
+    "categorie": "Alchemy & Potions",
+    "section": "1N",
+    "volumes": 5
+  },
+  {
+    "titre": "Tomes of Alchemy: A Grimoire of Elemental Fusion and Fission",
+    "categorie": "Alchemy & Potions",
+    "section": "1N",
+    "volumes": 5
+  },
+  {
+    "titre": "Tomes of Alchemy: Alchemical Safety Manual Handling Hazardous Materials",
+    "categorie": "Alchemy & Potions",
+    "section": "1N",
+    "volumes": 5
+  },
+  {
+    "titre": "Tomes of Alchemy: Alchemical Tools and Laboratory Apparatus",
+    "categorie": "Alchemy & Potions",
+    "section": "1N",
+    "volumes": 5
+  },
+  {
+    "titre": "Tomes of Alchemy: Beginner Manual of Alchemical Synthesis",
+    "categorie": "Alchemy & Potions",
+    "section": "1N",
+    "volumes": 5
+  },
+  {
+    "titre": "Tomes of Alchemy: Complete Theory of Elemental Transmutation",
+    "categorie": "Alchemy & Potions",
+    "section": "1N",
+    "volumes": 5
+  },
+  {
+    "titre": "Tomes of Alchemy: The Alchemical Art of Transmuting Food to Poop",
+    "categorie": "Alchemy & Potions",
+    "section": "1N",
+    "volumes": 5
+  },
+  {
+    "titre": "Tomes of Alchemy: The Great Compendium of Synthesis Recipes",
+    "categorie": "Alchemy & Potions",
+    "section": "1N",
+    "volumes": 5
+  },
+  {
+    "titre": "Armor and Muscle: Synergy Between Body and Steel",
+    "categorie": "Warrior",
+    "section": "2A",
+    "volumes": 10
+  },
+  {
+    "titre": "Battlefield Logic: A Tactical Guide for Warriors",
+    "categorie": "Warrior",
+    "section": "2A",
+    "volumes": 10
+  },
+  {
+    "titre": "Blade: Dimension Slash Combat Technique",
+    "categorie": "Warrior",
+    "section": "2A",
+    "volumes": 10
+  },
+  {
+    "titre": "Heretic Blade Arts: Three Sword Style",
+    "categorie": "Warrior",
+    "section": "2A",
+    "volumes": 10
+  },
+  {
+    "titre": "Mind Like Still Water: The Zen of Perfect Parrying",
+    "categorie": "Warrior",
+    "section": "2A",
+    "volumes": 10
+  },
+  {
+    "titre": "Scion of the Axe God: Strongest Warrior Chosen by the Sun",
+    "categorie": "Warrior",
+    "section": "2A",
+    "volumes": 10
+  },
+  {
+    "titre": "Sword Saint: The One Who Sliced the Mountains",
+    "categorie": "Warrior",
+    "section": "2A",
+    "volumes": 10
+  },
+  {
+    "titre": "The Dark Berserker and the Greatsword",
+    "categorie": "Warrior",
+    "section": "2A",
+    "volumes": 10
+  },
+  {
+    "titre": "The Supreme Creed: The Naked Warrior",
+    "categorie": "Warrior",
+    "section": "2A",
+    "volumes": 10
+  },
+  {
+    "titre": "The Warrior's Creed: Only Cowards Become Long-Range Mages",
+    "categorie": "Warrior",
+    "section": "2A",
+    "volumes": 10
+  },
+  {
+    "titre": "The Weapon Compendium: Use of Swords, Axes and Spears",
+    "categorie": "Warrior",
+    "section": "2A",
+    "volumes": 10
+  },
+  {
+    "titre": "Warrior's Foundation: Between Blade and Spell",
+    "categorie": "Warrior",
+    "section": "2A",
+    "volumes": 10
+  },
+  {
+    "titre": "Anatomy of the Bow and Arrow",
+    "categorie": "Archery",
+    "section": "2B",
+    "volumes": 10
+  },
+  {
+    "titre": "Applied Archery Tactics: Arrows of Stillness and Motion",
+    "categorie": "Archery",
+    "section": "2B",
+    "volumes": 10
+  },
+  {
+    "titre": "Archers of the Fairies Pact",
+    "categorie": "Archery",
+    "section": "2B",
+    "volumes": 10
+  },
+  {
+    "titre": "Arrow of the Shattered Knee",
+    "categorie": "Archery",
+    "section": "2B",
+    "volumes": 10
+  },
+  {
+    "titre": "Forging and Using Magical Bows",
+    "categorie": "Archery",
+    "section": "2B",
+    "volumes": 10
+  },
+  {
+    "titre": "From Longbow to Shortbow: Tactical Applications",
+    "categorie": "Archery",
+    "section": "2B",
+    "volumes": 10
+  },
+  {
+    "titre": "Stellar Archery: Resonance of Stars and Arrows",
+    "categorie": "Archery",
+    "section": "2B",
+    "volumes": 10
+  },
+  {
+    "titre": "The Art of the Arrow Series",
+    "categorie": "Archery",
+    "section": "2B",
+    "volumes": 10
+  },
+  {
+    "titre": "The Book of Arcane Bows: Magic Infused Arrows",
+    "categorie": "Archery",
+    "section": "2B",
+    "volumes": 10
+  },
+  {
+    "titre": "The Fundamentals of Archery: Spirit and Skill",
+    "categorie": "Archery",
+    "section": "2B",
+    "volumes": 10
+  },
+  {
+    "titre": "The Grand Compendium of Archery",
+    "categorie": "Archery",
+    "section": "2B",
+    "volumes": 10
+  },
+  {
+    "titre": "The Hunter's Archery Manual",
+    "categorie": "Archery",
+    "section": "2B",
+    "volumes": 10
+  },
+  {
+    "titre": "1000 Easy Spells to Use at Home",
+    "categorie": "Daily",
+    "section": "2C",
+    "volumes": 10
+  },
+  {
+    "titre": "A Compendium of Useless Magic from Around the World",
+    "categorie": "Daily",
+    "section": "2C",
+    "volumes": 10
+  },
+  {
+    "titre": "Introduction to LifeHack Magic",
+    "categorie": "Daily",
+    "section": "2C",
+    "volumes": 10
+  },
+  {
+    "titre": "Magic Techniques to Boost Household Efficiency",
+    "categorie": "Daily",
+    "section": "2C",
+    "volumes": 10
+  },
+  {
+    "titre": "Minor Repairs: Practical Everyday Magic",
+    "categorie": "Daily",
+    "section": "2C",
+    "volumes": 10
+  },
+  {
+    "titre": "The Complete Guide to Everyday Magic: Simple Life Enchantments",
+    "categorie": "Daily",
+    "section": "2C",
+    "volumes": 10
+  },
+  {
+    "titre": "Broom Handling Techniques: The Art of Aerial Travel",
+    "categorie": "Daily",
+    "section": "2C",
+    "volumes": 3
+  },
+  {
+    "titre": "Compendium Magic for the Lazy",
+    "categorie": "Daily",
+    "section": "2C",
+    "volumes": 3
+  },
+  {
+    "titre": "Everyday Magic for Deep and Restful Sleep",
+    "categorie": "Daily",
+    "section": "2C",
+    "volumes": 3
+  },
+  {
+    "titre": "Handy Kitchen Magic Recipes",
+    "categorie": "Daily",
+    "section": "2C",
+    "volumes": 3
+  },
+  {
+    "titre": "Home Magic: Spells to Protect and Nurture Your Dwelling",
+    "categorie": "Daily",
+    "section": "2C",
+    "volumes": 3
+  },
+  {
+    "titre": "How to Commute with Magic",
+    "categorie": "Daily",
+    "section": "2C",
+    "volumes": 3
+  },
+  {
+    "titre": "Magic to Mute a Specific Person's Voice",
+    "categorie": "Daily",
+    "section": "2C",
+    "volumes": 3
+  },
+  {
+    "titre": "Magic to Speak and Convey",
+    "categorie": "Daily",
+    "section": "2C",
+    "volumes": 3
+  },
+  {
+    "titre": "Spoiler Prevention Magic",
+    "categorie": "Daily",
+    "section": "2C",
+    "volumes": 3
+  },
+  {
+    "titre": "Storage Magic: Different Dimension Pocket",
+    "categorie": "Daily",
+    "section": "2C",
+    "volumes": 3
+  },
+  {
+    "titre": "Three Seconds to Office: Magic for Last-Minute Commuters",
+    "categorie": "Daily",
+    "section": "2C",
+    "volumes": 3
+  },
+  {
+    "titre": "What Kind of Magic Works Best for Job Hunting?",
+    "categorie": "Daily",
+    "section": "2C",
+    "volumes": 3
+  },
+  {
+    "titre": "Easy Math! Magical Representation Theory for a 3-Year-Old",
+    "categorie": "Mathematics",
+    "section": "2D",
+    "volumes": 10
+  },
+  {
+    "titre": "Introduction to Sorcery Mathematics",
+    "categorie": "Mathematics",
+    "section": "2D",
+    "volumes": 10
+  },
+  {
+    "titre": "Mana Measurement and Conversion Equations",
+    "categorie": "Mathematics",
+    "section": "2D",
+    "volumes": 10
+  },
+  {
+    "titre": "Structural Analysis of Sorcerous Equations",
+    "categorie": "Mathematics",
+    "section": "2D",
+    "volumes": 10
+  },
+  {
+    "titre": "The Mathematical Geometry of Magic Circles",
+    "categorie": "Mathematics",
+    "section": "2D",
+    "volumes": 10
+  },
+  {
+    "titre": "Theory of Everything: Grasping Beautiful Theory through Equations",
+    "categorie": "Mathematics",
+    "section": "2D",
+    "volumes": 10
+  },
+  {
+    "titre": "Arcane Glyphs and Pattern Theory",
+    "categorie": "Mathematics",
+    "section": "2D",
+    "volumes": 3
+  },
+  {
+    "titre": "Genesis Theory: An Interpretation via Imaginary Numbers",
+    "categorie": "Mathematics",
+    "section": "2D",
+    "volumes": 3
+  },
+  {
+    "titre": "Magical Analysis Based on the Application of Infinite Series",
+    "categorie": "Mathematics",
+    "section": "2D",
+    "volumes": 3
+  },
+  {
+    "titre": "Mass-Mana Equivalence",
+    "categorie": "Mathematics",
+    "section": "2D",
+    "volumes": 3
+  },
+  {
+    "titre": "Mathematical Methods for Constructing Magic Circles",
+    "categorie": "Mathematics",
+    "section": "2D",
+    "volumes": 3
+  },
+  {
+    "titre": "Prime Equation: The Absolute Order Hidden Behind Irregularity",
+    "categorie": "Mathematics",
+    "section": "2D",
+    "volumes": 3
+  },
+  {
+    "titre": "Prophecy and Probability Theory",
+    "categorie": "Mathematics",
+    "section": "2D",
+    "volumes": 3
+  },
+  {
+    "titre": "Quantification of Cursed Power and Constraint Conditions",
+    "categorie": "Mathematics",
+    "section": "2D",
+    "volumes": 3
+  },
+  {
+    "titre": "Spatial Distribution of Mana Density and Its Fluctuation Characteristics",
+    "categorie": "Mathematics",
+    "section": "2D",
+    "volumes": 3
+  },
+  {
+    "titre": "Temporal Magic and Chaos Theory",
+    "categorie": "Mathematics",
+    "section": "2D",
+    "volumes": 3
+  },
+  {
+    "titre": "The Law of Equivalent Exchange",
+    "categorie": "Mathematics",
+    "section": "2D",
+    "volumes": 3
+  },
+  {
+    "titre": "Vector Space Theory of Magic",
+    "categorie": "Mathematics",
+    "section": "2D",
+    "volumes": 3
+  },
+  {
+    "titre": "Art and Magic Circles: Definitions and Differences",
+    "categorie": "Art",
+    "section": "2E",
+    "volumes": 10
+  },
+  {
+    "titre": "Art Collection That No One Can Understand",
+    "categorie": "Art",
+    "section": "2E",
+    "volumes": 10
+  },
+  {
+    "titre": "Art is Sublime Because It Has No Answer",
+    "categorie": "Art",
+    "section": "2E",
+    "volumes": 10
+  },
+  {
+    "titre": "Drawing Moving Characters: Beginner Level",
+    "categorie": "Art",
+    "section": "2E",
+    "volumes": 10
+  },
+  {
+    "titre": "How to Change Drawn Art into Reality",
+    "categorie": "Art",
+    "section": "2E",
+    "volumes": 10
+  },
+  {
+    "titre": "Introduction to Magical Art",
+    "categorie": "Art",
+    "section": "2E",
+    "volumes": 10
+  },
+  {
+    "titre": "Living Paintings: Creating and Controlling Animated Magical Art",
+    "categorie": "Art",
+    "section": "2E",
+    "volumes": 10
+  },
+  {
+    "titre": "Memory Transfer: The Technique of Direct Scene Depiction from your Brain",
+    "categorie": "Art",
+    "section": "2E",
+    "volumes": 10
+  },
+  {
+    "titre": "Perfect Lines and Circles: The Secret to Drawing in One Stroke",
+    "categorie": "Art",
+    "section": "2E",
+    "volumes": 10
+  },
+  {
+    "titre": "Process: Sublimating Brain Fragments into Works",
+    "categorie": "Art",
+    "section": "2E",
+    "volumes": 10
+  },
+  {
+    "titre": "Puppet Crafting: An Introductory Guide to Automata and Statues",
+    "categorie": "Art",
+    "section": "2E",
+    "volumes": 10
+  },
+  {
+    "titre": "Techniques for Returning a Drawing to a Previous Step",
+    "categorie": "Art",
+    "section": "2E",
+    "volumes": 10
+  },
+  {
+    "titre": "Conflict Protocols for Guilds",
+    "categorie": "Management",
+    "section": "2F",
+    "volumes": 10
+  },
+  {
+    "titre": "Guild Treasury and Reward System Management",
+    "categorie": "Management",
+    "section": "2F",
+    "volumes": 10
+  },
+  {
+    "titre": "Licensing and Regulation of Magic Users",
+    "categorie": "Management",
+    "section": "2F",
+    "volumes": 10
+  },
+  {
+    "titre": "Magical Supply Chain Management",
+    "categorie": "Management",
+    "section": "2F",
+    "volumes": 10
+  },
+  {
+    "titre": "Management: Administration of Magical Institutions",
+    "categorie": "Management",
+    "section": "2F",
+    "volumes": 10
+  },
+  {
+    "titre": "Management: High-Ranking Magician Training and Evaluation System",
+    "categorie": "Management",
+    "section": "2F",
+    "volumes": 10
+  },
+  {
+    "titre": "Management: Mana Resource Allocation and Optimization",
+    "categorie": "Management",
+    "section": "2F",
+    "volumes": 10
+  },
+  {
+    "titre": "Management: Tactical Command of Magical Forces",
+    "categorie": "Management",
+    "section": "2F",
+    "volumes": 10
+  },
+  {
+    "titre": "Managing Diverse and Cross-Race Adventurer Parties",
+    "categorie": "Management",
+    "section": "2F",
+    "volumes": 10
+  },
+  {
+    "titre": "Organizational Discipline: How Small Cracks Lead to Great Ruin",
+    "categorie": "Management",
+    "section": "2F",
+    "volumes": 10
+  },
+  {
+    "titre": "Research of Adventurer Party Tactics Series",
+    "categorie": "Management",
+    "section": "2F",
+    "volumes": 10
+  },
+  {
+    "titre": "Systems for Nurturing and Promotions in Guilds",
+    "categorie": "Management",
+    "section": "2F",
+    "volumes": 10
+  },
+  {
+    "titre": "An Introduction to Magical Economics",
+    "categorie": "Economics",
+    "section": "2G",
+    "volumes": 10
+  },
+  {
+    "titre": "Arcane Economy Report: Regional Mana Market Analysis",
+    "categorie": "Economics",
+    "section": "2G",
+    "volumes": 10
+  },
+  {
+    "titre": "Economics: Wage Structures in the Magical Professions",
+    "categorie": "Economics",
+    "section": "2G",
+    "volumes": 10
+  },
+  {
+    "titre": "Introduction to Arcane Market Systems",
+    "categorie": "Economics",
+    "section": "2G",
+    "volumes": 10
+  },
+  {
+    "titre": "Magic and Value: Arcane Resource Valuations",
+    "categorie": "Economics",
+    "section": "2G",
+    "volumes": 10
+  },
+  {
+    "titre": "Mana Currency Systems and Their Evolution",
+    "categorie": "Economics",
+    "section": "2G",
+    "volumes": 10
+  },
+  {
+    "titre": "Alchemy and Inflation: The Gold Collapse",
+    "categorie": "Economics",
+    "section": "2G",
+    "volumes": 3
+  },
+  {
+    "titre": "Economics: Supply and Trade of Arcane Resources",
+    "categorie": "Economics",
+    "section": "2G",
+    "volumes": 3
+  },
+  {
+    "titre": "Economics: The Lost Three Decades",
+    "categorie": "Economics",
+    "section": "2G",
+    "volumes": 3
+  },
+  {
+    "titre": "Economics: The Revolution in Logistics Through Teleportation",
+    "categorie": "Economics",
+    "section": "2G",
+    "volumes": 3
+  },
+  {
+    "titre": "Economics: Where Did the Taxes Go?",
+    "categorie": "Economics",
+    "section": "2G",
+    "volumes": 3
+  },
+  {
+    "titre": "Financial: The Art of the Tariff",
+    "categorie": "Economics",
+    "section": "2G",
+    "volumes": 3
+  },
+  {
+    "titre": "History of Demonic Financial Hegemony",
+    "categorie": "Economics",
+    "section": "2G",
+    "volumes": 3
+  },
+  {
+    "titre": "Spell Patents and IP Rights",
+    "categorie": "Economics",
+    "section": "2G",
+    "volumes": 3
+  },
+  {
+    "titre": "Studies in Arcane Fiscal Theory",
+    "categorie": "Economics",
+    "section": "2G",
+    "volumes": 3
+  },
+  {
+    "titre": "The Arcane Black Market and Price Manipulation",
+    "categorie": "Economics",
+    "section": "2G",
+    "volumes": 3
+  },
+  {
+    "titre": "The Complete Works of Magical Economics",
+    "categorie": "Economics",
+    "section": "2G",
+    "volumes": 3
+  },
+  {
+    "titre": "Why Do Stocks Crash the Moment I Buy Them?",
+    "categorie": "Economics",
+    "section": "2G",
+    "volumes": 3
+  },
+  {
+    "titre": "Career Opportunity: Graduated from Magic University… Got Zero Job Offers",
+    "categorie": "Sociology",
+    "section": "2H",
+    "volumes": 10
+  },
+  {
+    "titre": "Interracial Social Dynamics",
+    "categorie": "Sociology",
+    "section": "2H",
+    "volumes": 10
+  },
+  {
+    "titre": "Job Inequality: Low Salary even as a Licensed Sage",
+    "categorie": "Sociology",
+    "section": "2H",
+    "volumes": 10
+  },
+  {
+    "titre": "Labor Studies: Even with Magic, Overtime Never Ends",
+    "categorie": "Sociology",
+    "section": "2H",
+    "volumes": 10
+  },
+  {
+    "titre": "The Influence of Short-Lived Cultures on Long-Lived Species",
+    "categorie": "Sociology",
+    "section": "2H",
+    "volumes": 10
+  },
+  {
+    "titre": "Work Culture: The Mage Who Changed Jobs to a Sweatshop",
+    "categorie": "Sociology",
+    "section": "2H",
+    "volumes": 10
+  },
+  {
+    "titre": "\"Low Mana\" a Form of Discrimination?",
+    "categorie": "Sociology",
+    "section": "2H",
+    "volumes": 3
+  },
+  {
+    "titre": "A Media Society Manipulated by Magic",
+    "categorie": "Sociology",
+    "section": "2H",
+    "volumes": 3
+  },
+  {
+    "titre": "How to Survive a Mana-Disparity Society",
+    "categorie": "Sociology",
+    "section": "2H",
+    "volumes": 3
+  },
+  {
+    "titre": "Labor Studies: Where are the Workplaces to Apply Your University-Learned Magic?",
+    "categorie": "Sociology",
+    "section": "2H",
+    "volumes": 3
+  },
+  {
+    "titre": "Mana and Labor: Sociology of Magical Economies",
+    "categorie": "Sociology",
+    "section": "2H",
+    "volumes": 3
+  },
+  {
+    "titre": "Marriage Is a Contract Spell: Advanced Disenchantment is required for Divorce",
+    "categorie": "Sociology",
+    "section": "2H",
+    "volumes": 3
+  },
+  {
+    "titre": "Social Structures of Magical Civilizations",
+    "categorie": "Sociology",
+    "section": "2H",
+    "volumes": 3
+  },
+  {
+    "titre": "Sociology: Mage Pension System on the Brink of Collapse",
+    "categorie": "Sociology",
+    "section": "2H",
+    "volumes": 3
+  },
+  {
+    "titre": "The Labor Reality of Mages: Unpaid and Unprotected Interns",
+    "categorie": "Sociology",
+    "section": "2H",
+    "volumes": 3
+  },
+  {
+    "titre": "The Rift in Values Between Different Species with Differing Lifespans",
+    "categorie": "Sociology",
+    "section": "2H",
+    "volumes": 3
+  },
+  {
+    "titre": "The Structure of Power Monopolization Tendencies by Long-Lived Species",
+    "categorie": "Sociology",
+    "section": "2H",
+    "volumes": 3
+  },
+  {
+    "titre": "Wage Gaps: Universal Mana Income for Mages Now!",
+    "categorie": "Sociology",
+    "section": "2H",
+    "volumes": 3
+  },
+  {
+    "titre": "A Diary of the Change in the State of the Mind-Reading Girl",
+    "categorie": "Psychology",
+    "section": "2I",
+    "volumes": 10
+  },
+  {
+    "titre": "A Psychologist's Definition of \"Happiness\": The Cutting Edge of Happiness Research",
+    "categorie": "Psychology",
+    "section": "2I",
+    "volumes": 10
+  },
+  {
+    "titre": "Effort Builds Confidence, and Confidence Leads to Action",
+    "categorie": "Psychology",
+    "section": "2I",
+    "volumes": 10
+  },
+  {
+    "titre": "Introduction to Psychological Principles and Analysis",
+    "categorie": "Psychology",
+    "section": "2I",
+    "volumes": 10
+  },
+  {
+    "titre": "Mind Reading: Detecting Lies through Facial Expressions and Gestures",
+    "categorie": "Psychology",
+    "section": "2I",
+    "volumes": 10
+  },
+  {
+    "titre": "Psychology: Mentality That the Weak Bark the Most",
+    "categorie": "Psychology",
+    "section": "2I",
+    "volumes": 10
+  },
+  {
+    "titre": "The Correlation of Magic and Emotion",
+    "categorie": "Psychology",
+    "section": "2I",
+    "volumes": 10
+  },
+  {
+    "titre": "The Psychology of Backseat Gaming",
+    "categorie": "Psychology",
+    "section": "2I",
+    "volumes": 10
+  },
+  {
+    "titre": "The Psychology of Prioritizing Gaming Over Tidying Your Room",
+    "categorie": "Psychology",
+    "section": "2I",
+    "volumes": 10
+  },
+  {
+    "titre": "The Psychology of Using Strong Language from a Safe Zone",
+    "categorie": "Psychology",
+    "section": "2I",
+    "volumes": 10
+  },
+  {
+    "titre": "The Psychology: Powerlessness and Responsibility Shifting",
+    "categorie": "Psychology",
+    "section": "2I",
+    "volumes": 10
+  },
+  {
+    "titre": "Ultimate Choice: Curry flavoured Poop, or Poop flavoured Curry?",
+    "categorie": "Psychology",
+    "section": "2I",
+    "volumes": 10
+  },
+  {
+    "titre": "Ethics of Magic: Responsibility and Restraint",
+    "categorie": "Philosophy",
+    "section": "2J",
+    "volumes": 10
+  },
+  {
+    "titre": "Fantasy or Reality? The Ontological Problem of World",
+    "categorie": "Philosophy",
+    "section": "2J",
+    "volumes": 10
+  },
+  {
+    "titre": "Foundations of Metaphysics",
+    "categorie": "Philosophy",
+    "section": "2J",
+    "volumes": 10
+  },
+  {
+    "titre": "I think, therefore I am",
+    "categorie": "Philosophy",
+    "section": "2J",
+    "volumes": 10
+  },
+  {
+    "titre": "Introduction to Magical Determinism: Spell-Causality and the Philosophy",
+    "categorie": "Philosophy",
+    "section": "2J",
+    "volumes": 10
+  },
+  {
+    "titre": "Philosophical Studies in Magic",
+    "categorie": "Philosophy",
+    "section": "2J",
+    "volumes": 10
+  },
+  {
+    "titre": "Philosophy of Mana and Willpower",
+    "categorie": "Philosophy",
+    "section": "2J",
+    "volumes": 10
+  },
+  {
+    "titre": "Philosophy of Science: Methodology and Truth",
+    "categorie": "Philosophy",
+    "section": "2J",
+    "volumes": 10
+  },
+  {
+    "titre": "Philosophy of Self and Other",
+    "categorie": "Philosophy",
+    "section": "2J",
+    "volumes": 10
+  },
+  {
+    "titre": "Philosophy: Power and Ethics",
+    "categorie": "Philosophy",
+    "section": "2J",
+    "volumes": 10
+  },
+  {
+    "titre": "Soul, Mind, and Body: Are They Truly Distinct?",
+    "categorie": "Philosophy",
+    "section": "2J",
+    "volumes": 10
+  },
+  {
+    "titre": "Teachings of the Great Philosophers of Magic",
+    "categorie": "Philosophy",
+    "section": "2J",
+    "volumes": 10
+  },
+  {
+    "titre": "Chronicles of the Magical Court",
+    "categorie": "Jurisprudence",
+    "section": "2K",
+    "volumes": 10
+  },
+  {
+    "titre": "Codex of Truth Verification",
+    "categorie": "Jurisprudence",
+    "section": "2K",
+    "volumes": 10
+  },
+  {
+    "titre": "Grand Compendium of Magic Jurisprudence",
+    "categorie": "Jurisprudence",
+    "section": "2K",
+    "volumes": 10
+  },
+  {
+    "titre": "Law: Foundations of Contemporary Magical Jurisprudence",
+    "categorie": "Jurisprudence",
+    "section": "2K",
+    "volumes": 10
+  },
+  {
+    "titre": "The Constitution of the Kingdom",
+    "categorie": "Jurisprudence",
+    "section": "2K",
+    "volumes": 10
+  },
+  {
+    "titre": "The System and Precedents of the Arcane Court",
+    "categorie": "Jurisprudence",
+    "section": "2K",
+    "volumes": 10
+  },
+  {
+    "titre": "Civil Liability Within Adventuring Parties",
+    "categorie": "Jurisprudence",
+    "section": "2K",
+    "volumes": 3
+  },
+  {
+    "titre": "Comparative Study of National Magic Laws",
+    "categorie": "Jurisprudence",
+    "section": "2K",
+    "volumes": 3
+  },
+  {
+    "titre": "Compendium of Magical Civil Law: Definition of Personhood, Rights and Succession",
+    "categorie": "Jurisprudence",
+    "section": "2K",
+    "volumes": 3
+  },
+  {
+    "titre": "Contract Law: How to Write Adventurer Contracts",
+    "categorie": "Jurisprudence",
+    "section": "2K",
+    "volumes": 3
+  },
+  {
+    "titre": "Guild Charter: Guild Discipline and Expulsion Systems",
+    "categorie": "Jurisprudence",
+    "section": "2K",
+    "volumes": 3
+  },
+  {
+    "titre": "Legal System for Magical Accidents and Accountability",
+    "categorie": "Jurisprudence",
+    "section": "2K",
+    "volumes": 3
+  },
+  {
+    "titre": "Legal Treatment of Forbidden Magic",
+    "categorie": "Jurisprudence",
+    "section": "2K",
+    "volumes": 3
+  },
+  {
+    "titre": "Legality and Regulation of Magic Use",
+    "categorie": "Jurisprudence",
+    "section": "2K",
+    "volumes": 3
+  },
+  {
+    "titre": "Magical Detective Law: Punishment Act for the Use of Unapproved and Unregistered Spell",
+    "categorie": "Jurisprudence",
+    "section": "2K",
+    "volumes": 3
+  },
+  {
+    "titre": "Monster Hunting Law: List of Prohibited Species and Regulation of Attack Methods",
+    "categorie": "Jurisprudence",
+    "section": "2K",
+    "volumes": 3
+  },
+  {
+    "titre": "The Idea of Equality Under the Law Is Laughable",
+    "categorie": "Jurisprudence",
+    "section": "2K",
+    "volumes": 3
+  },
+  {
+    "titre": "The Legalities of Party Disbandment: Property Distribution and Liability",
+    "categorie": "Jurisprudence",
+    "section": "2K",
+    "volumes": 3
+  },
+  {
+    "titre": "A Kiss Wrought in Spells",
+    "categorie": "Romance",
+    "section": "2L",
+    "volumes": 10
+  },
+  {
+    "titre": "A Midsummer Night's Sweet Dream",
+    "categorie": "Romance",
+    "section": "2L",
+    "volumes": 10
+  },
+  {
+    "titre": "Romance Novel: A Pact Beneath the Stars",
+    "categorie": "Romance",
+    "section": "2L",
+    "volumes": 10
+  },
+  {
+    "titre": "Romance Novel: Senior and the Beast",
+    "categorie": "Romance",
+    "section": "2L",
+    "volumes": 10
+  },
+  {
+    "titre": "Romance Novel: The Fire King and the Ice Queen",
+    "categorie": "Romance",
+    "section": "2L",
+    "volumes": 10
+  },
+  {
+    "titre": "Romance Novel: Whispers of the Moon",
+    "categorie": "Romance",
+    "section": "2L",
+    "volumes": 10
+  },
+  {
+    "titre": "30 Year Old Wizard's First Love",
+    "categorie": "Romance",
+    "section": "2L",
+    "volumes": 3
+  },
+  {
+    "titre": "Cursed to Love You",
+    "categorie": "Romance",
+    "section": "2L",
+    "volumes": 3
+  },
+  {
+    "titre": "Fill the Solitude of My Millennium with Your Ninety Years",
+    "categorie": "Romance",
+    "section": "2L",
+    "volumes": 3
+  },
+  {
+    "titre": "Romance Novel: Lies More Beautiful Than Truth",
+    "categorie": "Romance",
+    "section": "2L",
+    "volumes": 3
+  },
+  {
+    "titre": "Romance Novel: My Massive Golden Balls",
+    "categorie": "Romance",
+    "section": "2L",
+    "volumes": 3
+  },
+  {
+    "titre": "Romance Novel: The Chicken and The Cat",
+    "categorie": "Romance",
+    "section": "2L",
+    "volumes": 3
+  },
+  {
+    "titre": "Romance Novel: The Red Lady and the Bamboozled Men",
+    "categorie": "Romance",
+    "section": "2L",
+    "volumes": 3
+  },
+  {
+    "titre": "Romance Novel: The Thorn Prince",
+    "categorie": "Romance",
+    "section": "2L",
+    "volumes": 3
+  },
+  {
+    "titre": "Roses Are Red, Violets Are Blue",
+    "categorie": "Romance",
+    "section": "2L",
+    "volumes": 3
+  },
+  {
+    "titre": "The Strongest Archmage is Obsessed with Me, the Girl with Zero Magic!",
+    "categorie": "Romance",
+    "section": "2L",
+    "volumes": 3
+  },
+  {
+    "titre": "The Witch and the Accidental Love Potion",
+    "categorie": "Romance",
+    "section": "2L",
+    "volumes": 3
+  },
+  {
+    "titre": "True Love between A 20-Year-Old Lady and an 80-Year-Old Tycoon",
+    "categorie": "Romance",
+    "section": "2L",
+    "volumes": 3
+  },
+  {
+    "titre": "Detective the Reaper",
+    "categorie": "Mystery",
+    "section": "2M",
+    "volumes": 10
+  },
+  {
+    "titre": "Mystery Fiction: The Bloodstained Astrologer",
+    "categorie": "Mystery",
+    "section": "2M",
+    "volumes": 10
+  },
+  {
+    "titre": "Mystery Fiction: The Prospero Code",
+    "categorie": "Mystery",
+    "section": "2M",
+    "volumes": 10
+  },
+  {
+    "titre": "The Arcane Detective Files",
+    "categorie": "Mystery",
+    "section": "2M",
+    "volumes": 10
+  },
+  {
+    "titre": "Mystery Fiction: Judgment of the Spectral Tribunal",
+    "categorie": "Mystery",
+    "section": "2M",
+    "volumes": 5
+  },
+  {
+    "titre": "Mystery Fiction: Magical Theorist Maris",
+    "categorie": "Mystery",
+    "section": "2M",
+    "volumes": 5
+  },
+  {
+    "titre": "Mystery Fiction: One Who Looks into the Abyss",
+    "categorie": "Mystery",
+    "section": "2M",
+    "volumes": 5
+  },
+  {
+    "titre": "Mystery Fiction: The Pirate Captain Who Stepped Down from His Ship",
+    "categorie": "Mystery",
+    "section": "2M",
+    "volumes": 5
+  },
+  {
+    "titre": "Origins of Magic: Awakening of the First Spells and Magic Power",
+    "categorie": "History",
+    "section": "2N",
+    "volumes": 10
+  },
+  {
+    "titre": "Studies in the History of Magical Civilizations",
+    "categorie": "History",
+    "section": "2N",
+    "volumes": 10
+  },
+  {
+    "titre": "The Genesis of Magic and the Evolution of Civilization",
+    "categorie": "History",
+    "section": "2N",
+    "volumes": 10
+  },
+  {
+    "titre": "The Transition and Evolutionary History of Magic",
+    "categorie": "History",
+    "section": "2N",
+    "volumes": 10
+  },
+  {
+    "titre": "Ancient Manuscript Studies on Mage Birth",
+    "categorie": "History",
+    "section": "2N",
+    "volumes": 5
+  },
+  {
+    "titre": "History and Tactics of Magical Warfare",
+    "categorie": "History",
+    "section": "2N",
+    "volumes": 5
+  },
+  {
+    "titre": "Record of the Demon King's Subjugation: The Archmage's Conquest",
+    "categorie": "History",
+    "section": "2N",
+    "volumes": 5
+  },
+  {
+    "titre": "The History of World Exploration and the Discovery of Lost Continents",
+    "categorie": "History",
+    "section": "2N",
+    "volumes": 5
+  },
+  {
+    "titre": "A People Enchanted by Glowing Slabs",
+    "categorie": "Otherworld",
+    "section": "2O",
+    "volumes": 10
+  },
+  {
+    "titre": "The Curious Daily Life in a World Without Magic",
+    "categorie": "Otherworld",
+    "section": "2O",
+    "volumes": 10
+  },
+  {
+    "titre": "The Cursed Workplaces of a Magicless World",
+    "categorie": "Otherworld",
+    "section": "2O",
+    "volumes": 10
+  },
+  {
+    "titre": "They Call Their Mana \"Dark Energy\"",
+    "categorie": "Otherworld",
+    "section": "2O",
+    "volumes": 10
+  },
+  {
+    "titre": "A World Without a Demon Lord, Yet Full of Corporate Slaves",
+    "categorie": "Otherworld",
+    "section": "2O",
+    "volumes": 5
+  },
+  {
+    "titre": "In the Otherworld, Money Is the Ultimate Magic",
+    "categorie": "Otherworld",
+    "section": "2O",
+    "volumes": 5
+  },
+  {
+    "titre": "Otherworld Chronicles: A World Ruled by Data",
+    "categorie": "Otherworld",
+    "section": "2O",
+    "volumes": 5
+  },
+  {
+    "titre": "Strange Technology from Another World! The Ultimate Language: C++",
+    "categorie": "Otherworld",
+    "section": "2O",
+    "volumes": 5
+  },
+  {
+    "titre": "The \"Internet\": The All-Knowing Grimoire",
+    "categorie": "Otherworld",
+    "section": "2O",
+    "volumes": 5
+  },
+  {
+    "titre": "The Otherworld: Demanding Fresh Graduates with 10 Years of Experience",
+    "categorie": "Otherworld",
+    "section": "2O",
+    "volumes": 5
+  },
+  {
+    "titre": "The Ultimate Guide to Otherworldly Swear Words",
+    "categorie": "Otherworld",
+    "section": "2O",
+    "volumes": 5
+  },
+  {
+    "titre": "They Worship an Invisible Entity Known as Wi-Fi",
+    "categorie": "Otherworld",
+    "section": "2O",
+    "volumes": 5
+  },
+  {
+    "titre": "Bestiary Components: Dungeon Creatures",
+    "categorie": "Dungeons",
+    "section": "2P",
+    "volumes": 10
+  },
+  {
+    "titre": "Compendium of Dungeon Resources",
+    "categorie": "Dungeons",
+    "section": "2P",
+    "volumes": 10
+  },
+  {
+    "titre": "Dungeon of the Abyss",
+    "categorie": "Dungeons",
+    "section": "2P",
+    "volumes": 10
+  },
+  {
+    "titre": "Fundamentals of Dungeon Architecture",
+    "categorie": "Dungeons",
+    "section": "2P",
+    "volumes": 10
+  },
+  {
+    "titre": "Gourmet Expeditions in the Dungeon",
+    "categorie": "Dungeons",
+    "section": "2P",
+    "volumes": 5
+  },
+  {
+    "titre": "Optimization Theory of Dungeon Routes",
+    "categorie": "Dungeons",
+    "section": "2P",
+    "volumes": 5
+  },
+  {
+    "titre": "Practical Dungeon Tactics",
+    "categorie": "Dungeons",
+    "section": "2P",
+    "volumes": 5
+  },
+  {
+    "titre": "The Daily Dungeon Notes of the Party Chronicler",
+    "categorie": "Dungeons",
+    "section": "2P",
+    "volumes": 5
+  },
+  {
+    "titre": "Everyone's Demonic: Words of Covenant and Power",
+    "categorie": "Language",
+    "section": "2Q",
+    "volumes": 10
+  },
+  {
+    "titre": "Everyone's Dwarvish: The Craftsman's Language",
+    "categorie": "Language",
+    "section": "2Q",
+    "volumes": 10
+  },
+  {
+    "titre": "Everyone's Elvish: The Graceful Speech of the Forest",
+    "categorie": "Language",
+    "section": "2Q",
+    "volumes": 10
+  },
+  {
+    "titre": "Everyone's Fairy Tongue: Tiny and Lovely Words",
+    "categorie": "Language",
+    "section": "2Q",
+    "volumes": 10
+  },
+  {
+    "titre": "How Did the First Language Emerge? The Origins of Language Evolution",
+    "categorie": "Language",
+    "section": "2Q",
+    "volumes": 5
+  },
+  {
+    "titre": "Inter-Species Communication",
+    "categorie": "Language",
+    "section": "2Q",
+    "volumes": 5
+  },
+  {
+    "titre": "The Birth of Magical Languages: Secrets of Spells and Ancient Speech",
+    "categorie": "Language",
+    "section": "2Q",
+    "volumes": 5
+  },
+  {
+    "titre": "The Language of Draconic: Roars of Ancient Wisdom and Primal Power",
+    "categorie": "Language",
+    "section": "2Q",
+    "volumes": 5
+  }
+]

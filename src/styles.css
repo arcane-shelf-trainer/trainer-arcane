@@ -1,0 +1,396 @@
+:root {
+  --fond: #1f1a17;
+  --bois: #3b2a1f;
+  --papier: #f1e7d0;
+  --encre: #2a211b;
+  --encre-pale: #7a6a58;
+  --accent: #c8752f;
+  --ok: #3f8f5a;
+  --faute: #b83a3a;
+  --clair: #efe6d4;
+  --clair-pale: #b9ab93;
+}
+
+html {
+  background: var(--fond);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: radial-gradient(ellipse at 50% 0%, #2c241f 0%, var(--fond) 60%, #15110f 100%) fixed;
+  color: var(--clair);
+  font-family: Georgia, 'Times New Roman', serif;
+  line-height: 1.45;
+}
+
+.app {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 20px 16px 48px;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 16px;
+  border-bottom: 2px solid var(--accent);
+  padding-bottom: 10px;
+  margin-bottom: 14px;
+}
+
+h1 {
+  margin: 0;
+  font-size: 1.6rem;
+  letter-spacing: 0.04em;
+}
+
+.sous-titre {
+  margin: 2px 0 0;
+  color: var(--clair-pale);
+  font-size: 0.9rem;
+}
+
+.jauges {
+  display: flex;
+  gap: 18px;
+  font-size: 0.95rem;
+  white-space: nowrap;
+}
+
+.jauges strong {
+  color: var(--accent);
+}
+
+.barre {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.onglets,
+.filtres {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.onglet,
+.filtre {
+  font: inherit;
+  padding: 7px 14px;
+  background: none;
+  border: 1px solid var(--clair-pale);
+  color: var(--clair);
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.onglet-actif {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.filtre {
+  font-size: 0.85rem;
+  padding: 5px 10px;
+}
+
+.filtre-actif {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.filtre:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.aide {
+  font-size: 0.85rem;
+  color: var(--clair-pale);
+  margin-left: 6px;
+  cursor: pointer;
+}
+
+.carte {
+  background: var(--papier);
+  color: var(--encre);
+  border-radius: 4px;
+  padding: 18px 24px 20px;
+  min-height: 170px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45);
+  text-align: center;
+}
+
+.mode-aide {
+  margin: 0 0 6px;
+  font-size: 0.8rem;
+  color: var(--encre-pale);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.invite-libelle {
+  margin: 8px 0 2px;
+  font-size: 0.75rem;
+  color: var(--encre-pale);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.invite {
+  margin: 0;
+  font-size: 1.55rem;
+  font-weight: bold;
+  line-height: 1.25;
+  min-height: 2.5em;
+}
+
+.invite-plan {
+  color: var(--accent);
+}
+
+.saisie {
+  margin: 12px 0 0;
+  font-size: 1.05rem;
+  min-height: 1.6em;
+}
+
+.curseur {
+  font-family: 'Courier New', monospace;
+  font-size: 1.6rem;
+  letter-spacing: 0.15em;
+  color: var(--accent);
+}
+
+.curseur-lettre {
+  animation: clignote 1s steps(2) infinite;
+}
+
+@keyframes clignote {
+  to {
+    opacity: 0;
+  }
+}
+
+.ok {
+  color: var(--ok);
+  font-weight: bold;
+}
+
+.faute {
+  color: var(--faute);
+}
+
+.faute em {
+  color: var(--encre-pale);
+  font-size: 0.85rem;
+}
+
+.continuer,
+.lancer {
+  font: inherit;
+  margin-top: 10px;
+  padding: 9px 20px;
+  background: var(--accent);
+  border: none;
+  color: #fff;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.chrono-accueil {
+  padding: 10px 0;
+}
+
+.chrono-bilan,
+.record {
+  margin: 6px 0;
+}
+
+.chrono-hud {
+  margin: 0 0 4px;
+  font-family: 'Courier New', monospace;
+  color: var(--encre-pale);
+}
+
+.plan {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.etage {
+  background: var(--bois);
+  border-radius: 4px;
+  padding: 10px 12px 12px;
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.4);
+}
+
+.etage-nom {
+  display: block;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--clair-pale);
+  margin-bottom: 8px;
+}
+
+.rayons {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(64px, 1fr));
+  gap: 6px;
+}
+
+.rayon {
+  font: inherit;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 8px 4px;
+  background: #5a4030;
+  border: 1px solid #2a1c14;
+  border-bottom: 3px solid #2a1c14;
+  color: var(--clair);
+  cursor: pointer;
+  border-radius: 3px;
+  min-height: 46px;
+}
+
+.rayon:hover {
+  background: #6e4f3b;
+}
+
+.rayon-id {
+  font-weight: bold;
+  font-size: 1.05rem;
+  letter-spacing: 0.05em;
+}
+
+.rayon-cat {
+  font-size: 0.6rem;
+  line-height: 1.1;
+  color: var(--clair-pale);
+  text-align: center;
+}
+
+.rayon-actif {
+  outline: 2px solid var(--accent);
+}
+
+.rayon-attendu {
+  background: var(--ok);
+  border-color: #1f5a34;
+}
+
+.rayon-faute {
+  background: var(--faute);
+  border-color: #6b1f1f;
+}
+
+.raccourcis {
+  margin: 10px 0 0;
+  font-size: 0.8rem;
+  color: var(--clair-pale);
+  text-align: center;
+}
+
+.stats {
+  margin-top: 28px;
+}
+
+h2 {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--clair-pale);
+  border-bottom: 1px solid #4a3a2e;
+  padding-bottom: 5px;
+}
+
+.stats-grille {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 4px 18px;
+}
+
+.stat {
+  display: grid;
+  grid-template-columns: 34px 1fr 90px 52px;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  padding: 2px 0;
+}
+
+.stat-id {
+  font-weight: bold;
+  color: var(--accent);
+}
+
+.stat-cat {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.stat-barre {
+  height: 7px;
+  background: #3a2e26;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.stat-barre-livres {
+  display: block;
+  height: 100%;
+  background: var(--accent);
+  transition: width 0.3s;
+}
+
+.stat-plan {
+  font-size: 0.7rem;
+  color: var(--ok);
+}
+
+footer {
+  margin-top: 28px;
+  text-align: center;
+}
+
+.effacer {
+  font: inherit;
+  font-size: 0.8rem;
+  background: none;
+  border: none;
+  color: var(--clair-pale);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+@media (max-width: 600px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .invite {
+    font-size: 1.2rem;
+  }
+
+  .stat {
+    grid-template-columns: 34px 1fr 70px 0;
+  }
+}
