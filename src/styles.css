@@ -1022,4 +1022,13 @@ footer {
   .carte-bouton-zoom {
     display: block;
   }
+
+  .onglets {
+    flex-wrap: wrap;
+  }
+
+  .onglet {
+    padding: 6px 12px;
+    font-size: 0.74rem;
+  }
 }
