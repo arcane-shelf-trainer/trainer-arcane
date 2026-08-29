@@ -14,6 +14,8 @@ const nav = await chromium.launch({ executablePath: CHROME, headless: true })
 let echec = false
 for (const largeur of [1100, 760, 1600]) {
   const page = await nav.newPage({ viewport: { width: largeur, height: 900 } })
+  // Entrainement libre : la session du jour se viderait apres dix nouveaux.
+  await page.addInitScript(() => localStorage.setItem("arcane-librarian-reglages", JSON.stringify({ entrainement: "libre", affichage: "complet", quotaNouveaux: 10, longueurChrono: 20 })))
   await page.goto(ADRESSE, { waitUntil: "networkidle" })
   await page.waitForSelector(".carte-image")
   await page.waitForTimeout(400)

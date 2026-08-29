@@ -340,6 +340,13 @@ h1 {
   margin-left: -8px;
 }
 
+.scene {
+  height: 176px;
+  width: auto;
+  border-radius: 6px;
+  box-shadow: 0 0 0 2px rgba(201, 165, 90, 0.7);
+}
+
 .invite-libelle {
   margin: 0 0 2px;
   font-family: var(--titres);
@@ -445,6 +452,147 @@ h1 {
   font-size: 0.72rem;
   color: var(--clair-pale);
   letter-spacing: 0.03em;
+}
+
+.tranche-seule {
+  height: 230px;
+  margin-left: 0;
+}
+
+.session-compte {
+  color: var(--or-sombre);
+  letter-spacing: 0.06em;
+}
+
+.cible {
+  margin: 0 0 8px;
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--or-sombre);
+}
+
+.session-fin {
+  text-align: center;
+  padding: 18px 0 8px;
+}
+
+.session-fin-titre {
+  margin: 0 0 6px;
+  font-family: var(--titres);
+  font-size: 1.1rem;
+  color: var(--or-sombre);
+}
+
+.session-fin p {
+  margin: 4px 0;
+}
+
+.session-fin-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.mots-cles {
+  margin: 10px 0 0;
+  padding: 8px 12px;
+  background: rgba(201, 165, 90, 0.14);
+  border-left: 3px solid var(--or-sombre);
+  border-radius: 0 4px 4px 0;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.mots-cles-libelle {
+  font-family: var(--titres);
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--or-sombre);
+  margin-right: 6px;
+}
+
+.mots-cles em {
+  color: var(--encre-pale);
+  font-size: 0.9rem;
+}
+
+.groupe-premier {
+  margin-left: 0;
+  padding-left: 0;
+  border-left: none;
+}
+
+.stats-vide {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--clair-pale);
+  font-style: italic;
+}
+
+.confusions {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.confusion {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 8px 12px;
+  background: var(--bois);
+  border: 1px solid #45362a;
+  border-radius: 5px;
+  font-size: 0.9rem;
+}
+
+.confusion-paire {
+  flex: 1;
+}
+
+.confusion-paire strong {
+  font-family: var(--titres);
+  color: var(--or);
+}
+
+.confusion-nombre {
+  color: var(--clair-pale);
+  white-space: nowrap;
+}
+
+.lien {
+  font: inherit;
+  font-size: 0.85rem;
+  background: none;
+  border: none;
+  color: var(--clair-pale);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.lien:hover {
+  color: var(--or);
+}
+
+.fiche .lien {
+  color: var(--or-sombre);
+  font-size: 0.9rem;
+}
+
+.pied-actions {
+  display: flex;
+  gap: 18px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.message {
+  margin: 10px 0 0;
+  color: var(--or);
+  font-size: 0.9rem;
 }
 
 .saisie {

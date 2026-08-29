@@ -1,19 +1,41 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { LIVRES, SECTIONS, type Livre as LivreCatalogue } from './jeu/catalogue'
-import { choisir, enregistrer, fiche, maitrise, type Progres } from './jeu/leitner'
 import {
+  aRevoir,
+  choisir,
+  enregistrer,
+  fiche,
+  maitrise,
+  nouveaux,
+  type Progres,
+} from './jeu/leitner'
+import {
+  chargerConfusions,
   chargerLangue,
   chargerProgres,
   chargerRecords,
+  chargerReglages,
+  chargerSession,
   effacerTout,
+  exporterTout,
+  lireSauvegarde,
+  sauvegarderConfusions,
   sauvegarderLangue,
   sauvegarderProgres,
   sauvegarderRecords,
+  sauvegarderReglages,
+  sauvegarderSession,
+  type Confusions,
   type Records,
+  type Reglages,
+  type Session,
 } from './jeu/stockage'
 import { Plan, type Filtre, type Resultat } from './Plan'
 import { visuelsDe } from './jeu/visuels'
 import { TEXTES, type Langue } from './textes'
+import motsClesJson from './donnees/mots-cles.json'
+
+const MOTS_CLES = motsClesJson as Record<string, { mots: string[]; en: string; fr: string }>
 
 type Mode = 'plan' | 'livres' | 'tomes' | 'chrono'
 type FiltreTomes = 'tous' | 3 | 5 | 10
@@ -38,10 +60,12 @@ const MODES: Mode[] = ['plan', 'livres', 'tomes', 'chrono']
 const FILTRES: Filtre[] = ['tous', '1', '2']
 const FILTRES_TOMES: FiltreTomes[] = ['tous', 3, 5, 10]
 const TOMES: number[] = [3, 5, 10]
-const CHRONO_QUESTIONS = 20
+const LONGUEURS_CHRONO = [20, 50, 400]
+const AFFICHAGES: Reglages['affichage'][] = ['complet', 'couverture', 'tranche']
 const PENALITE_MS = 3000
 const DELAI_CORRECT_MS = 450
 const DELAI_FAUTE_CHRONO_MS = 1300
+const TIC_HORLOGE_MS = 15_000
 
 function questionsPour(mode: Mode, filtre: Filtre, tomes: FiltreTomes): Question[] {
   if (mode === 'plan') {
@@ -70,14 +94,44 @@ function formatSecondes(ms: number, langue: Langue): string {
   return `${langue === 'fr' ? s.replace('.', ',') : s} s`
 }
 
-// Le livre tel qu'on le voit en jeu : couverture et tranche.
-function Livre({ titre }: { titre: string }) {
+function jourLocal(d = new Date()): string {
+  const deux = (n: number) => String(n).padStart(2, '0')
+  return `${d.getFullYear()}-${deux(d.getMonth() + 1)}-${deux(d.getDate())}`
+}
+
+// Le livre tel qu'on le voit en jeu. Selon l'affichage : couverture et tranche,
+// couverture seule, ou tranche seule ; à la réponse, la scène en jeu.
+function Livre({
+  titre,
+  affichage,
+  revele,
+}: {
+  titre: string
+  affichage: Reglages['affichage']
+  revele: boolean
+}) {
   const v = visuelsDe(titre)
   if (!v.couverture) return null
+  if (revele && v.scene) {
+    return (
+      <div className="livre-visuel">
+        <img className="scene" src={v.scene} alt="" draggable={false} />
+      </div>
+    )
+  }
   return (
     <div className="livre-visuel">
-      <img className="couverture" src={v.couverture} alt="" draggable={false} />
-      {v.tranche && <img className="tranche" src={v.tranche} alt="" draggable={false} />}
+      {affichage !== 'tranche' && (
+        <img className="couverture" src={v.couverture} alt="" draggable={false} />
+      )}
+      {affichage !== 'couverture' && v.tranche && (
+        <img
+          className={`tranche${affichage === 'tranche' ? ' tranche-seule' : ''}`}
+          src={v.tranche}
+          alt=""
+          draggable={false}
+        />
+      )}
     </div>
   )
 }
@@ -104,6 +158,10 @@ function composition(section: string): string {
     .sort((a, b) => b[0] - a[0])
     .map(([volumes, n]) => `${n} × ${volumes}`)
     .join(' · ')
+}
+
+function categorieDe(section: string): string {
+  return SECTIONS.find((s) => s.section === section)?.categorie ?? ''
 }
 
 function Statistiques({ progres, titre, planSu }: { progres: Progres; titre: string; planSu: string }) {
@@ -146,13 +204,22 @@ export function App() {
   const [filtre, setFiltre] = useState<Filtre>('tous')
   const [tomes, setTomes] = useState<FiltreTomes>('tous')
   const [aide, setAide] = useState(false)
+  const [reglages, setReglages] = useState<Reglages>(chargerReglages)
   const [progres, setProgres] = useState<Progres>(chargerProgres)
   const [records, setRecords] = useState<Records>(chargerRecords)
+  const [confusions, setConfusions] = useState<Confusions>(chargerConfusions)
+  const [session, setSession] = useState<Session>(() => {
+    const s = chargerSession()
+    return s.jour === jourLocal() ? s : { jour: jourLocal(), nouveaux: 0 }
+  })
+  const [cible, setCible] = useState<string[] | null>(null)
   const [question, setQuestion] = useState<Question | null>(null)
   const [saisie, setSaisie] = useState('')
   const [resultat, setResultat] = useState<Resultat | null>(null)
   const [chrono, setChrono] = useState<Chrono | null>(null)
   const [maintenant, setMaintenant] = useState(0)
+  const [horloge, setHorloge] = useState(() => Date.now())
+  const [message, setMessage] = useState<string | null>(null)
 
   const t = TEXTES[langue]
 
@@ -161,28 +228,64 @@ export function App() {
   const questionRef = useRef(question)
   questionRef.current = question
   const minuterie = useRef<number | null>(null)
+  const fichierImport = useRef<HTMLInputElement | null>(null)
 
   const questions = useMemo(() => questionsPour(mode, filtre, tomes), [mode, filtre, tomes])
   const parCle = useMemo(() => new Map(questions.map((q) => [q.cle, q])), [questions])
-  const cles = useMemo(() => questions.map((q) => q.cle), [questions])
+  const clesBase = useMemo(
+    () =>
+      questions
+        .filter((q) => !cible || cible.includes(q.section))
+        .map((q) => q.cle),
+    [questions, cible],
+  )
+  const enSession = mode !== 'chrono' && reglages.entrainement === 'session' && !cible
 
   useEffect(() => sauvegarderProgres(progres), [progres])
   useEffect(() => sauvegarderRecords(records), [records])
+  useEffect(() => sauvegarderConfusions(confusions), [confusions])
+  useEffect(() => sauvegarderReglages(reglages), [reglages])
+  useEffect(() => sauvegarderSession(session), [session])
   useEffect(() => {
     sauvegarderLangue(langue)
     document.documentElement.lang = langue
   }, [langue])
+
+  // L'horloge de la session avance toutes les quinze secondes : des livres redeviennent dus.
+  useEffect(() => {
+    if (!enSession) return
+    const id = window.setInterval(() => setHorloge(Date.now()), TIC_HORLOGE_MS)
+    return () => window.clearInterval(id)
+  }, [enSession])
+
+  const quotaRestant = Math.max(0, reglages.quotaNouveaux - session.nouveaux)
+
+  // Le paquet du moment : tout, ou seulement les dus et les nouveaux du jour.
+  const deck = useMemo(() => {
+    if (!enSession) return clesBase
+    const dus = aRevoir(progres, clesBase, horloge)
+    const neufs = nouveaux(progres, clesBase).slice(0, quotaRestant)
+    return [...dus, ...neufs]
+  }, [enSession, clesBase, progres, horloge, quotaRestant])
+  const deckRef = useRef(deck)
+  deckRef.current = deck
 
   const suivant = useCallback(() => {
     if (minuterie.current) window.clearTimeout(minuterie.current)
     minuterie.current = null
     setResultat(null)
     setSaisie('')
-    const cle = choisir(progresRef.current, cles, Math.random(), questionRef.current?.cle)
+    setHorloge(Date.now())
+    const candidats = deckRef.current
+    if (candidats.length === 0) {
+      setQuestion(null)
+      return
+    }
+    const cle = choisir(progresRef.current, candidats, Math.random(), questionRef.current?.cle)
     setQuestion(parCle.get(cle) ?? null)
-  }, [cles, parCle])
+  }, [parCle])
 
-  // Nouveau mode ou nouveau filtre : on repart sur une question fraîche (hors chrono).
+  // Nouveau mode, filtre ou réglage : on repart sur une question fraîche (hors chrono).
   useEffect(() => {
     if (mode === 'chrono') {
       setChrono(null)
@@ -192,7 +295,13 @@ export function App() {
       return
     }
     suivant()
-  }, [mode, filtre, tomes, suivant])
+  }, [mode, filtre, tomes, reglages.entrainement, cible, suivant])
+
+  // Si la session s'est vidée, la question disparaît ; si des livres redeviennent dus, elle revient.
+  useEffect(() => {
+    if (!enSession || resultat) return
+    if (question === null && deck.length > 0) suivant()
+  }, [enSession, deck, question, resultat, suivant])
 
   // Horloge du chrono.
   useEffect(() => {
@@ -201,14 +310,20 @@ export function App() {
     return () => window.clearInterval(id)
   }, [chrono])
 
-  const cleRecord = `chrono:${filtre}:${tomes}`
+  const cleRecord = `chrono:${filtre}:${tomes}:${reglages.longueurChrono}`
 
   const repondre = useCallback(
     (reponse: string) => {
       const q = questionRef.current
       if (!q || resultat) return
       const correct = reponse === q.reponse
-      setProgres((p) => enregistrer(p, q.cle, correct))
+      const premiereFois = fiche(progresRef.current, q.cle).vues === 0
+      setProgres((p) => enregistrer(p, q.cle, correct, Date.now()))
+      if (premiereFois && mode !== 'chrono') setSession((s) => ({ ...s, nouveaux: s.nouveaux + 1 }))
+      if (!correct && mode !== 'tomes') {
+        const paire = `${q.reponse}>${reponse}`
+        setConfusions((c) => ({ ...c, [paire]: (c[paire] ?? 0) + 1 }))
+      }
       setResultat({
         correct,
         choisi: reponse,
@@ -221,7 +336,7 @@ export function App() {
       if (mode === 'chrono' && chrono) {
         const faites = chrono.faites + 1
         const fautes = chrono.fautes + (correct ? 0 : 1)
-        if (faites >= CHRONO_QUESTIONS) {
+        if (faites >= reglages.longueurChrono) {
           const fin = performance.now()
           setChrono({ ...chrono, faites, fautes, fin })
           const temps = fin - chrono.debut + fautes * PENALITE_MS
@@ -239,7 +354,7 @@ export function App() {
       }
       if (correct) minuterie.current = window.setTimeout(suivant, DELAI_CORRECT_MS)
     },
-    [resultat, mode, chrono, cleRecord, suivant],
+    [resultat, mode, chrono, cleRecord, suivant, reglages.longueurChrono],
   )
 
   function lancerChrono() {
@@ -253,7 +368,39 @@ export function App() {
     effacerTout()
     setProgres({})
     setRecords({})
+    setConfusions({})
+    setSession({ jour: jourLocal(), nouveaux: 0 })
   }
+
+  function exporter() {
+    const contenu = JSON.stringify(exporterTout(), null, 1)
+    const url = URL.createObjectURL(new Blob([contenu], { type: 'application/json' }))
+    const a = document.createElement('a')
+    a.href = url
+    a.download = `arcane-librarian-${jourLocal()}.json`
+    a.click()
+    URL.revokeObjectURL(url)
+  }
+
+  async function importer(fichier: File | undefined) {
+    if (!fichier) return
+    const lu = lireSauvegarde(await fichier.text())
+    if (!lu) {
+      setMessage(t.importRate)
+      return
+    }
+    setProgres(lu.progres)
+    setRecords(lu.records)
+    setConfusions(lu.confusions)
+    setSession(lu.session.jour === jourLocal() ? lu.session : { jour: jourLocal(), nouveaux: 0 })
+    setMessage(t.importe)
+  }
+
+  useEffect(() => {
+    if (!message) return
+    const id = window.setTimeout(() => setMessage(null), 4000)
+    return () => window.clearTimeout(id)
+  }, [message])
 
   // Clavier. Étagères : 1 ou 2 (ou & et é en AZERTY) puis la lettre. Tomes : 3, 5, ou 1
   // pour 10 (avec leurs équivalents AZERTY non décalés). Entrée ou Espace pour continuer.
@@ -305,15 +452,44 @@ export function App() {
   const chronoFini = mode === 'chrono' && chrono !== null && chrono.fin !== null
   const classeFiche = `fiche${resultat ? (resultat.correct ? ' fiche-ok' : ' fiche-faute') : ''}`
   const avecCarte = mode !== 'tomes' && (mode !== 'chrono' || chronoEnCours)
-  const nomFiltreRecord = [t.filtres[filtre], tomes === 'tous' ? '' : t.tomesPastille(tomes)]
+  const nomFiltreRecord = [
+    t.filtres[filtre],
+    tomes === 'tous' ? '' : t.tomesPastille(tomes),
+    `${reglages.longueurChrono}`,
+  ]
     .filter(Boolean)
     .join(', ')
     .toLowerCase()
+  const dus = enSession ? aRevoir(progres, clesBase, horloge).length : 0
+  const neufsDisponibles = enSession ? Math.min(nouveaux(progres, clesBase).length, quotaRestant) : 0
+  const sessionVide = enSession && question === null && !resultat
+  const prochaineEcheance = useMemo(() => {
+    if (!sessionVide) return null
+    let min = Infinity
+    for (const c of clesBase) {
+      const f = fiche(progres, c)
+      if (f.vues > 0 && f.echeance > horloge && f.echeance < min) min = f.echeance
+    }
+    return min === Infinity ? null : Math.ceil((min - horloge) / 60_000)
+  }, [sessionVide, clesBase, progres, horloge])
+  const pairesConfusion = useMemo(
+    () =>
+      Object.entries(confusions)
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 5)
+        .map(([paire, n]) => {
+          const [attendu, choisi] = paire.split('>')
+          return { attendu, choisi, n }
+        }),
+    [confusions],
+  )
 
   function retour(r: Resultat): string {
     if (mode === 'tomes') return r.correct ? t.exactTomes(r.attendu) : t.fauteTomes(r.choisi, r.attendu)
     return r.correct ? t.exact(r.attendu, r.categorie) : t.faute(r.choisi, r.attendu, r.categorie)
   }
+
+  const montrerTitre = mode === 'plan' || reglages.affichage === 'complet' || resultat !== null
 
   return (
     <div className="app">
@@ -347,16 +523,32 @@ export function App() {
           ))}
         </div>
         <div className="filtres">
-          {FILTRES.map((f) => (
-            <button
-              key={f}
-              className={`filtre${filtre === f ? ' filtre-actif' : ''}`}
-              onClick={() => setFiltre(f)}
-              disabled={chronoEnCours}
-            >
-              {t.filtres[f]}
-            </button>
-          ))}
+          {mode !== 'chrono' && (
+            <span className="groupe-filtres groupe-premier">
+              {(['session', 'libre'] as const).map((e) => (
+                <button
+                  key={e}
+                  className={`filtre${reglages.entrainement === e ? ' filtre-actif' : ''}`}
+                  onClick={() => setReglages({ ...reglages, entrainement: e })}
+                  disabled={cible !== null}
+                >
+                  {t.entrainement[e]}
+                </button>
+              ))}
+            </span>
+          )}
+          <span className="groupe-filtres">
+            {FILTRES.map((f) => (
+              <button
+                key={f}
+                className={`filtre${filtre === f ? ' filtre-actif' : ''}`}
+                onClick={() => setFiltre(f)}
+                disabled={chronoEnCours}
+              >
+                {t.filtres[f]}
+              </button>
+            ))}
+          </span>
           {mode !== 'plan' && (
             <span className="groupe-filtres">
               <span className="groupe-libelle">{t.filtreTomes}</span>
@@ -372,6 +564,35 @@ export function App() {
               ))}
             </span>
           )}
+          {mode !== 'plan' && (
+            <span className="groupe-filtres">
+              <span className="groupe-libelle">{t.affichageLibelle}</span>
+              {AFFICHAGES.map((a) => (
+                <button
+                  key={a}
+                  className={`filtre${reglages.affichage === a ? ' filtre-actif' : ''}`}
+                  onClick={() => setReglages({ ...reglages, affichage: a })}
+                >
+                  {t.affichage[a]}
+                </button>
+              ))}
+            </span>
+          )}
+          {mode === 'chrono' && (
+            <span className="groupe-filtres">
+              <span className="groupe-libelle">{t.longueur}</span>
+              {LONGUEURS_CHRONO.map((n) => (
+                <button
+                  key={n}
+                  className={`filtre${reglages.longueurChrono === n ? ' filtre-actif' : ''}`}
+                  onClick={() => setReglages({ ...reglages, longueurChrono: n })}
+                  disabled={chronoEnCours}
+                >
+                  {n}
+                </button>
+              ))}
+            </span>
+          )}
           {mode !== 'tomes' && (
             <label className="interrupteur">
               <input type="checkbox" checked={aide} onChange={(e) => setAide(e.target.checked)} />
@@ -383,7 +604,23 @@ export function App() {
       </nav>
 
       <main className={classeFiche}>
-        <p className="mode-aide">{t.modes[mode].aide}</p>
+        <p className="mode-aide">
+          {t.modes[mode].aide}
+          {enSession && (
+            <span className="session-compte">
+              {' '}
+              · {t.aRevoir(dus)} · {t.nouveauxRestants(neufsDisponibles)}
+            </span>
+          )}
+        </p>
+        {cible && (
+          <p className="cible">
+            {t.cible(cible)}{' '}
+            <button className="lien" onClick={() => setCible(null)}>
+              {t.quitterCible}
+            </button>
+          </p>
+        )}
 
         {mode === 'chrono' && !chronoEnCours && (
           <div className="chrono-accueil">
@@ -404,23 +641,53 @@ export function App() {
               </strong>
             </p>
             <button className="lancer" onClick={lancerChrono}>
-              {chronoFini ? t.relancer : t.lancer} : {t.chronoConsigne(CHRONO_QUESTIONS, PENALITE_MS / 1000)}
+              {chronoFini ? t.relancer : t.lancer} :{' '}
+              {t.chronoConsigne(reglages.longueurChrono, PENALITE_MS / 1000)}
             </button>
+          </div>
+        )}
+
+        {sessionVide && (
+          <div className="session-fin">
+            <p className="session-fin-titre">{t.sessionTerminee}</p>
+            {prochaineEcheance !== null && <p>{t.prochainRetour(prochaineEcheance)}</p>}
+            <div className="session-fin-actions">
+              {nouveaux(progres, clesBase).length > 0 && (
+                <button
+                  className="lancer"
+                  onClick={() => setReglages({ ...reglages, quotaNouveaux: reglages.quotaNouveaux + 10 })}
+                >
+                  {t.plusDeNouveaux(10)}
+                </button>
+              )}
+              <button
+                className="continuer"
+                onClick={() => setReglages({ ...reglages, entrainement: 'libre' })}
+              >
+                {t.passerEnLibre}
+              </button>
+            </div>
           </div>
         )}
 
         {question && (mode !== 'chrono' || chronoEnCours) && (
           <div className={`question${mode === 'plan' ? ' question-plan' : ''}`}>
-            {mode !== 'plan' && <Livre titre={question.invite} />}
+            {mode !== 'plan' && (
+              <Livre titre={question.invite} affichage={reglages.affichage} revele={resultat !== null} />
+            )}
             <div className="question-texte">
               {chronoEnCours && chrono && (
                 <p className="chrono-hud">
-                  {t.chronoTitre(chrono.faites + 1, CHRONO_QUESTIONS)} —{' '}
+                  {t.chronoTitre(chrono.faites + 1, reglages.longueurChrono)} —{' '}
                   {formatSecondes(maintenant - chrono.debut, langue)} — {t.fautes(chrono.fautes)}
                 </p>
               )}
-              <p className="invite-libelle">{mode === 'plan' ? t.categorie : t.titreLivre}</p>
-              <p className={`invite${mode === 'plan' ? ' invite-plan' : ''}`}>{question.invite}</p>
+              {montrerTitre && (
+                <>
+                  <p className="invite-libelle">{mode === 'plan' ? t.categorie : t.titreLivre}</p>
+                  <p className={`invite${mode === 'plan' ? ' invite-plan' : ''}`}>{question.invite}</p>
+                </>
+              )}
               {mode !== 'plan' && mode !== 'tomes' && question.volumes !== undefined && (
                 <p className="serie">{t.serieDe(question.volumes)}</p>
               )}
@@ -454,6 +721,14 @@ export function App() {
                   </span>
                 )}
               </p>
+              {resultat && !resultat.correct && mode !== 'tomes' && MOTS_CLES[resultat.attendu] && (
+                <p className="mots-cles">
+                  <span className="mots-cles-libelle">{t.motsCles}</span>{' '}
+                  {MOTS_CLES[resultat.attendu].mots.join(', ')}
+                  <br />
+                  <em>{MOTS_CLES[resultat.attendu][langue]}</em>
+                </p>
+              )}
               {resultat && !resultat.correct && mode !== 'chrono' && (
                 <button className="continuer" onClick={suivant}>
                   {t.continuer}
@@ -475,6 +750,34 @@ export function App() {
 
       <Statistiques progres={progres} titre={t.maitrise} planSu={t.planSu} />
 
+      <section className="stats">
+        <h2>{t.confusions}</h2>
+        {pairesConfusion.length === 0 ? (
+          <p className="stats-vide">{t.confusionsVide}</p>
+        ) : (
+          <div className="confusions">
+            {pairesConfusion.map((p) => (
+              <div className="confusion" key={`${p.attendu}>${p.choisi}`}>
+                <span className="confusion-paire">
+                  <strong>{p.attendu}</strong> {categorieDe(p.attendu)} → <strong>{p.choisi}</strong>{' '}
+                  {categorieDe(p.choisi)}
+                </span>
+                <span className="confusion-nombre">{t.fois(p.n)}</span>
+                <button
+                  className="filtre"
+                  onClick={() => {
+                    setCible([p.attendu, p.choisi])
+                    if (mode === 'chrono' || mode === 'tomes') setMode('livres')
+                  }}
+                >
+                  {t.sEntrainer}
+                </button>
+              </div>
+            ))}
+          </div>
+        )}
+      </section>
+
       <footer>
         <p className="credits">
           {t.credits}{' '}
@@ -482,9 +785,28 @@ export function App() {
             {t.jeu}
           </a>
         </p>
-        <button className="effacer" onClick={toutEffacer}>
-          {t.effacer}
-        </button>
+        <div className="pied-actions">
+          <button className="lien" onClick={exporter}>
+            {t.exporter}
+          </button>
+          <button className="lien" onClick={() => fichierImport.current?.click()}>
+            {t.importer}
+          </button>
+          <input
+            ref={fichierImport}
+            type="file"
+            accept="application/json"
+            hidden
+            onChange={(e) => {
+              void importer(e.target.files?.[0])
+              e.target.value = ''
+            }}
+          />
+          <button className="lien" onClick={toutEffacer}>
+            {t.effacer}
+          </button>
+        </div>
+        {message && <p className="message">{message}</p>}
       </footer>
     </div>
   )

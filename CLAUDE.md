@@ -19,8 +19,19 @@ l'étagère (section 1A à 1N, 2A à 2Q) de chaque catégorie et de chacun des 4
   pénalité par faute, record par filtre d'étage et de série). Le filtre « Séries »
   (3, 5, 10) restreint Livres, Tomes et Chrono : en speedrun, les séries de 3 tomes
   donnent les points de compétence le plus vite.
-- Répétition espacée par boîtes de Leitner (`src/jeu/leitner.ts`, pur et testé) : les
-  inconnus reviennent souvent, les maîtrisés rarement.
+- Répétition espacée (`src/jeu/leitner.ts`, pur et testé) : boîtes de Leitner pour le
+  poids de tirage et la maîtrise, plus un échéancier dans le temps (10 min, 1, 3, 7, 21,
+  45, 90 jours ; une faute rappelle dans la minute). La « session du jour » ne propose
+  que les livres dus et dix nouveaux par jour (dans l'ordre du catalogue, étagère par
+  étagère) ; quand elle est vide, l'écran de fin propose dix nouveaux de plus ou
+  l'entraînement libre. Réglages (`src/jeu/stockage.ts`) : entraînement, affichage
+  (livre et titre, couverture seule, tranche seule), quota de nouveaux, longueur du
+  chrono (20, 50, 400).
+- À la faute : la scène en jeu du livre, les mots-clés et une note de la catégorie
+  (`src/donnees/mots-cles.json`, d'après librariangame.com, notes traduites). Les
+  confusions (paires attendu > choisi) sont comptées et proposent un entraînement ciblé
+  sur les deux étagères.
+- Export et import de la progression en JSON (pied de page).
 - Réponse au clavier (1 ou 2 puis la lettre ; & et é acceptés pour l'AZERTY ; sur un seul
   étage, la lettre suffit) ou au clic sur le plan des étagères. Entrée ou Espace pour
   continuer après une faute.
