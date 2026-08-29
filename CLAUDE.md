@@ -33,12 +33,17 @@ l'étagère (section 1A à 1N, 2A à 2Q) de chaque catégorie et de chacun des 4
   chaque section a une zone et qu'aucune zone n'en chevauche une autre.
 - Progression et records en localStorage.
 
-- Les couvertures (`src/assets/couvertures`, 400 SVG, `src/donnees/couvertures.json` pour
-  la correspondance titre vers fichier) viennent du wiki librarian.gamedb.wiki :
-  dessins du wiki aux familles de couleurs du jeu, pas les textures originales.
-  `scripts/nettoyer-couvertures.py` en retire les textes qui donneraient la réponse
-  (section, volumes, pied de page) ; à relancer après tout nouveau téléchargement.
-  Elles s'affichent à côté du titre dans les modes Livres et Chrono.
+- Les visuels des livres (`src/assets/livres`, 1 200 WebP : `NNN-couverture`,
+  `NNN-tranche`, `NNN-scene`, NNN étant le rang du livre dans le catalogue à partir
+  de 1 ; `src/donnees/visuels.json` donne le rang de chaque titre) sont les vraies
+  images du jeu, tirées des images de cellules de la feuille Google (colonnes Image,
+  Back, Binding, Cover : scène en jeu, quatrième de couverture, tranche, couverture).
+  Ces images n'apparaissent dans aucun export : elles ont été récupérées en ouvrant la
+  feuille dans un navigateur piloté, en lisant les identifiants `cosmoId` du modèle de
+  la page (page initiale pour les 99 premières lignes, réponse `streamrows` pour les
+  suivantes), en les résolvant par l'appel `renderdata` de Google Sheets en adresses
+  signées, puis en téléchargeant et réduisant les fichiers (WebP, 360 px de haut).
+  Couverture et tranche s'affichent à côté du titre dans les modes Livres et Chrono.
 
 ## Règles techniques
 

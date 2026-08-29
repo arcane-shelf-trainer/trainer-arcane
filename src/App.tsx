@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { LIVRES, SECTIONS } from './jeu/catalogue'
 import { choisir, enregistrer, fiche, maitrise, type Progres } from './jeu/leitner'
 import { Plan, type Filtre, type Resultat } from './Plan'
-import { urlCouverture } from './jeu/couvertures'
+import { visuelsDe } from './jeu/visuels'
 import {
   chargerProgres,
   chargerRecords,
@@ -63,6 +63,18 @@ function formatSecondes(ms: number): string {
 
 function pluriel(n: number, mot: string): string {
   return `${n} ${mot}${n > 1 ? 's' : ''}`
+}
+
+// Le livre tel qu'on le voit en jeu : sa couverture, sa tranche, puis son titre.
+function Livre({ titre }: { titre: string }) {
+  const v = visuelsDe(titre)
+  return (
+    <div className="livre">
+      {v.couverture && <img className="couverture" src={v.couverture} alt="" draggable={false} />}
+      {v.tranche && <img className="tranche" src={v.tranche} alt="" draggable={false} />}
+      <p className="invite">{titre}</p>
+    </div>
+  )
 }
 
 function Statistiques({ progres }: { progres: Progres }) {
@@ -323,17 +335,7 @@ export function App() {
             {mode === 'plan' ? (
               <p className="invite invite-plan">{question.invite}</p>
             ) : (
-              <div className="livre">
-                {urlCouverture(question.invite) && (
-                  <img
-                    className="couverture"
-                    src={urlCouverture(question.invite) ?? undefined}
-                    alt=""
-                    draggable={false}
-                  />
-                )}
-                <p className="invite">{question.invite}</p>
-              </div>
+              <Livre titre={question.invite} />
             )}
             <p className="saisie">
               {resultat ? (

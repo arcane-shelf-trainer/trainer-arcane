@@ -175,12 +175,16 @@ h1 {
   max-width: 420px;
 }
 
-.couverture {
-  width: 96px;
-  height: 134px;
+.couverture,
+.tranche {
+  height: 150px;
+  width: auto;
   flex: 0 0 auto;
-  border-radius: 4px;
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.35);
+  filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.4));
+}
+
+.tranche {
+  margin-left: -10px;
 }
 
 .saisie {
