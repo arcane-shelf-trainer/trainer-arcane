@@ -779,10 +779,47 @@ h2 {
   line-height: 0;
 }
 
+.carte-defilante {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.carte-contenu {
+  position: relative;
+  width: 100%;
+}
+
+.carte-zoom .carte-contenu {
+  width: 200%;
+}
+
 .carte-image {
   display: block;
   width: 100%;
   height: auto;
+}
+
+/* Le bouton d'agrandissement ne sert que sur petit écran. */
+.carte-bouton-zoom {
+  display: none;
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 1;
+  font: inherit;
+  font-size: 0.8rem;
+  padding: 4px 10px;
+  background: rgba(26, 21, 18, 0.8);
+  border: 1px solid var(--or-sombre);
+  color: var(--clair);
+  border-radius: 4px;
+  cursor: pointer;
+  line-height: 1.4;
+}
+
+.carte-bouton-zoom[aria-pressed='true'] {
+  background: var(--or);
+  color: #2a1f16;
 }
 
 /* Chaque zone couvre le pictogramme entier de l'étagère et s'allume d'une lueur
@@ -980,5 +1017,9 @@ footer {
 
   .options {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .carte-bouton-zoom {
+    display: block;
   }
 }

@@ -8,7 +8,13 @@ stop reading the wall maps.
 - **Books** mode: a book (real cover and spine), which shelf? The series size (3, 5 or
   10 volumes) is shown under the title, and a filter restricts the deck to one size —
   3-volume series earn skill points fastest in a speedrun.
+- **Shelf** mode: a shelf, which of four books belongs there? Keys 1 to 4. The shelf is
+  highlighted on the map.
 - **Volumes** mode: a book, how many volumes in its series? Keys 3, 5 or 1 (for 10).
+- **Today's session**: spaced repetition over days (10 min, 1, 3, 7, 21, 45, 90 days),
+  ten new books a day shelf by shelf, then free practice. Wrong answers show the book
+  in the game, the category's keywords and a note. Your confusions are tracked and can
+  be drilled. Progress can be exported and imported as JSON.
 - **Timer** mode: twenty books against the clock, three seconds per mistake, best time kept.
 - Spaced repetition: what you miss comes back often, what you know comes back rarely.
 - Answer with the keyboard (`1` or `2`, then the shelf letter) or by clicking the real

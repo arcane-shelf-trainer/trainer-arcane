@@ -70,6 +70,7 @@ export const TEXTES = {
     conseilTomes:
       'En speedrun, les séries de 3 tomes rapportent les points de compétence le plus vite : ce sont les titres à connaître en priorité.',
     carte: 'Plan de la bibliothèque',
+    zoomCarte: 'Agrandir',
     maitrise: 'Maîtrise par étagère',
     planSu: 'plan su',
     confusions: 'Vos confusions',
@@ -152,6 +153,7 @@ export const TEXTES = {
     conseilTomes:
       'In speedruns, 3-volume series earn skill points fastest: those are the titles to learn first.',
     carte: 'Library map',
+    zoomCarte: 'Zoom',
     maitrise: 'Mastery per shelf',
     planSu: 'map known',
     confusions: 'Your confusions',

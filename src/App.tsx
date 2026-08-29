@@ -839,6 +839,7 @@ export function App() {
             resultat={resultat}
             surligne={mode === 'etagere' ? question?.section ?? null : null}
             surChoix={mode === 'etagere' ? () => undefined : repondre}
+            libelleZoom={t.zoomCarte}
           />
           <p className="raccourcis">{t.raccourcis}</p>
         </section>

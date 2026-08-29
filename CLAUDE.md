@@ -34,6 +34,11 @@ l'étagère (section 1A à 1N, 2A à 2Q) de chaque catégorie et de chacun des 4
   confusions (paires attendu > choisi) sont comptées et proposent un entraînement ciblé
   sur les deux étagères.
 - Export et import de la progression en JSON (pied de page).
+- Application installable et utilisable hors-ligne : `public/manifest.webmanifest`,
+  `public/sw.js` (page et code réseau d'abord avec repli cache, images et polices cache
+  d'abord et mises en cache à la demande), enregistré par `src/main.tsx` sur le site
+  construit seulement. Icônes dans `public/icones`. Sur petit écran, un bouton agrandit
+  la carte au double avec défilement horizontal.
 - Réponse au clavier (1 ou 2 puis la lettre ; & et é acceptés pour l'AZERTY ; sur un seul
   étage, la lettre suffit) ou au clic sur le plan des étagères. Entrée ou Espace pour
   continuer après une faute.

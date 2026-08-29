@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { SECTIONS, type Etage } from './jeu/catalogue'
 import { ZONES } from './jeu/plan'
 import carte from './assets/carte.png'
@@ -20,6 +21,7 @@ export function Plan({
   resultat,
   surligne = null,
   surChoix,
+  libelleZoom,
 }: {
   filtre: Filtre
   aide: boolean
@@ -27,16 +29,24 @@ export function Plan({
   resultat: Resultat | null
   surligne?: string | null // une étagère à montrer, sans question posée sur la carte
   surChoix: (section: string) => void
+  libelleZoom: string // texte du bouton d'agrandissement (petits écrans)
 }) {
+  // Sur petit écran, la carte peut s'agrandir au double et se faire défiler.
+  const [zoom, setZoom] = useState(false)
   return (
-    <div className="carte-plan" role="group" aria-label="Carte de la bibliothèque">
-      <img
-        className="carte-image"
-        src={aide ? carte : carteMuette}
-        alt="Carte de la bibliothèque, les deux étages"
-        draggable={false}
-      />
-      {SECTIONS.map((s) => {
+    <div className={`carte-plan${zoom ? ' carte-zoom' : ''}`} role="group" aria-label="Carte de la bibliothèque">
+      <button className="carte-bouton-zoom" onClick={() => setZoom(!zoom)} aria-pressed={zoom}>
+        {libelleZoom}
+      </button>
+      <div className="carte-defilante">
+        <div className="carte-contenu">
+          <img
+            className="carte-image"
+            src={aide ? carte : carteMuette}
+            alt="Carte de la bibliothèque, les deux étages"
+            draggable={false}
+          />
+          {SECTIONS.map((s) => {
         const z = ZONES[s.section]
         let classe = 'zone'
         if (filtre !== 'tous' && s.etage !== filtre) classe += ' zone-inactive'
@@ -60,6 +70,8 @@ export function Plan({
           />
         )
       })}
+        </div>
+      </div>
     </div>
   )
 }
