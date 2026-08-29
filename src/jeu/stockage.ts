@@ -14,6 +14,7 @@ export type Confusions = Record<string, number> // clé « attendu>choisi »
 export interface Reglages {
   entrainement: 'session' | 'libre'
   affichage: 'complet' | 'couverture' | 'tranche'
+  carte: 'noms' | 'identifiants' | 'muette'
   quotaNouveaux: number
   longueurChrono: number
 }
@@ -26,6 +27,7 @@ export interface Session {
 export const REGLAGES_DEFAUT: Reglages = {
   entrainement: 'session',
   affichage: 'complet',
+  carte: 'identifiants',
   quotaNouveaux: 10,
   longueurChrono: 20,
 }

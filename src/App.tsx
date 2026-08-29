@@ -37,7 +37,7 @@ import motsClesJson from './donnees/mots-cles.json'
 
 const MOTS_CLES = motsClesJson as Record<string, { mots: string[]; en: string; fr: string }>
 
-type Mode = 'plan' | 'livres' | 'etagere' | 'tomes' | 'chrono'
+type Mode = 'plan' | 'situer' | 'livres' | 'etagere' | 'tomes' | 'chrono'
 type FiltreTomes = 'tous' | 3 | 5 | 10
 
 // Un livre proposé dans le mode Étagère : le bon ou un intrus.
@@ -63,7 +63,8 @@ interface Chrono {
   fin: number | null
 }
 
-const MODES: Mode[] = ['plan', 'livres', 'etagere', 'tomes', 'chrono']
+const MODES: Mode[] = ['plan', 'situer', 'livres', 'etagere', 'tomes', 'chrono']
+const IMAGES_CARTE: Reglages['carte'][] = ['noms', 'identifiants', 'muette']
 const NOMBRE_OPTIONS = 4
 const FILTRES: Filtre[] = ['tous', '1', '2']
 const FILTRES_TOMES: FiltreTomes[] = ['tous', 3, 5, 10]
@@ -76,10 +77,11 @@ const DELAI_FAUTE_CHRONO_MS = 1300
 const TIC_HORLOGE_MS = 15_000
 
 function questionsPour(mode: Mode, filtre: Filtre, tomes: FiltreTomes): Question[] {
-  if (mode === 'plan' || mode === 'etagere') {
+  if (mode === 'plan' || mode === 'etagere' || mode === 'situer') {
     return SECTIONS.filter((s) => filtre === 'tous' || s.section.startsWith(filtre)).map((s) => ({
       cle: `${mode}:${s.section}`,
-      invite: mode === 'plan' ? s.categorie : `${s.section} — ${s.categorie}`,
+      invite:
+        mode === 'plan' ? s.categorie : mode === 'situer' ? s.section : `${s.section} — ${s.categorie}`,
       reponse: s.section,
       categorie: s.categorie,
       section: s.section,
@@ -233,7 +235,6 @@ export function App() {
   const [mode, setMode] = useState<Mode>('plan')
   const [filtre, setFiltre] = useState<Filtre>('tous')
   const [tomes, setTomes] = useState<FiltreTomes>('tous')
-  const [aide, setAide] = useState(false)
   const [reglages, setReglages] = useState<Reglages>(chargerReglages)
   const [progres, setProgres] = useState<Progres>(chargerProgres)
   const [records, setRecords] = useState<Records>(chargerRecords)
@@ -451,6 +452,7 @@ export function App() {
         return
       }
       if (!question) return
+      if (mode === 'situer') return // la réponse se donne à la souris, de mémoire
       if (mode === 'etagere') {
         const touches: Record<string, number> = { '1': 0, '&': 0, '2': 1, 'é': 1, '3': 2, '"': 2, '4': 3, "'": 3 }
         const i = touches[k]
@@ -480,10 +482,10 @@ export function App() {
     return () => window.removeEventListener('keydown', surTouche)
   }, [resultat, question, saisie, filtre, mode, options, repondre, suivant])
 
-  const maitrisePlan = maitrise(
-    progres,
-    SECTIONS.map((s) => `plan:${s.section}`),
-  )
+  const maitrisePlan = maitrise(progres, [
+    ...SECTIONS.map((s) => `plan:${s.section}`),
+    ...SECTIONS.map((s) => `situer:${s.section}`),
+  ])
   const maitriseLivres = maitrise(
     progres,
     LIVRES.map((l) => `livre:${l.titre}`),
@@ -544,7 +546,12 @@ export function App() {
   }
 
   const montrerTitre =
-    mode === 'plan' || mode === 'etagere' || reglages.affichage === 'complet' || resultat !== null
+    mode === 'plan' ||
+    mode === 'etagere' ||
+    mode === 'situer' ||
+    reglages.affichage === 'complet' ||
+    resultat !== null
+  const modeCarteSeule = mode === 'plan' || mode === 'etagere' || mode === 'situer'
 
   return (
     <div className="app">
@@ -605,7 +612,7 @@ export function App() {
               </button>
             ))}
           </span>
-          {mode !== 'plan' && mode !== 'etagere' && (
+          {!modeCarteSeule && (
             <span className="groupe-filtres">
               <span className="groupe-libelle">{t.filtreTomes}</span>
               {FILTRES_TOMES.map((f) => (
@@ -620,7 +627,7 @@ export function App() {
               ))}
             </span>
           )}
-          {mode !== 'plan' && mode !== 'etagere' && (
+          {!modeCarteSeule && (
             <span className="groupe-filtres">
               <span className="groupe-libelle">{t.affichageLibelle}</span>
               {AFFICHAGES.map((a) => (
@@ -649,12 +656,19 @@ export function App() {
               ))}
             </span>
           )}
-          {mode !== 'tomes' && (
-            <label className="interrupteur">
-              <input type="checkbox" checked={aide} onChange={(e) => setAide(e.target.checked)} />
-              <span className="interrupteur-piste" aria-hidden="true" />
-              <span>{t.nomsSurCarte}</span>
-            </label>
+          {mode !== 'tomes' && mode !== 'situer' && (
+            <span className="groupe-filtres">
+              <span className="groupe-libelle">{t.carteLibelle}</span>
+              {IMAGES_CARTE.map((c) => (
+                <button
+                  key={c}
+                  className={`filtre${reglages.carte === c ? ' filtre-actif' : ''}`}
+                  onClick={() => setReglages({ ...reglages, carte: c })}
+                >
+                  {t.carteOptions[c]}
+                </button>
+              ))}
+            </span>
           )}
         </div>
       </nav>
@@ -727,8 +741,8 @@ export function App() {
         )}
 
         {question && (mode !== 'chrono' || chronoEnCours) && (
-          <div className={`question${mode === 'plan' || mode === 'etagere' ? ' question-plan' : ''}`}>
-            {mode !== 'plan' && mode !== 'etagere' && (
+          <div className={`question${modeCarteSeule ? ' question-plan' : ''}`}>
+            {!modeCarteSeule && (
               <Livre titre={question.invite} affichage={reglages.affichage} revele={resultat !== null} />
             )}
             <div className="question-texte">
@@ -741,11 +755,15 @@ export function App() {
               {montrerTitre && (
                 <>
                   <p className="invite-libelle">
-                    {mode === 'plan' ? t.categorie : mode === 'etagere' ? t.etagere : t.titreLivre}
+                    {mode === 'plan'
+                      ? t.categorie
+                      : mode === 'etagere'
+                        ? t.etagere
+                        : mode === 'situer'
+                          ? t.identifiant
+                          : t.titreLivre}
                   </p>
-                  <p className={`invite${mode === 'plan' || mode === 'etagere' ? ' invite-plan' : ''}`}>
-                    {question.invite}
-                  </p>
+                  <p className={`invite${modeCarteSeule ? ' invite-plan' : ''}`}>{question.invite}</p>
                 </>
               )}
               {mode === 'etagere' && (
@@ -803,6 +821,8 @@ export function App() {
                   <span className="raccourcis-inline">{t.raccourcisTomes}</span>
                 ) : mode === 'etagere' ? (
                   <span className="raccourcis-inline">{t.raccourcisEtagere}</span>
+                ) : mode === 'situer' ? (
+                  <span className="raccourcis-inline">{t.cliquezCarte}</span>
                 ) : (
                   <span className="curseur">
                     {saisie || (filtre !== 'tous' ? filtre : '_')}
@@ -834,14 +854,14 @@ export function App() {
           <h2>{t.carte}</h2>
           <Plan
             filtre={filtre}
-            aide={aide}
+            image={mode === 'situer' ? 'muette' : reglages.carte}
             saisie={saisie}
             resultat={resultat}
             surligne={mode === 'etagere' ? question?.section ?? null : null}
             surChoix={mode === 'etagere' ? () => undefined : repondre}
             libelleZoom={t.zoomCarte}
           />
-          <p className="raccourcis">{t.raccourcis}</p>
+          <p className="raccourcis">{mode === 'situer' ? t.cliquezCarte : t.raccourcis}</p>
         </section>
       )}
 

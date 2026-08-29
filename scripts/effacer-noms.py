@@ -11,6 +11,7 @@ from PIL import Image, ImageFilter, ImageStat
 RACINE = Path(__file__).resolve().parent.parent
 SOURCE = RACINE / "src" / "assets" / "carte.png"
 CIBLE = RACINE / "src" / "assets" / "carte-muette.png"
+CIBLE_VIERGE = RACINE / "src" / "assets" / "carte-vierge.png"
 
 # Rectangles (x1, y1, x2, y2, nature) en pixels de l'original, mesurés sur des zooms.
 RUSTINES = [
@@ -51,6 +52,25 @@ RUSTINES = [
     (1872, 346, 1950, 428, "parchemin"),  # 2O The Travels of Otherworld
     (1850, 482, 1950, 520, "parchemin"),  # 2P Dungeons
     (1843, 607, 1942, 646, "parchemin"),  # 2Q Language
+]
+
+
+# Les identifiants (« 1A »...) dans leurs cadres, centres en pixels de l'image ; les
+# deux de l'alcove sont ecrits en clair sur fond sombre.
+CENTRES_IDENTIFIANTS = {
+    "2A": (597, 86), "2C": (812, 86), "2E": (1018, 86), "2G": (1230, 86), "2I": (1438, 86), "2K": (1650, 86),
+    "1A": (630, 253), "1C": (785, 233), "1E": (955, 253), "1G": (1120, 233), "1I": (1285, 253), "1K": (1440, 225),
+    "1M": (1618, 262), "1N": (1618, 417),
+    "1B": (630, 483), "1D": (787, 488), "1F": (950, 483), "1H": (1115, 488), "1J": (1280, 483), "1L": (1432, 513),
+    "2B": (605, 654), "2D": (812, 654), "2F": (1015, 654), "2H": (1230, 654), "2J": (1437, 654), "2L": (1642, 654),
+    # Sur le mur du fond, le texte est plus haut que le centre du cadre.
+    "2M": (1888, 97), "2N": (1896, 222), "2O": (1906, 326), "2P": (1901, 467), "2Q": (1894, 588),
+}
+DEMI_IDENTIFIANT = (26, 16)
+RUSTINES_IDENTIFIANTS = [
+    (cx - DEMI_IDENTIFIANT[0], cy - DEMI_IDENTIFIANT[1], cx + DEMI_IDENTIFIANT[0], cy + DEMI_IDENTIFIANT[1],
+     "sombre" if section in ("1M", "1N") else "parchemin")
+    for section, (cx, cy) in CENTRES_IDENTIFIANTS.items()
 ]
 
 # Tuiles de texture : parchemin vide sous la galerie haute, fond sombre entre 1M et 1N.
@@ -135,11 +155,9 @@ def recolorer(patch, cible):
     return Image.merge("RGB", ajustees)
 
 
-def main():
-    random.seed(7)
-    image = Image.open(SOURCE).convert("RGB")
+def appliquer(image, rustines):
     largeur, hauteur = image.size
-    for x1, y1, x2, y2, nature in RUSTINES:
+    for x1, y1, x2, y2, nature in rustines:
         couleur = voisinage(image, (x1, y1, x2, y2), nature)
         marge = DEBORD + FONDU
         boite = (max(0, x1 - marge), max(0, y1 - marge), min(largeur, x2 + marge), min(hauteur, y2 + marge))
@@ -149,10 +167,20 @@ def main():
         masque.paste(255, (FONDU, FONDU, l - FONDU, h - FONDU))
         masque = masque.filter(ImageFilter.GaussianBlur(FONDU / 2))
         image.paste(patch, boite, masque)
-    image.quantize(256, method=Image.Quantize.MEDIANCUT, dither=Image.Dither.FLOYDSTEINBERG).save(
-        CIBLE, optimize=True
-    )
-    print("écrit", CIBLE, image.size)
+    return image
+
+
+def enregistrer(image, cible):
+    image.quantize(256, method=Image.Quantize.MEDIANCUT, dither=Image.Dither.FLOYDSTEINBERG).save(cible, optimize=True)
+    print("écrit", cible, image.size)
+
+
+def main():
+    random.seed(7)
+    muette = appliquer(Image.open(SOURCE).convert("RGB"), RUSTINES)
+    enregistrer(muette, CIBLE)
+    vierge = appliquer(muette.copy(), RUSTINES_IDENTIFIANTS)
+    enregistrer(vierge, CIBLE_VIERGE)
 
 
 if __name__ == "__main__":

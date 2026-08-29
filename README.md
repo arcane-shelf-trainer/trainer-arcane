@@ -5,6 +5,7 @@ A free, fan-made trainer for *Librarian: Tidy Up the Arcane Library!* Learn whic
 stop reading the wall maps.
 
 - **Map** mode: a category, which shelf?
+- **Locate** mode: a shelf code, click where it is on a fully blank map, from memory.
 - **Books** mode: a book (real cover and spine), which shelf? The series size (3, 5 or
   10 volumes) is shown under the title, and a filter restricts the deck to one size —
   3-volume series earn skill points fastest in a speedrun.
@@ -18,7 +19,7 @@ stop reading the wall maps.
 - **Timer** mode: twenty books against the clock, three seconds per mistake, best time kept.
 - Spaced repetition: what you miss comes back often, what you know comes back rarely.
 - Answer with the keyboard (`1` or `2`, then the shelf letter) or by clicking the real
-  library map. Category names on the map can be hidden.
+  library map, shown with names, with codes only, or fully blank.
 - French and English interface. Progress stays in your browser.
 
 ## Running it locally

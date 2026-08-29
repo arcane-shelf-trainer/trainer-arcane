@@ -13,7 +13,8 @@ l'étagère (section 1A à 1N, 2A à 2Q) de chaque catégorie et de chacun des 4
 
 ## Ce que fait l'application
 
-- Cinq modes : Plan (catégorie vers étagère), Livres (titre vers étagère, avec la
+- Six modes : Plan (catégorie vers étagère), Situer (un identifiant, cliquer son
+  emplacement de mémoire sur la carte vierge, sans clavier), Livres (titre vers étagère, avec la
   taille de la série affichée), Étagère (une étagère, quatre livres dont un seul y est
   rangé, touches 1 à 4, intrus tirés de préférence sur le même étage, étagère surlignée
   sur le plan), Tomes (titre vers nombre de tomes de la série : 3, 5 ou 10, touches 3,
@@ -48,9 +49,11 @@ l'étagère (section 1A à 1N, 2A à 2Q) de chaque catégorie et de chacun des 4
   deux rangées (A, C, E... en haut, B, D, F... en bas) puis 1M et 1N dans l'alcôve du
   fond ; galerie du second étage le long des murs (2A à 2K en haut, 2B à 2L en bas, 2M à
   2Q au fond). Les zones cliquables (`src/jeu/plan.ts`, en pixels de l'image) épousent
-  les cadres d'identifiants et restent invisibles hors survol et réponse. Sans l'aide,
-  l'application affiche `carte-muette.png`, la même carte avec les noms de catégories
-  effacés ; `python scripts/effacer-noms.py` la régénère (Pillow). Un test vérifie que
+  les cadres d'identifiants et restent invisibles hors survol et réponse. Trois images
+  au choix (réglage « Carte ») : `carte.png` avec les noms, `carte-muette.png` sans les
+  noms de catégories, `carte-vierge.png` sans les identifiants non plus (mémoire
+  spatiale pure, forcée en mode Situer) ; `python scripts/effacer-noms.py` régénère les
+  deux dernières (Pillow). Un test vérifie que
   chaque section a une zone et qu'aucune zone n'en chevauche une autre.
 - Progression et records en localStorage.
 
