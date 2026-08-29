@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { LIVRES, SECTIONS, type Etage } from './jeu/catalogue'
+import { LIVRES, SECTIONS } from './jeu/catalogue'
 import { choisir, enregistrer, fiche, maitrise, type Progres } from './jeu/leitner'
+import { Plan, type Filtre, type Resultat } from './Plan'
 import {
   chargerProgres,
   chargerRecords,
@@ -11,19 +12,11 @@ import {
 } from './jeu/stockage'
 
 type Mode = 'plan' | 'livres' | 'chrono'
-type Filtre = 'tous' | Etage
 
 interface Question {
   cle: string
   invite: string
   reponse: string
-  categorie: string
-}
-
-interface Resultat {
-  correct: boolean
-  choisi: string
-  attendu: string
   categorie: string
 }
 
@@ -69,47 +62,6 @@ function formatSecondes(ms: number): string {
 
 function pluriel(n: number, mot: string): string {
   return `${n} ${mot}${n > 1 ? 's' : ''}`
-}
-
-function Plan({
-  filtre,
-  aide,
-  saisie,
-  resultat,
-  surChoix,
-}: {
-  filtre: Filtre
-  aide: boolean
-  saisie: string
-  resultat: Resultat | null
-  surChoix: (section: string) => void
-}) {
-  const etages = (['1', '2'] as const).filter((e) => filtre === 'tous' || filtre === e)
-  return (
-    <div className="plan">
-      {etages.map((etage) => (
-        <div className="etage" key={etage}>
-          <span className="etage-nom">Étage {etage}</span>
-          <div className="rayons">
-            {SECTIONS.filter((s) => s.etage === etage).map((s) => {
-              let classe = 'rayon'
-              if (resultat && s.section === resultat.attendu) classe += ' rayon-attendu'
-              if (resultat && !resultat.correct && s.section === resultat.choisi) {
-                classe += ' rayon-faute'
-              }
-              if (!resultat && saisie && s.section.startsWith(saisie)) classe += ' rayon-actif'
-              return (
-                <button key={s.section} className={classe} onClick={() => surChoix(s.section)}>
-                  <span className="rayon-id">{s.section}</span>
-                  {aide && <span className="rayon-cat">{s.categorie}</span>}
-                </button>
-              )
-            })}
-          </div>
-        </div>
-      ))}
-    </div>
-  )
 }
 
 function Statistiques({ progres }: { progres: Progres }) {

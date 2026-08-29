@@ -21,6 +21,12 @@ l'étagère (section 1A à 1N, 2A à 2Q) de chaque catégorie et de chacun des 4
 - Réponse au clavier (1 ou 2 puis la lettre ; & et é acceptés pour l'AZERTY ; sur un seul
   étage, la lettre suffit) ou au clic sur le plan des étagères. Entrée ou Espace pour
   continuer après une faute.
+- Le plan (`src/Plan.tsx`, positions dans `src/jeu/plan.ts`) reproduit les cartes
+  affichées dans le jeu près des escaliers, les deux étages superposés : escalier à
+  gauche, premier étage au centre en deux rangées (A, C, E... en haut, B, D, F... en
+  bas) puis 1M et 1N dans l'alcôve du fond ; galerie du second étage le long des murs
+  (2A à 2K en haut, 2B à 2L en bas, 2M à 2Q au fond). Un test vérifie que chaque section
+  du catalogue a une position et qu'aucune boîte n'en chevauche une autre.
 - Progression et records en localStorage.
 
 ## Règles techniques

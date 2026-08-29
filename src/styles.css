@@ -224,80 +224,93 @@ h1 {
   color: var(--encre-pale);
 }
 
+/* Le plan de la bibliothèque, en SVG. */
+
 .plan {
-  margin-top: 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.etage {
-  background: var(--bois);
-  border-radius: 4px;
-  padding: 10px 12px 12px;
-  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.4);
-}
-
-.etage-nom {
   display: block;
-  font-size: 0.75rem;
-  text-transform: uppercase;
+  width: 100%;
+  height: auto;
+  margin-top: 16px;
+  background: var(--bois);
+  border-radius: 6px;
+  box-shadow: inset 0 0 24px rgba(0, 0, 0, 0.45);
+}
+
+.plan-salle {
+  fill: #4a3628;
+  stroke: #24170f;
+  stroke-width: 2;
+}
+
+.plan-escalier {
+  fill: none;
+  stroke: #2e2119;
+  stroke-width: 2;
+}
+
+.plan-alcove {
+  fill: #2b1d15;
+  stroke: #1a100a;
+  stroke-width: 1.5;
+}
+
+.plan-legende {
+  fill: var(--clair-pale);
+  font-size: 11px;
   letter-spacing: 0.12em;
-  color: var(--clair-pale);
-  margin-bottom: 8px;
+  text-transform: uppercase;
+  text-anchor: middle;
+  pointer-events: none;
 }
 
-.rayons {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(64px, 1fr));
-  gap: 6px;
-}
-
-.rayon {
-  font: inherit;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2px;
-  padding: 8px 4px;
-  background: #5a4030;
-  border: 1px solid #2a1c14;
-  border-bottom: 3px solid #2a1c14;
-  color: var(--clair);
+.plan-section {
   cursor: pointer;
-  border-radius: 3px;
-  min-height: 46px;
+  outline: none;
 }
 
-.rayon:hover {
-  background: #6e4f3b;
+.plan-section rect {
+  fill: #6b4b37;
+  stroke: #24170f;
+  stroke-width: 1.5;
+  transition: fill 0.1s;
 }
 
-.rayon-id {
+.plan-section:hover rect,
+.plan-section:focus-visible rect {
+  fill: #7d5a44;
+}
+
+.plan-id {
+  fill: var(--clair);
+  font-size: 15px;
   font-weight: bold;
-  font-size: 1.05rem;
-  letter-spacing: 0.05em;
+  text-anchor: middle;
+  pointer-events: none;
 }
 
-.rayon-cat {
-  font-size: 0.6rem;
-  line-height: 1.1;
-  color: var(--clair-pale);
-  text-align: center;
+.plan-cat {
+  fill: var(--clair-pale);
+  font-size: 7px;
+  text-anchor: middle;
+  pointer-events: none;
 }
 
-.rayon-actif {
-  outline: 2px solid var(--accent);
+.plan-section-active rect {
+  stroke: var(--accent);
+  stroke-width: 3;
 }
 
-.rayon-attendu {
-  background: var(--ok);
-  border-color: #1f5a34;
+.plan-section-attendu rect {
+  fill: var(--ok);
 }
 
-.rayon-faute {
-  background: var(--faute);
-  border-color: #6b1f1f;
+.plan-section-faute rect {
+  fill: var(--faute);
+}
+
+.plan-section-inactive {
+  opacity: 0.3;
+  pointer-events: none;
 }
 
 .raccourcis {
