@@ -471,39 +471,46 @@ h2 {
   height: auto;
 }
 
+/* Chaque zone couvre le pictogramme entier de l'étagère et s'allume d'une lueur
+   dorée arrondie au survol ; verte pour l'attendu, rouge pour la faute. */
+
 .zone {
   position: absolute;
   padding: 0;
   margin: 0;
   background: transparent;
   border: none;
-  border-radius: 5px;
+  border-radius: 10px;
   cursor: pointer;
-  transition: box-shadow 0.1s, background 0.1s;
+  transition: box-shadow 0.15s ease, background 0.15s ease;
 }
 
 .zone:hover,
 .zone:focus-visible {
-  box-shadow: 0 0 0 2px var(--accent);
+  background: rgba(201, 165, 90, 0.22);
+  box-shadow: 0 0 0 2px rgba(201, 165, 90, 0.9), 0 0 18px rgba(201, 165, 90, 0.6);
   outline: none;
 }
 
 .zone-active {
-  box-shadow: 0 0 0 2px var(--accent), 0 0 10px rgba(208, 129, 47, 0.7);
+  background: rgba(201, 165, 90, 0.12);
+  box-shadow: 0 0 0 1.5px rgba(201, 165, 90, 0.6);
 }
 
-.zone-attendue {
-  background: rgba(63, 154, 95, 0.55);
-  box-shadow: 0 0 0 2px #2f7a4a;
+.zone-attendue,
+.zone-attendue:hover {
+  background: rgba(63, 154, 95, 0.42);
+  box-shadow: 0 0 0 2px rgba(63, 154, 95, 0.95), 0 0 18px rgba(63, 154, 95, 0.7);
 }
 
-.zone-faute {
-  background: rgba(194, 61, 61, 0.55);
-  box-shadow: 0 0 0 2px #8f2a2a;
+.zone-faute,
+.zone-faute:hover {
+  background: rgba(194, 61, 61, 0.42);
+  box-shadow: 0 0 0 2px rgba(194, 61, 61, 0.95), 0 0 18px rgba(194, 61, 61, 0.7);
 }
 
 .zone-inactive {
-  background: rgba(20, 12, 8, 0.6);
+  background: rgba(20, 12, 8, 0.55);
   pointer-events: none;
 }
 
