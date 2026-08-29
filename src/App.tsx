@@ -698,20 +698,23 @@ export function App() {
               <p className="chrono-bilan">
                 {t.termine} <strong>{formatSecondes(chrono.fin - chrono.debut, langue)}</strong>,{' '}
                 {t.fautes(chrono.fautes)}
-                {chrono.fautes > 0 && ` (+${(chrono.fautes * PENALITE_MS) / 1000} s)`} : {t.score}{' '}
+                {chrono.fautes > 0 && ` (+${(chrono.fautes * PENALITE_MS) / 1000} s)`}
+                {t.sep}
+                {t.score}{' '}
                 <strong>
                   {formatSecondes(chrono.fin - chrono.debut + chrono.fautes * PENALITE_MS, langue)}
                 </strong>
               </p>
             )}
             <p className="record">
-              {t.record} ({nomFiltreRecord}) :{' '}
+              {t.record} ({nomFiltreRecord}){t.sep}
               <strong>
                 {records[cleRecord] !== undefined ? formatSecondes(records[cleRecord], langue) : t.aucun}
               </strong>
             </p>
             <button className="lancer" onClick={lancerChrono}>
-              {chronoFini ? t.relancer : t.lancer} :{' '}
+              {chronoFini ? t.relancer : t.lancer}
+              {t.sep}
               {t.chronoConsigne(reglages.longueurChrono, PENALITE_MS / 1000)}
             </button>
           </div>
@@ -741,7 +744,9 @@ export function App() {
         )}
 
         {question && (mode !== 'chrono' || chronoEnCours) && (
-          <div className={`question${modeCarteSeule ? ' question-plan' : ''}`}>
+          <div
+            className={`question${modeCarteSeule ? ' question-plan' : ''}${!montrerTitre ? ' question-compact' : ''}`}
+          >
             {!modeCarteSeule && (
               <Livre titre={question.invite} affichage={reglages.affichage} revele={resultat !== null} />
             )}
@@ -823,11 +828,13 @@ export function App() {
                   <span className="raccourcis-inline">{t.raccourcisEtagere}</span>
                 ) : mode === 'situer' ? (
                   <span className="raccourcis-inline">{t.cliquezCarte}</span>
-                ) : (
+                ) : saisie || filtre !== 'tous' ? (
                   <span className="curseur">
-                    {saisie || (filtre !== 'tous' ? filtre : '_')}
+                    {saisie || filtre}
                     <span className="curseur-lettre">_</span>
                   </span>
+                ) : (
+                  <span className="indice">{t.indiceSaisie}</span>
                 )}
               </p>
               {resultat && !resultat.correct && mode !== 'tomes' && MOTS_CLES[resultat.attendu] && (

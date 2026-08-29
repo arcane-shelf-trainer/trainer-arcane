@@ -192,7 +192,7 @@ h1 {
 
 .filtres {
   display: flex;
-  gap: 6px;
+  gap: 6px 4px;
   align-items: center;
   flex-wrap: wrap;
 }
@@ -434,9 +434,7 @@ h1 {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  margin-left: 10px;
-  padding-left: 10px;
-  border-left: 1px solid #4a3a2c;
+  margin-right: 10px;
 }
 
 .groupe-libelle {
@@ -603,8 +601,33 @@ h1 {
 
 .groupe-premier {
   margin-left: 0;
-  padding-left: 0;
-  border-left: none;
+}
+
+/* Focus clavier : un anneau doré plutôt que celui du navigateur. */
+.onglet:focus-visible,
+.filtre:focus-visible,
+.langue:focus-visible,
+.lancer:focus-visible,
+.continuer:focus-visible,
+.lien:focus-visible {
+  outline: 2px solid var(--or);
+  outline-offset: 2px;
+}
+
+/* Sans titre affiché (couverture ou tranche seule), la fiche se recentre. */
+.question-compact {
+  justify-content: center;
+  text-align: center;
+}
+
+.question-compact .question-texte {
+  flex: 0 0 auto;
+}
+
+.indice {
+  font-size: 0.95rem;
+  font-style: italic;
+  color: var(--encre-pale);
 }
 
 .stats-vide {

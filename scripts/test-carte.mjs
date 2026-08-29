@@ -22,11 +22,11 @@ for (const largeur of [1100, 760, 1600]) {
   let bons = 0
   const rates = []
   for (const [section, cx, cy] of centres) {
-    await page.waitForFunction(() => /_$/.test(document.querySelector(".saisie").innerText.trim()), null, { timeout: 5000 })
+    await page.waitForFunction(() => !/^(Non|No,|Exact|Correct)/.test(document.querySelector(".saisie").innerText.trim()), null, { timeout: 5000 })
     await page.locator(".carte-image").scrollIntoViewIfNeeded()
     const r = await page.locator(".carte-image").boundingBox()
     await page.mouse.click(r.x + (cx / 2022) * r.width, r.y + (cy / 778) * r.height)
-    await page.waitForFunction(() => !/_$/.test(document.querySelector(".saisie").innerText.trim()), null, { timeout: 5000 })
+    await page.waitForFunction(() => /^(Non|No,|Exact|Correct)/.test(document.querySelector(".saisie").innerText.trim()), null, { timeout: 5000 })
     const texte = (await page.locator(".saisie").innerText()).trim()
     const m = texte.match(/(\d[A-Q])/)
     if (m && m[1] === section) bons++
