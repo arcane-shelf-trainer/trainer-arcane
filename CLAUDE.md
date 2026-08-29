@@ -21,12 +21,16 @@ l'étagère (section 1A à 1N, 2A à 2Q) de chaque catégorie et de chacun des 4
 - Réponse au clavier (1 ou 2 puis la lettre ; & et é acceptés pour l'AZERTY ; sur un seul
   étage, la lettre suffit) ou au clic sur le plan des étagères. Entrée ou Espace pour
   continuer après une faute.
-- Le plan (`src/Plan.tsx`, positions dans `src/jeu/plan.ts`) reproduit les cartes
-  affichées dans le jeu près des escaliers, les deux étages superposés : escalier à
-  gauche, premier étage au centre en deux rangées (A, C, E... en haut, B, D, F... en
-  bas) puis 1M et 1N dans l'alcôve du fond ; galerie du second étage le long des murs
-  (2A à 2K en haut, 2B à 2L en bas, 2M à 2Q au fond). Un test vérifie que chaque section
-  du catalogue a une position et qu'aucune boîte n'en chevauche une autre.
+- La carte (`src/Plan.tsx`) est l'image du jeu, les deux étages composés sur une seule
+  vue (`src/assets/carte.png`, 2022 x 778, tirée du guide Steam « Complete Guide (Map,
+  All Floors, Shelves & Book Lists) ») : escalier à gauche, premier étage au centre en
+  deux rangées (A, C, E... en haut, B, D, F... en bas) puis 1M et 1N dans l'alcôve du
+  fond ; galerie du second étage le long des murs (2A à 2K en haut, 2B à 2L en bas, 2M à
+  2Q au fond). Les zones cliquables (`src/jeu/plan.ts`, en pixels de l'image) épousent
+  les cadres d'identifiants et restent invisibles hors survol et réponse. Sans l'aide,
+  l'application affiche `carte-muette.png`, la même carte avec les noms de catégories
+  effacés ; `python scripts/effacer-noms.py` la régénère (Pillow). Un test vérifie que
+  chaque section a une zone et qu'aucune zone n'en chevauche une autre.
 - Progression et records en localStorage.
 
 ## Règles techniques

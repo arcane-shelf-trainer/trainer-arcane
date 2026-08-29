@@ -279,7 +279,7 @@ export function App() {
           ))}
           <label className="aide">
             <input type="checkbox" checked={aide} onChange={(e) => setAide(e.target.checked)} />{' '}
-            catégories sur le plan
+            noms des catégories sur la carte
           </label>
         </div>
       </nav>
