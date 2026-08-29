@@ -480,33 +480,33 @@ h2 {
   margin: 0;
   background: transparent;
   border: none;
-  border-radius: 10px;
+  border-radius: 8px;
   cursor: pointer;
-  transition: box-shadow 0.15s ease, background 0.15s ease;
+  transition: box-shadow 0.12s ease, background 0.12s ease;
 }
 
 .zone:hover,
 .zone:focus-visible {
-  background: rgba(201, 165, 90, 0.22);
-  box-shadow: 0 0 0 2px rgba(201, 165, 90, 0.9), 0 0 18px rgba(201, 165, 90, 0.6);
+  background: rgba(201, 165, 90, 0.2);
+  box-shadow: 0 0 0 2px rgba(201, 165, 90, 0.95), 0 0 14px rgba(201, 165, 90, 0.55);
   outline: none;
 }
 
 .zone-active {
-  background: rgba(201, 165, 90, 0.12);
-  box-shadow: 0 0 0 1.5px rgba(201, 165, 90, 0.6);
+  background: rgba(201, 165, 90, 0.1);
+  box-shadow: 0 0 0 1.5px rgba(201, 165, 90, 0.55);
 }
 
 .zone-attendue,
 .zone-attendue:hover {
-  background: rgba(63, 154, 95, 0.42);
-  box-shadow: 0 0 0 2px rgba(63, 154, 95, 0.95), 0 0 18px rgba(63, 154, 95, 0.7);
+  background: rgba(63, 154, 95, 0.4);
+  box-shadow: 0 0 0 2px rgba(63, 154, 95, 0.95), 0 0 14px rgba(63, 154, 95, 0.65);
 }
 
 .zone-faute,
 .zone-faute:hover {
-  background: rgba(194, 61, 61, 0.42);
-  box-shadow: 0 0 0 2px rgba(194, 61, 61, 0.95), 0 0 18px rgba(194, 61, 61, 0.7);
+  background: rgba(194, 61, 61, 0.4);
+  box-shadow: 0 0 0 2px rgba(194, 61, 61, 0.95), 0 0 14px rgba(194, 61, 61, 0.65);
 }
 
 .zone-inactive {
