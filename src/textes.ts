@@ -11,9 +11,16 @@ export const TEXTES = {
     jaugePlan: 'Plan',
     jaugeLivres: 'Livres',
     jaugeTomes: 'Tomes',
+    jaugeEtageres: 'Étagères',
+    etagere: 'Étagère',
+    exactEtagere: (titre: string) => `Exact : « ${titre} »`,
+    fauteEtagere: (titreChoisi: string, section: string, categorie: string, titreAttendu: string) =>
+      `Non : « ${titreChoisi} » est en ${section} — ${categorie}. C’était « ${titreAttendu} »`,
+    raccourcisEtagere: 'Clavier : 1 à 4.',
     modes: {
       plan: { nom: 'Plan', aide: 'Une catégorie : quelle étagère ?' },
       livres: { nom: 'Livres', aide: 'Un livre : quelle étagère ?' },
+      etagere: { nom: 'Étagère', aide: 'Une étagère : lequel de ces livres y est rangé ?' },
       tomes: { nom: 'Tomes', aide: 'Un livre : combien de tomes dans la série ?' },
       chrono: { nom: 'Chrono', aide: 'Des livres contre la montre' },
     },
@@ -86,9 +93,16 @@ export const TEXTES = {
     jaugePlan: 'Map',
     jaugeLivres: 'Books',
     jaugeTomes: 'Volumes',
+    jaugeEtageres: 'Shelves',
+    etagere: 'Shelf',
+    exactEtagere: (titre: string) => `Correct: “${titre}”`,
+    fauteEtagere: (titreChoisi: string, section: string, categorie: string, titreAttendu: string) =>
+      `No: “${titreChoisi}” is in ${section} — ${categorie}. It was “${titreAttendu}”`,
+    raccourcisEtagere: 'Keyboard: 1 to 4.',
     modes: {
       plan: { nom: 'Map', aide: 'A category: which shelf?' },
       livres: { nom: 'Books', aide: 'A book: which shelf?' },
+      etagere: { nom: 'Shelf', aide: 'A shelf: which of these books belongs there?' },
       tomes: { nom: 'Volumes', aide: 'A book: how many volumes in the series?' },
       chrono: { nom: 'Timer', aide: 'Books against the clock' },
     },

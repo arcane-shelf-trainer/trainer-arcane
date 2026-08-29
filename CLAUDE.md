@@ -13,9 +13,11 @@ l'étagère (section 1A à 1N, 2A à 2Q) de chaque catégorie et de chacun des 4
 
 ## Ce que fait l'application
 
-- Quatre modes : Plan (catégorie vers étagère), Livres (titre vers étagère, avec la
-  taille de la série affichée), Tomes (titre vers nombre de tomes de la série : 3, 5 ou
-  10, touches 3, 5 ou 1), Chrono (vingt titres contre la montre, trois secondes de
+- Cinq modes : Plan (catégorie vers étagère), Livres (titre vers étagère, avec la
+  taille de la série affichée), Étagère (une étagère, quatre livres dont un seul y est
+  rangé, touches 1 à 4, intrus tirés de préférence sur le même étage, étagère surlignée
+  sur le plan), Tomes (titre vers nombre de tomes de la série : 3, 5 ou 10, touches 3,
+  5 ou 1), Chrono (vingt titres contre la montre, trois secondes de
   pénalité par faute, record par filtre d'étage et de série). Le filtre « Séries »
   (3, 5, 10) restreint Livres, Tomes et Chrono : en speedrun, les séries de 3 tomes
   donnent les points de compétence le plus vite.

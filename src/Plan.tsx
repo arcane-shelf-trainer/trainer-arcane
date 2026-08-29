@@ -18,12 +18,14 @@ export function Plan({
   aide,
   saisie,
   resultat,
+  surligne = null,
   surChoix,
 }: {
   filtre: Filtre
   aide: boolean
   saisie: string
   resultat: Resultat | null
+  surligne?: string | null // une étagère à montrer, sans question posée sur la carte
   surChoix: (section: string) => void
 }) {
   return (
@@ -41,6 +43,7 @@ export function Plan({
         if (resultat && s.section === resultat.attendu) classe += ' zone-attendue'
         if (resultat && !resultat.correct && s.section === resultat.choisi) classe += ' zone-faute'
         if (!resultat && saisie && s.section.startsWith(saisie)) classe += ' zone-active'
+        if (surligne === s.section) classe += ' zone-surlignee'
         return (
           <button
             key={s.section}

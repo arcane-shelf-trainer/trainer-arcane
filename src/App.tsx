@@ -37,8 +37,15 @@ import motsClesJson from './donnees/mots-cles.json'
 
 const MOTS_CLES = motsClesJson as Record<string, { mots: string[]; en: string; fr: string }>
 
-type Mode = 'plan' | 'livres' | 'tomes' | 'chrono'
+type Mode = 'plan' | 'livres' | 'etagere' | 'tomes' | 'chrono'
 type FiltreTomes = 'tous' | 3 | 5 | 10
+
+// Un livre proposé dans le mode Étagère : le bon ou un intrus.
+interface Option {
+  titre: string
+  section: string
+  categorie: string
+}
 
 interface Question {
   cle: string
@@ -56,7 +63,8 @@ interface Chrono {
   fin: number | null
 }
 
-const MODES: Mode[] = ['plan', 'livres', 'tomes', 'chrono']
+const MODES: Mode[] = ['plan', 'livres', 'etagere', 'tomes', 'chrono']
+const NOMBRE_OPTIONS = 4
 const FILTRES: Filtre[] = ['tous', '1', '2']
 const FILTRES_TOMES: FiltreTomes[] = ['tous', 3, 5, 10]
 const TOMES: number[] = [3, 5, 10]
@@ -68,10 +76,10 @@ const DELAI_FAUTE_CHRONO_MS = 1300
 const TIC_HORLOGE_MS = 15_000
 
 function questionsPour(mode: Mode, filtre: Filtre, tomes: FiltreTomes): Question[] {
-  if (mode === 'plan') {
+  if (mode === 'plan' || mode === 'etagere') {
     return SECTIONS.filter((s) => filtre === 'tous' || s.section.startsWith(filtre)).map((s) => ({
-      cle: `plan:${s.section}`,
-      invite: s.categorie,
+      cle: `${mode}:${s.section}`,
+      invite: mode === 'plan' ? s.categorie : `${s.section} — ${s.categorie}`,
       reponse: s.section,
       categorie: s.categorie,
       section: s.section,
@@ -92,6 +100,28 @@ function questionsPour(mode: Mode, filtre: Filtre, tomes: FiltreTomes): Question
 function formatSecondes(ms: number, langue: Langue): string {
   const s = (ms / 1000).toFixed(2)
   return `${langue === 'fr' ? s.replace('.', ',') : s} s`
+}
+
+// Quatre livres pour une étagère : un des siens et trois intrus d'autres étagères,
+// de préférence du même étage, mélangés.
+function optionsPour(section: string, alea: () => number): Option[] {
+  const tirer = <T,>(liste: T[]) => liste[Math.floor(alea() * liste.length)]
+  const bons = LIVRES.filter((l) => l.section === section)
+  const memeEtage = LIVRES.filter((l) => l.section !== section && l.section[0] === section[0])
+  const autres = LIVRES.filter((l) => l.section !== section)
+  const choisis: Option[] = [tirer(bons)].map((l) => ({ titre: l.titre, section: l.section, categorie: l.categorie }))
+  while (choisis.length < NOMBRE_OPTIONS) {
+    const source = alea() < 0.7 && memeEtage.length > 0 ? memeEtage : autres
+    const l = tirer(source)
+    if (!choisis.some((c) => c.titre === l.titre || c.section === l.section)) {
+      choisis.push({ titre: l.titre, section: l.section, categorie: l.categorie })
+    }
+  }
+  for (let i = choisis.length - 1; i > 0; i--) {
+    const j = Math.floor(alea() * (i + 1))
+    ;[choisis[i], choisis[j]] = [choisis[j], choisis[i]]
+  }
+  return choisis
 }
 
 function jourLocal(d = new Date()): string {
@@ -214,6 +244,8 @@ export function App() {
   })
   const [cible, setCible] = useState<string[] | null>(null)
   const [question, setQuestion] = useState<Question | null>(null)
+  const [options, setOptions] = useState<Option[]>([])
+  const [choixTitre, setChoixTitre] = useState<string | null>(null)
   const [saisie, setSaisie] = useState('')
   const [resultat, setResultat] = useState<Resultat | null>(null)
   const [chrono, setChrono] = useState<Chrono | null>(null)
@@ -282,7 +314,10 @@ export function App() {
       return
     }
     const cle = choisir(progresRef.current, candidats, Math.random(), questionRef.current?.cle)
-    setQuestion(parCle.get(cle) ?? null)
+    const q = parCle.get(cle) ?? null
+    setQuestion(q)
+    setChoixTitre(null)
+    setOptions(q && cle.startsWith('etagere:') ? optionsPour(q.section, Math.random) : [])
   }, [parCle])
 
   // Nouveau mode, filtre ou réglage : on repart sur une question fraîche (hors chrono).
@@ -416,6 +451,15 @@ export function App() {
         return
       }
       if (!question) return
+      if (mode === 'etagere') {
+        const touches: Record<string, number> = { '1': 0, '&': 0, '2': 1, 'é': 1, '3': 2, '"': 2, '4': 3, "'": 3 }
+        const i = touches[k]
+        if (i !== undefined && options[i]) {
+          setChoixTitre(options[i].titre)
+          repondre(options[i].section)
+        }
+        return
+      }
       if (mode === 'tomes') {
         if (k === '3' || k === '"') return repondre('3')
         if (k === '5' || k === '(') return repondre('5')
@@ -434,7 +478,7 @@ export function App() {
     }
     window.addEventListener('keydown', surTouche)
     return () => window.removeEventListener('keydown', surTouche)
-  }, [resultat, question, saisie, filtre, mode, repondre, suivant])
+  }, [resultat, question, saisie, filtre, mode, options, repondre, suivant])
 
   const maitrisePlan = maitrise(
     progres,
@@ -447,6 +491,10 @@ export function App() {
   const maitriseTomes = maitrise(
     progres,
     LIVRES.map((l) => `tome:${l.titre}`),
+  )
+  const maitriseEtageres = maitrise(
+    progres,
+    SECTIONS.map((s) => `etagere:${s.section}`),
   )
   const chronoEnCours = mode === 'chrono' && chrono !== null && chrono.fin === null
   const chronoFini = mode === 'chrono' && chrono !== null && chrono.fin !== null
@@ -486,10 +534,17 @@ export function App() {
 
   function retour(r: Resultat): string {
     if (mode === 'tomes') return r.correct ? t.exactTomes(r.attendu) : t.fauteTomes(r.choisi, r.attendu)
+    if (mode === 'etagere') {
+      const bon = options.find((o) => o.section === r.attendu)
+      const choisi = options.find((o) => o.titre === choixTitre)
+      if (r.correct) return t.exactEtagere(bon?.titre ?? '')
+      return t.fauteEtagere(choisi?.titre ?? '', r.choisi, choisi?.categorie ?? '', bon?.titre ?? '')
+    }
     return r.correct ? t.exact(r.attendu, r.categorie) : t.faute(r.choisi, r.attendu, r.categorie)
   }
 
-  const montrerTitre = mode === 'plan' || reglages.affichage === 'complet' || resultat !== null
+  const montrerTitre =
+    mode === 'plan' || mode === 'etagere' || reglages.affichage === 'complet' || resultat !== null
 
   return (
     <div className="app">
@@ -502,6 +557,7 @@ export function App() {
           <Jauge libelle={t.jaugePlan} valeur={maitrisePlan} />
           <Jauge libelle={t.jaugeLivres} valeur={maitriseLivres} />
           <Jauge libelle={t.jaugeTomes} valeur={maitriseTomes} />
+          <Jauge libelle={t.jaugeEtageres} valeur={maitriseEtageres} />
           <button className="langue" onClick={() => setLangue(langue === 'fr' ? 'en' : 'fr')}>
             {t.langue}
           </button>
@@ -549,7 +605,7 @@ export function App() {
               </button>
             ))}
           </span>
-          {mode !== 'plan' && (
+          {mode !== 'plan' && mode !== 'etagere' && (
             <span className="groupe-filtres">
               <span className="groupe-libelle">{t.filtreTomes}</span>
               {FILTRES_TOMES.map((f) => (
@@ -564,7 +620,7 @@ export function App() {
               ))}
             </span>
           )}
-          {mode !== 'plan' && (
+          {mode !== 'plan' && mode !== 'etagere' && (
             <span className="groupe-filtres">
               <span className="groupe-libelle">{t.affichageLibelle}</span>
               {AFFICHAGES.map((a) => (
@@ -671,8 +727,8 @@ export function App() {
         )}
 
         {question && (mode !== 'chrono' || chronoEnCours) && (
-          <div className={`question${mode === 'plan' ? ' question-plan' : ''}`}>
-            {mode !== 'plan' && (
+          <div className={`question${mode === 'plan' || mode === 'etagere' ? ' question-plan' : ''}`}>
+            {mode !== 'plan' && mode !== 'etagere' && (
               <Livre titre={question.invite} affichage={reglages.affichage} revele={resultat !== null} />
             )}
             <div className="question-texte">
@@ -684,9 +740,40 @@ export function App() {
               )}
               {montrerTitre && (
                 <>
-                  <p className="invite-libelle">{mode === 'plan' ? t.categorie : t.titreLivre}</p>
-                  <p className={`invite${mode === 'plan' ? ' invite-plan' : ''}`}>{question.invite}</p>
+                  <p className="invite-libelle">
+                    {mode === 'plan' ? t.categorie : mode === 'etagere' ? t.etagere : t.titreLivre}
+                  </p>
+                  <p className={`invite${mode === 'plan' || mode === 'etagere' ? ' invite-plan' : ''}`}>
+                    {question.invite}
+                  </p>
                 </>
+              )}
+              {mode === 'etagere' && (
+                <div className="options">
+                  {options.map((o, i) => {
+                    let classe = 'option'
+                    if (resultat && o.section === resultat.attendu) classe += ' option-attendue'
+                    if (resultat && !resultat.correct && o.titre === choixTitre) classe += ' option-faute'
+                    return (
+                      <button
+                        key={o.titre}
+                        className={classe}
+                        disabled={resultat !== null}
+                        onClick={() => {
+                          setChoixTitre(o.titre)
+                          repondre(o.section)
+                        }}
+                      >
+                        <span className="option-numero">{i + 1}</span>
+                        {visuelsDe(o.titre).couverture && (
+                          <img className="option-couverture" src={visuelsDe(o.titre).couverture ?? undefined} alt="" draggable={false} />
+                        )}
+                        <span className="option-titre">{o.titre}</span>
+                        {resultat && <span className="option-section">{o.section}</span>}
+                      </button>
+                    )
+                  })}
+                </div>
               )}
               {mode !== 'plan' && mode !== 'tomes' && question.volumes !== undefined && (
                 <p className="serie">{t.serieDe(question.volumes)}</p>
@@ -714,6 +801,8 @@ export function App() {
                   </span>
                 ) : mode === 'tomes' ? (
                   <span className="raccourcis-inline">{t.raccourcisTomes}</span>
+                ) : mode === 'etagere' ? (
+                  <span className="raccourcis-inline">{t.raccourcisEtagere}</span>
                 ) : (
                   <span className="curseur">
                     {saisie || (filtre !== 'tous' ? filtre : '_')}
@@ -743,7 +832,14 @@ export function App() {
       {avecCarte && (
         <section className="carte-bloc">
           <h2>{t.carte}</h2>
-          <Plan filtre={filtre} aide={aide} saisie={saisie} resultat={resultat} surChoix={repondre} />
+          <Plan
+            filtre={filtre}
+            aide={aide}
+            saisie={saisie}
+            resultat={resultat}
+            surligne={mode === 'etagere' ? question?.section ?? null : null}
+            surChoix={mode === 'etagere' ? () => undefined : repondre}
+          />
           <p className="raccourcis">{t.raccourcis}</p>
         </section>
       )}

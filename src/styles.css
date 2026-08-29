@@ -459,6 +459,88 @@ h1 {
   margin-left: 0;
 }
 
+/* Le mode Étagère : quatre livres, un seul y est rangé. */
+.options {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin: 14px 0 6px;
+  text-align: left;
+}
+
+.option {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 10px 10px;
+  font: inherit;
+  background: rgba(255, 255, 255, 0.35);
+  border: 2px solid rgba(143, 113, 53, 0.35);
+  border-radius: 6px;
+  color: var(--encre);
+  cursor: pointer;
+  transition: border-color 0.12s, background 0.12s, transform 0.12s;
+}
+
+.option:hover:not(:disabled),
+.option:focus-visible {
+  border-color: var(--or);
+  background: rgba(255, 255, 255, 0.55);
+  transform: translateY(-2px);
+  outline: none;
+}
+
+.option:disabled {
+  cursor: default;
+}
+
+.option-numero {
+  position: absolute;
+  top: 6px;
+  left: 8px;
+  font-family: var(--titres);
+  font-size: 0.8rem;
+  color: var(--or-sombre);
+}
+
+.option-couverture {
+  height: 120px;
+  width: auto;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.35));
+}
+
+.option-titre {
+  font-size: 0.85rem;
+  line-height: 1.25;
+  text-align: center;
+}
+
+.option-section {
+  font-family: var(--titres);
+  font-size: 0.75rem;
+  color: var(--or-sombre);
+}
+
+.option-attendue,
+.option-attendue:disabled {
+  border-color: var(--ok);
+  background: rgba(63, 154, 95, 0.18);
+}
+
+.option-faute,
+.option-faute:disabled {
+  border-color: var(--faute);
+  background: rgba(194, 61, 61, 0.16);
+}
+
+.zone-surlignee {
+  background: rgba(201, 165, 90, 0.28);
+  box-shadow: 0 0 0 2px rgba(201, 165, 90, 0.95), 0 0 16px rgba(201, 165, 90, 0.6);
+  pointer-events: none;
+}
+
 .session-compte {
   color: var(--or-sombre);
   letter-spacing: 0.06em;
@@ -894,5 +976,9 @@ footer {
 
   .interrupteur {
     margin-left: 0;
+  }
+
+  .options {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
