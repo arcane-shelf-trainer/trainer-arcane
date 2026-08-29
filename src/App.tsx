@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { LIVRES, SECTIONS } from './jeu/catalogue'
+import { LIVRES, SECTIONS, type Livre as LivreCatalogue } from './jeu/catalogue'
 import { choisir, enregistrer, fiche, maitrise, type Progres } from './jeu/leitner'
 import {
   chargerLangue,
@@ -15,13 +15,16 @@ import { Plan, type Filtre, type Resultat } from './Plan'
 import { visuelsDe } from './jeu/visuels'
 import { TEXTES, type Langue } from './textes'
 
-type Mode = 'plan' | 'livres' | 'chrono'
+type Mode = 'plan' | 'livres' | 'tomes' | 'chrono'
+type FiltreTomes = 'tous' | 3 | 5 | 10
 
 interface Question {
   cle: string
   invite: string
   reponse: string
   categorie: string
+  section: string
+  volumes?: number
 }
 
 interface Chrono {
@@ -31,28 +34,34 @@ interface Chrono {
   fin: number | null
 }
 
-const MODES: Mode[] = ['plan', 'livres', 'chrono']
+const MODES: Mode[] = ['plan', 'livres', 'tomes', 'chrono']
 const FILTRES: Filtre[] = ['tous', '1', '2']
+const FILTRES_TOMES: FiltreTomes[] = ['tous', 3, 5, 10]
+const TOMES: number[] = [3, 5, 10]
 const CHRONO_QUESTIONS = 20
 const PENALITE_MS = 3000
 const DELAI_CORRECT_MS = 450
 const DELAI_FAUTE_CHRONO_MS = 1300
 
-function questionsPour(mode: Mode, filtre: Filtre): Question[] {
-  const garde = (section: string) => filtre === 'tous' || section.startsWith(filtre)
+function questionsPour(mode: Mode, filtre: Filtre, tomes: FiltreTomes): Question[] {
   if (mode === 'plan') {
-    return SECTIONS.filter((s) => garde(s.section)).map((s) => ({
+    return SECTIONS.filter((s) => filtre === 'tous' || s.section.startsWith(filtre)).map((s) => ({
       cle: `plan:${s.section}`,
       invite: s.categorie,
       reponse: s.section,
       categorie: s.categorie,
+      section: s.section,
     }))
   }
-  return LIVRES.filter((l) => garde(l.section)).map((l) => ({
-    cle: `livre:${l.titre}`,
+  const garde = (l: LivreCatalogue) =>
+    (filtre === 'tous' || l.section.startsWith(filtre)) && (tomes === 'tous' || l.volumes === tomes)
+  return LIVRES.filter(garde).map((l) => ({
+    cle: mode === 'tomes' ? `tome:${l.titre}` : `livre:${l.titre}`,
     invite: l.titre,
-    reponse: l.section,
+    reponse: mode === 'tomes' ? String(l.volumes) : l.section,
     categorie: l.categorie,
+    section: l.section,
+    volumes: l.volumes,
   }))
 }
 
@@ -85,6 +94,18 @@ function Jauge({ libelle, valeur }: { libelle: string; valeur: number }) {
   )
 }
 
+// Composition d'une étagère en séries : « 4 × 10 · 8 × 3 ».
+function composition(section: string): string {
+  const comptes = new Map<number, number>()
+  for (const l of LIVRES) {
+    if (l.section === section) comptes.set(l.volumes, (comptes.get(l.volumes) ?? 0) + 1)
+  }
+  return [...comptes.entries()]
+    .sort((a, b) => b[0] - a[0])
+    .map(([volumes, n]) => `${n} × ${volumes}`)
+    .join(' · ')
+}
+
 function Statistiques({ progres, titre, planSu }: { progres: Progres; titre: string; planSu: string }) {
   const lignes = SECTIONS.map((s) => {
     const cles = LIVRES.filter((l) => l.section === s.section).map((l) => `livre:${l.titre}`)
@@ -92,6 +113,7 @@ function Statistiques({ progres, titre, planSu }: { progres: Progres; titre: str
       ...s,
       livres: maitrise(progres, cles),
       plan: fiche(progres, `plan:${s.section}`).boite / 4,
+      series: composition(s.section),
     }
   })
   return (
@@ -109,6 +131,7 @@ function Statistiques({ progres, titre, planSu }: { progres: Progres; titre: str
             <span className="etagere-barre">
               <span className="etagere-remplissage" style={{ width: `${l.livres * 100}%` }} />
             </span>
+            <span className="etagere-series">{l.series}</span>
             {l.plan >= 1 && <span className="etagere-plan">{planSu}</span>}
           </div>
         ))}
@@ -121,6 +144,7 @@ export function App() {
   const [langue, setLangue] = useState<Langue>(chargerLangue)
   const [mode, setMode] = useState<Mode>('plan')
   const [filtre, setFiltre] = useState<Filtre>('tous')
+  const [tomes, setTomes] = useState<FiltreTomes>('tous')
   const [aide, setAide] = useState(false)
   const [progres, setProgres] = useState<Progres>(chargerProgres)
   const [records, setRecords] = useState<Records>(chargerRecords)
@@ -138,7 +162,7 @@ export function App() {
   questionRef.current = question
   const minuterie = useRef<number | null>(null)
 
-  const questions = useMemo(() => questionsPour(mode, filtre), [mode, filtre])
+  const questions = useMemo(() => questionsPour(mode, filtre, tomes), [mode, filtre, tomes])
   const parCle = useMemo(() => new Map(questions.map((q) => [q.cle, q])), [questions])
   const cles = useMemo(() => questions.map((q) => q.cle), [questions])
 
@@ -168,7 +192,7 @@ export function App() {
       return
     }
     suivant()
-  }, [mode, filtre, suivant])
+  }, [mode, filtre, tomes, suivant])
 
   // Horloge du chrono.
   useEffect(() => {
@@ -177,15 +201,21 @@ export function App() {
     return () => window.clearInterval(id)
   }, [chrono])
 
-  const cleRecord = `chrono:${filtre}`
+  const cleRecord = `chrono:${filtre}:${tomes}`
 
   const repondre = useCallback(
-    (section: string) => {
+    (reponse: string) => {
       const q = questionRef.current
       if (!q || resultat) return
-      const correct = section === q.reponse
+      const correct = reponse === q.reponse
       setProgres((p) => enregistrer(p, q.cle, correct))
-      setResultat({ correct, choisi: section, attendu: q.reponse, categorie: q.categorie })
+      setResultat({
+        correct,
+        choisi: reponse,
+        attendu: q.reponse,
+        categorie: q.categorie,
+        section: q.section,
+      })
       setSaisie('')
 
       if (mode === 'chrono' && chrono) {
@@ -225,7 +255,8 @@ export function App() {
     setRecords({})
   }
 
-  // Clavier : 1 ou 2 (ou & et é en AZERTY) puis la lettre ; Entrée ou Espace pour continuer.
+  // Clavier. Étagères : 1 ou 2 (ou & et é en AZERTY) puis la lettre. Tomes : 3, 5, ou 1
+  // pour 10 (avec leurs équivalents AZERTY non décalés). Entrée ou Espace pour continuer.
   useEffect(() => {
     function surTouche(e: KeyboardEvent) {
       if (e.ctrlKey || e.metaKey || e.altKey) return
@@ -238,6 +269,12 @@ export function App() {
         return
       }
       if (!question) return
+      if (mode === 'tomes') {
+        if (k === '3' || k === '"') return repondre('3')
+        if (k === '5' || k === '(') return repondre('5')
+        if (k === '1' || k === '&' || k === '0' || k === 'à') return repondre('10')
+        return
+      }
       if (k === '1' || k === '&') return setSaisie('1')
       if (k === '2' || k === 'é') return setSaisie('2')
       if (k === 'Escape') return setSaisie('')
@@ -260,9 +297,23 @@ export function App() {
     progres,
     LIVRES.map((l) => `livre:${l.titre}`),
   )
+  const maitriseTomes = maitrise(
+    progres,
+    LIVRES.map((l) => `tome:${l.titre}`),
+  )
   const chronoEnCours = mode === 'chrono' && chrono !== null && chrono.fin === null
   const chronoFini = mode === 'chrono' && chrono !== null && chrono.fin !== null
   const classeFiche = `fiche${resultat ? (resultat.correct ? ' fiche-ok' : ' fiche-faute') : ''}`
+  const avecCarte = mode !== 'tomes' && (mode !== 'chrono' || chronoEnCours)
+  const nomFiltreRecord = [t.filtres[filtre], tomes === 'tous' ? '' : t.tomesPastille(tomes)]
+    .filter(Boolean)
+    .join(', ')
+    .toLowerCase()
+
+  function retour(r: Resultat): string {
+    if (mode === 'tomes') return r.correct ? t.exactTomes(r.attendu) : t.fauteTomes(r.choisi, r.attendu)
+    return r.correct ? t.exact(r.attendu, r.categorie) : t.faute(r.choisi, r.attendu, r.categorie)
+  }
 
   return (
     <div className="app">
@@ -274,6 +325,7 @@ export function App() {
         <div className="entete-droite">
           <Jauge libelle={t.jaugePlan} valeur={maitrisePlan} />
           <Jauge libelle={t.jaugeLivres} valeur={maitriseLivres} />
+          <Jauge libelle={t.jaugeTomes} valeur={maitriseTomes} />
           <button className="langue" onClick={() => setLangue(langue === 'fr' ? 'en' : 'fr')}>
             {t.langue}
           </button>
@@ -305,11 +357,28 @@ export function App() {
               {t.filtres[f]}
             </button>
           ))}
-          <label className="interrupteur">
-            <input type="checkbox" checked={aide} onChange={(e) => setAide(e.target.checked)} />
-            <span className="interrupteur-piste" aria-hidden="true" />
-            <span>{t.nomsSurCarte}</span>
-          </label>
+          {mode !== 'plan' && (
+            <span className="groupe-filtres">
+              <span className="groupe-libelle">{t.filtreTomes}</span>
+              {FILTRES_TOMES.map((f) => (
+                <button
+                  key={f}
+                  className={`filtre${tomes === f ? ' filtre-actif' : ''}`}
+                  onClick={() => setTomes(f)}
+                  disabled={chronoEnCours}
+                >
+                  {f === 'tous' ? t.tousLesTomes : f}
+                </button>
+              ))}
+            </span>
+          )}
+          {mode !== 'tomes' && (
+            <label className="interrupteur">
+              <input type="checkbox" checked={aide} onChange={(e) => setAide(e.target.checked)} />
+              <span className="interrupteur-piste" aria-hidden="true" />
+              <span>{t.nomsSurCarte}</span>
+            </label>
+          )}
         </div>
       </nav>
 
@@ -329,7 +398,7 @@ export function App() {
               </p>
             )}
             <p className="record">
-              {t.record} ({t.filtres[filtre].toLowerCase()}) :{' '}
+              {t.record} ({nomFiltreRecord}) :{' '}
               <strong>
                 {records[cleRecord] !== undefined ? formatSecondes(records[cleRecord], langue) : t.aucun}
               </strong>
@@ -352,16 +421,32 @@ export function App() {
               )}
               <p className="invite-libelle">{mode === 'plan' ? t.categorie : t.titreLivre}</p>
               <p className={`invite${mode === 'plan' ? ' invite-plan' : ''}`}>{question.invite}</p>
+              {mode !== 'plan' && mode !== 'tomes' && question.volumes !== undefined && (
+                <p className="serie">{t.serieDe(question.volumes)}</p>
+              )}
+              {mode === 'tomes' && !resultat && (
+                <div className="tomes-choix">
+                  {TOMES.map((n) => (
+                    <button key={n} className="tome" onClick={() => repondre(String(n))}>
+                      {n}
+                    </button>
+                  ))}
+                </div>
+              )}
               <p className="saisie">
                 {resultat ? (
-                  resultat.correct ? (
-                    <span className="ok">{t.exact(resultat.attendu, resultat.categorie)}</span>
-                  ) : (
-                    <span className="faute">
-                      {t.faute(resultat.choisi, resultat.attendu, resultat.categorie)}
-                      {mode !== 'chrono' && <em> ({t.entreePourContinuer})</em>}
-                    </span>
-                  )
+                  <span className={resultat.correct ? 'ok' : 'faute'}>
+                    {retour(resultat)}
+                    {mode === 'tomes' && (
+                      <span className="saisie-detail">
+                        {' '}
+                        — {resultat.section} {resultat.categorie}
+                      </span>
+                    )}
+                    {!resultat.correct && mode !== 'chrono' && <em> ({t.entreePourContinuer})</em>}
+                  </span>
+                ) : mode === 'tomes' ? (
+                  <span className="raccourcis-inline">{t.raccourcisTomes}</span>
                 ) : (
                   <span className="curseur">
                     {saisie || (filtre !== 'tous' ? filtre : '_')}
@@ -377,9 +462,10 @@ export function App() {
             </div>
           </div>
         )}
+        {mode === 'tomes' && <p className="conseil">{t.conseilTomes}</p>}
       </main>
 
-      {(mode !== 'chrono' || chronoEnCours) && (
+      {avecCarte && (
         <section className="carte-bloc">
           <h2>{t.carte}</h2>
           <Plan filtre={filtre} aide={aide} saisie={saisie} resultat={resultat} surChoix={repondre} />

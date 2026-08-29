@@ -13,9 +13,12 @@ l'étagère (section 1A à 1N, 2A à 2Q) de chaque catégorie et de chacun des 4
 
 ## Ce que fait l'application
 
-- Trois modes : Plan (catégorie vers étagère), Livres (titre vers étagère), Chrono
-  (vingt titres contre la montre, trois secondes de pénalité par faute, record par filtre
-  d'étage).
+- Quatre modes : Plan (catégorie vers étagère), Livres (titre vers étagère, avec la
+  taille de la série affichée), Tomes (titre vers nombre de tomes de la série : 3, 5 ou
+  10, touches 3, 5 ou 1), Chrono (vingt titres contre la montre, trois secondes de
+  pénalité par faute, record par filtre d'étage et de série). Le filtre « Séries »
+  (3, 5, 10) restreint Livres, Tomes et Chrono : en speedrun, les séries de 3 tomes
+  donnent les points de compétence le plus vite.
 - Répétition espacée par boîtes de Leitner (`src/jeu/leitner.ts`, pur et testé) : les
   inconnus reviennent souvent, les maîtrisés rarement.
 - Réponse au clavier (1 ou 2 puis la lettre ; & et é acceptés pour l'AZERTY ; sur un seul

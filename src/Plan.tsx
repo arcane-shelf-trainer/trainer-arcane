@@ -10,6 +10,7 @@ export interface Resultat {
   choisi: string
   attendu: string
   categorie: string
+  section: string
 }
 
 export function Plan({

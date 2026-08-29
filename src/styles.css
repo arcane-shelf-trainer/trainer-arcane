@@ -88,7 +88,7 @@ h1 {
 .entete-droite {
   display: flex;
   align-items: flex-end;
-  gap: 18px;
+  gap: 14px;
 }
 
 .jauge {
@@ -97,8 +97,8 @@ h1 {
   grid-template-rows: auto auto;
   column-gap: 8px;
   align-items: center;
-  min-width: 150px;
-  font-size: 0.85rem;
+  min-width: 116px;
+  font-size: 0.8rem;
 }
 
 .jauge-libelle {
@@ -361,6 +361,90 @@ h1 {
   font-size: 1.9rem;
   color: var(--or-sombre);
   padding: 22px 0;
+}
+
+.serie {
+  margin: 6px 0 0;
+  display: inline-block;
+  font-family: var(--titres);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--or-sombre);
+  border: 1px solid var(--or-sombre);
+  border-radius: 3px;
+  padding: 2px 8px;
+}
+
+.tomes-choix {
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.tome {
+  font: inherit;
+  font-family: var(--titres);
+  font-weight: 700;
+  font-size: 1.3rem;
+  width: 64px;
+  height: 52px;
+  background: none;
+  border: 2px solid var(--or-sombre);
+  color: var(--or-sombre);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.12s, color 0.12s;
+}
+
+.tome:hover,
+.tome:focus-visible {
+  background: var(--or-sombre);
+  color: #fff;
+  outline: none;
+}
+
+.raccourcis-inline {
+  font-size: 0.9rem;
+  font-style: italic;
+  color: var(--encre-pale);
+}
+
+.saisie-detail {
+  color: var(--encre-pale);
+  font-weight: normal;
+}
+
+.conseil {
+  margin: 14px 0 0;
+  font-size: 0.9rem;
+  font-style: italic;
+  color: var(--encre-pale);
+  text-align: center;
+}
+
+.groupe-filtres {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: 10px;
+  padding-left: 10px;
+  border-left: 1px solid #4a3a2c;
+}
+
+.groupe-libelle {
+  font-family: var(--titres);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--clair-pale);
+}
+
+.etagere-series {
+  grid-column: 1 / -1;
+  font-size: 0.72rem;
+  color: var(--clair-pale);
+  letter-spacing: 0.03em;
 }
 
 .saisie {
