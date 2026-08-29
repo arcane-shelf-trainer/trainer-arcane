@@ -1,16 +1,19 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { LIVRES, SECTIONS } from './jeu/catalogue'
 import { choisir, enregistrer, fiche, maitrise, type Progres } from './jeu/leitner'
-import { Plan, type Filtre, type Resultat } from './Plan'
-import { visuelsDe } from './jeu/visuels'
 import {
+  chargerLangue,
   chargerProgres,
   chargerRecords,
   effacerTout,
+  sauvegarderLangue,
   sauvegarderProgres,
   sauvegarderRecords,
   type Records,
 } from './jeu/stockage'
+import { Plan, type Filtre, type Resultat } from './Plan'
+import { visuelsDe } from './jeu/visuels'
+import { TEXTES, type Langue } from './textes'
 
 type Mode = 'plan' | 'livres' | 'chrono'
 
@@ -28,16 +31,12 @@ interface Chrono {
   fin: number | null
 }
 
+const MODES: Mode[] = ['plan', 'livres', 'chrono']
+const FILTRES: Filtre[] = ['tous', '1', '2']
 const CHRONO_QUESTIONS = 20
 const PENALITE_MS = 3000
 const DELAI_CORRECT_MS = 450
 const DELAI_FAUTE_CHRONO_MS = 1300
-
-const MODES: { cle: Mode; nom: string; aide: string }[] = [
-  { cle: 'plan', nom: 'Plan', aide: 'Une catégorie, quelle étagère ?' },
-  { cle: 'livres', nom: 'Livres', aide: 'Un titre, quelle étagère ?' },
-  { cle: 'chrono', nom: 'Chrono', aide: `${CHRONO_QUESTIONS} titres contre la montre` },
-]
 
 function questionsPour(mode: Mode, filtre: Filtre): Question[] {
   const garde = (section: string) => filtre === 'tous' || section.startsWith(filtre)
@@ -57,27 +56,36 @@ function questionsPour(mode: Mode, filtre: Filtre): Question[] {
   }))
 }
 
-function formatSecondes(ms: number): string {
-  return `${(ms / 1000).toFixed(2).replace('.', ',')} s`
+function formatSecondes(ms: number, langue: Langue): string {
+  const s = (ms / 1000).toFixed(2)
+  return `${langue === 'fr' ? s.replace('.', ',') : s} s`
 }
 
-function pluriel(n: number, mot: string): string {
-  return `${n} ${mot}${n > 1 ? 's' : ''}`
-}
-
-// Le livre tel qu'on le voit en jeu : sa couverture, sa tranche, puis son titre.
+// Le livre tel qu'on le voit en jeu : couverture et tranche.
 function Livre({ titre }: { titre: string }) {
   const v = visuelsDe(titre)
+  if (!v.couverture) return null
   return (
-    <div className="livre">
-      {v.couverture && <img className="couverture" src={v.couverture} alt="" draggable={false} />}
+    <div className="livre-visuel">
+      <img className="couverture" src={v.couverture} alt="" draggable={false} />
       {v.tranche && <img className="tranche" src={v.tranche} alt="" draggable={false} />}
-      <p className="invite">{titre}</p>
     </div>
   )
 }
 
-function Statistiques({ progres }: { progres: Progres }) {
+function Jauge({ libelle, valeur }: { libelle: string; valeur: number }) {
+  return (
+    <div className="jauge">
+      <span className="jauge-libelle">{libelle}</span>
+      <span className="jauge-barre">
+        <span className="jauge-remplissage" style={{ width: `${valeur * 100}%` }} />
+      </span>
+      <span className="jauge-valeur">{Math.round(valeur * 100)} %</span>
+    </div>
+  )
+}
+
+function Statistiques({ progres, titre, planSu }: { progres: Progres; titre: string; planSu: string }) {
   const lignes = SECTIONS.map((s) => {
     const cles = LIVRES.filter((l) => l.section === s.section).map((l) => `livre:${l.titre}`)
     return {
@@ -88,20 +96,20 @@ function Statistiques({ progres }: { progres: Progres }) {
   })
   return (
     <section className="stats">
-      <h2>Maîtrise par étagère</h2>
-      <div className="stats-grille">
+      <h2>{titre}</h2>
+      <div className="etageres">
         {lignes.map((l) => (
           <div
-            className="stat"
+            className={`etagere${l.plan >= 1 ? ' etagere-plan-su' : ''}`}
             key={l.section}
-            title={`${l.categorie} : livres ${Math.round(l.livres * 100)} %, plan ${Math.round(l.plan * 100)} %`}
+            title={`${l.categorie} : ${Math.round(l.livres * 100)} %`}
           >
-            <span className="stat-id">{l.section}</span>
-            <span className="stat-cat">{l.categorie}</span>
-            <span className="stat-barre">
-              <span className="stat-barre-livres" style={{ width: `${l.livres * 100}%` }} />
+            <span className="etagere-id">{l.section}</span>
+            <span className="etagere-cat">{l.categorie}</span>
+            <span className="etagere-barre">
+              <span className="etagere-remplissage" style={{ width: `${l.livres * 100}%` }} />
             </span>
-            <span className="stat-plan">{l.plan >= 1 ? 'plan su' : ''}</span>
+            {l.plan >= 1 && <span className="etagere-plan">{planSu}</span>}
           </div>
         ))}
       </div>
@@ -110,6 +118,7 @@ function Statistiques({ progres }: { progres: Progres }) {
 }
 
 export function App() {
+  const [langue, setLangue] = useState<Langue>(chargerLangue)
   const [mode, setMode] = useState<Mode>('plan')
   const [filtre, setFiltre] = useState<Filtre>('tous')
   const [aide, setAide] = useState(false)
@@ -120,6 +129,8 @@ export function App() {
   const [resultat, setResultat] = useState<Resultat | null>(null)
   const [chrono, setChrono] = useState<Chrono | null>(null)
   const [maintenant, setMaintenant] = useState(0)
+
+  const t = TEXTES[langue]
 
   const progresRef = useRef(progres)
   progresRef.current = progres
@@ -133,6 +144,10 @@ export function App() {
 
   useEffect(() => sauvegarderProgres(progres), [progres])
   useEffect(() => sauvegarderRecords(records), [records])
+  useEffect(() => {
+    sauvegarderLangue(langue)
+    document.documentElement.lang = langue
+  }, [langue])
 
   const suivant = useCallback(() => {
     if (minuterie.current) window.clearTimeout(minuterie.current)
@@ -204,7 +219,7 @@ export function App() {
   }
 
   function toutEffacer() {
-    if (!window.confirm('Effacer toute la progression et les records ?')) return
+    if (!window.confirm(t.confirmerEffacer)) return
     effacerTout()
     setProgres({})
     setRecords({})
@@ -245,141 +260,144 @@ export function App() {
     progres,
     LIVRES.map((l) => `livre:${l.titre}`),
   )
-  const modeCourant = MODES.find((m) => m.cle === mode)!
   const chronoEnCours = mode === 'chrono' && chrono !== null && chrono.fin === null
   const chronoFini = mode === 'chrono' && chrono !== null && chrono.fin !== null
-  const nomFiltre = filtre === 'tous' ? 'les deux étages' : `étage ${filtre}`
+  const classeFiche = `fiche${resultat ? (resultat.correct ? ' fiche-ok' : ' fiche-faute') : ''}`
 
   return (
     <div className="app">
-      <header>
-        <div>
-          <h1>Arcane Librarian</h1>
-          <p className="sous-titre">Entraîneur d'étagères pour le speedrun</p>
+      <header className="entete">
+        <div className="marque">
+          <h1>{t.titre}</h1>
+          <p className="sous-titre">{t.sousTitre}</p>
         </div>
-        <div className="jauges">
-          <span>
-            Plan : <strong>{Math.round(maitrisePlan * 100)} %</strong>
-          </span>
-          <span>
-            Livres : <strong>{Math.round(maitriseLivres * 100)} %</strong>
-          </span>
+        <div className="entete-droite">
+          <Jauge libelle={t.jaugePlan} valeur={maitrisePlan} />
+          <Jauge libelle={t.jaugeLivres} valeur={maitriseLivres} />
+          <button className="langue" onClick={() => setLangue(langue === 'fr' ? 'en' : 'fr')}>
+            {t.langue}
+          </button>
         </div>
       </header>
 
       <nav className="barre">
-        <div className="onglets">
+        <div className="onglets" role="tablist">
           {MODES.map((m) => (
             <button
-              key={m.cle}
-              className={`onglet${mode === m.cle ? ' onglet-actif' : ''}`}
-              onClick={() => setMode(m.cle)}
+              key={m}
+              role="tab"
+              aria-selected={mode === m}
+              className={`onglet${mode === m ? ' onglet-actif' : ''}`}
+              onClick={() => setMode(m)}
             >
-              {m.nom}
+              {t.modes[m].nom}
             </button>
           ))}
         </div>
         <div className="filtres">
-          {(['tous', '1', '2'] as Filtre[]).map((f) => (
+          {FILTRES.map((f) => (
             <button
               key={f}
               className={`filtre${filtre === f ? ' filtre-actif' : ''}`}
               onClick={() => setFiltre(f)}
               disabled={chronoEnCours}
             >
-              {f === 'tous' ? 'Les deux étages' : `Étage ${f}`}
+              {t.filtres[f]}
             </button>
           ))}
-          <label className="aide">
-            <input type="checkbox" checked={aide} onChange={(e) => setAide(e.target.checked)} />{' '}
-            noms des catégories sur la carte
+          <label className="interrupteur">
+            <input type="checkbox" checked={aide} onChange={(e) => setAide(e.target.checked)} />
+            <span className="interrupteur-piste" aria-hidden="true" />
+            <span>{t.nomsSurCarte}</span>
           </label>
         </div>
       </nav>
 
-      <main className="carte">
-        <p className="mode-aide">{modeCourant.aide}</p>
+      <main className={classeFiche}>
+        <p className="mode-aide">{t.modes[mode].aide}</p>
 
         {mode === 'chrono' && !chronoEnCours && (
           <div className="chrono-accueil">
             {chronoFini && chrono && chrono.fin !== null && (
               <p className="chrono-bilan">
-                Terminé en <strong>{formatSecondes(chrono.fin - chrono.debut)}</strong>,{' '}
-                {pluriel(chrono.fautes, 'faute')}
-                {chrono.fautes > 0 && ` (+${(chrono.fautes * PENALITE_MS) / 1000} s)`} : score{' '}
-                <strong>{formatSecondes(chrono.fin - chrono.debut + chrono.fautes * PENALITE_MS)}</strong>
+                {t.termine} <strong>{formatSecondes(chrono.fin - chrono.debut, langue)}</strong>,{' '}
+                {t.fautes(chrono.fautes)}
+                {chrono.fautes > 0 && ` (+${(chrono.fautes * PENALITE_MS) / 1000} s)`} : {t.score}{' '}
+                <strong>
+                  {formatSecondes(chrono.fin - chrono.debut + chrono.fautes * PENALITE_MS, langue)}
+                </strong>
               </p>
             )}
             <p className="record">
-              Record ({nomFiltre}) :{' '}
+              {t.record} ({t.filtres[filtre].toLowerCase()}) :{' '}
               <strong>
-                {records[cleRecord] !== undefined ? formatSecondes(records[cleRecord]) : 'aucun'}
+                {records[cleRecord] !== undefined ? formatSecondes(records[cleRecord], langue) : t.aucun}
               </strong>
             </p>
             <button className="lancer" onClick={lancerChrono}>
-              {chronoFini ? 'Relancer' : 'Lancer'} : {CHRONO_QUESTIONS} titres, +{PENALITE_MS / 1000} s
-              par faute
+              {chronoFini ? t.relancer : t.lancer} : {t.chronoConsigne(CHRONO_QUESTIONS, PENALITE_MS / 1000)}
             </button>
           </div>
         )}
 
         {question && (mode !== 'chrono' || chronoEnCours) && (
-          <>
-            {chronoEnCours && chrono && (
-              <p className="chrono-hud">
-                Titre {chrono.faites + 1}/{CHRONO_QUESTIONS} — {formatSecondes(maintenant - chrono.debut)}{' '}
-                — {pluriel(chrono.fautes, 'faute')}
-              </p>
-            )}
-            <p className="invite-libelle">{mode === 'plan' ? 'Catégorie' : 'Titre'}</p>
-            {mode === 'plan' ? (
-              <p className="invite invite-plan">{question.invite}</p>
-            ) : (
-              <Livre titre={question.invite} />
-            )}
-            <p className="saisie">
-              {resultat ? (
-                resultat.correct ? (
-                  <span className="ok">
-                    Exact : {resultat.attendu} — {resultat.categorie}
-                  </span>
-                ) : (
-                  <span className="faute">
-                    Non, {resultat.choisi} : c'était <strong>{resultat.attendu}</strong> —{' '}
-                    {resultat.categorie}
-                    {mode !== 'chrono' && <em> (Entrée pour continuer)</em>}
-                  </span>
-                )
-              ) : (
-                <span className="curseur">
-                  {saisie || (filtre !== 'tous' ? filtre : '_')}
-                  <span className="curseur-lettre">_</span>
-                </span>
+          <div className={`question${mode === 'plan' ? ' question-plan' : ''}`}>
+            {mode !== 'plan' && <Livre titre={question.invite} />}
+            <div className="question-texte">
+              {chronoEnCours && chrono && (
+                <p className="chrono-hud">
+                  {t.chronoTitre(chrono.faites + 1, CHRONO_QUESTIONS)} —{' '}
+                  {formatSecondes(maintenant - chrono.debut, langue)} — {t.fautes(chrono.fautes)}
+                </p>
               )}
-            </p>
-            {resultat && !resultat.correct && mode !== 'chrono' && (
-              <button className="continuer" onClick={suivant}>
-                Continuer
-              </button>
-            )}
-          </>
+              <p className="invite-libelle">{mode === 'plan' ? t.categorie : t.titreLivre}</p>
+              <p className={`invite${mode === 'plan' ? ' invite-plan' : ''}`}>{question.invite}</p>
+              <p className="saisie">
+                {resultat ? (
+                  resultat.correct ? (
+                    <span className="ok">{t.exact(resultat.attendu, resultat.categorie)}</span>
+                  ) : (
+                    <span className="faute">
+                      {t.faute(resultat.choisi, resultat.attendu, resultat.categorie)}
+                      {mode !== 'chrono' && <em> ({t.entreePourContinuer})</em>}
+                    </span>
+                  )
+                ) : (
+                  <span className="curseur">
+                    {saisie || (filtre !== 'tous' ? filtre : '_')}
+                    <span className="curseur-lettre">_</span>
+                  </span>
+                )}
+              </p>
+              {resultat && !resultat.correct && mode !== 'chrono' && (
+                <button className="continuer" onClick={suivant}>
+                  {t.continuer}
+                </button>
+              )}
+            </div>
+          </div>
         )}
       </main>
 
       {(mode !== 'chrono' || chronoEnCours) && (
-        <Plan filtre={filtre} aide={aide} saisie={saisie} resultat={resultat} surChoix={repondre} />
+        <section className="carte-bloc">
+          <h2>{t.carte}</h2>
+          <Plan filtre={filtre} aide={aide} saisie={saisie} resultat={resultat} surChoix={repondre} />
+          <p className="raccourcis">{t.raccourcis}</p>
+        </section>
       )}
 
-      <p className="raccourcis">
-        Clavier : 1 ou 2 puis la lettre de l'étagère (sur un seul étage, la lettre suffit). Échap
-        annule.
-      </p>
-
-      <Statistiques progres={progres} />
+      <Statistiques progres={progres} titre={t.maitrise} planSu={t.planSu} />
 
       <footer>
+        <p className="credits">
+          {t.credits}{' '}
+          <a href="https://store.steampowered.com/search/?term=Librarian%20Tidy%20Up%20the%20Arcane%20Library" target="_blank" rel="noreferrer">
+            {t.jeu}
+          </a>
+        </p>
         <button className="effacer" onClick={toutEffacer}>
-          Effacer la progression
+          {t.effacer}
         </button>
       </footer>
     </div>

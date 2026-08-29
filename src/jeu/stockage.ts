@@ -1,7 +1,9 @@
 import type { Progres } from './leitner'
+import type { Langue } from '../textes'
 
 const CLE_PROGRES = 'arcane-librarian-progres'
 const CLE_RECORDS = 'arcane-librarian-records'
+const CLE_LANGUE = 'arcane-librarian-langue'
 
 export type Records = Record<string, number>
 
@@ -26,6 +28,18 @@ export const chargerProgres = () => lire<Progres>(CLE_PROGRES, {})
 export const sauvegarderProgres = (p: Progres) => ecrire(CLE_PROGRES, p)
 export const chargerRecords = () => lire<Records>(CLE_RECORDS, {})
 export const sauvegarderRecords = (r: Records) => ecrire(CLE_RECORDS, r)
+export const sauvegarderLangue = (l: Langue) => ecrire(CLE_LANGUE, l)
+
+// Langue mémorisée, sinon celle du navigateur (français si francophone, anglais sinon).
+export function chargerLangue(): Langue {
+  const memorisee = lire<Langue | null>(CLE_LANGUE, null)
+  if (memorisee === 'fr' || memorisee === 'en') return memorisee
+  try {
+    return navigator.language.toLowerCase().startsWith('fr') ? 'fr' : 'en'
+  } catch {
+    return 'en'
+  }
+}
 
 export function effacerTout(): void {
   try {

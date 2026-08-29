@@ -1,14 +1,22 @@
+/* Une bibliothèque la nuit : bois sombre, parchemin, dorures discrètes. */
+
 :root {
-  --fond: #1f1a17;
-  --bois: #3b2a1f;
-  --papier: #f1e7d0;
-  --encre: #2a211b;
-  --encre-pale: #7a6a58;
-  --accent: #c8752f;
-  --ok: #3f8f5a;
-  --faute: #b83a3a;
-  --clair: #efe6d4;
-  --clair-pale: #b9ab93;
+  --fond: #1a1512;
+  --bois: #2d211a;
+  --bois-clair: #3d2d23;
+  --papier: #f3e9d2;
+  --papier-sombre: #e4d6b4;
+  --encre: #2a1f16;
+  --encre-pale: #7a6a56;
+  --or: #c9a55a;
+  --or-sombre: #8f7135;
+  --accent: #d0812f;
+  --ok: #3f9a5f;
+  --faute: #c23d3d;
+  --clair: #efe4cc;
+  --clair-pale: #a89880;
+  --titres: 'Cinzel', 'Georgia', serif;
+  --corps: 'Crimson Pro', 'Georgia', 'Times New Roman', serif;
 }
 
 html {
@@ -21,61 +29,167 @@ html {
 
 body {
   margin: 0;
-  background: radial-gradient(ellipse at 50% 0%, #2c241f 0%, var(--fond) 60%, #15110f 100%) fixed;
+  background:
+    radial-gradient(ellipse at 50% -10%, #3a2c22 0%, transparent 55%),
+    linear-gradient(180deg, #221a15 0%, var(--fond) 40%, #120e0b 100%) fixed;
   color: var(--clair);
-  font-family: Georgia, 'Times New Roman', serif;
+  font-family: var(--corps);
+  font-size: 18px;
   line-height: 1.45;
 }
 
 .app {
-  max-width: 960px;
+  max-width: 980px;
   margin: 0 auto;
-  padding: 20px 16px 48px;
+  padding: 26px 18px 56px;
 }
 
-header {
+/* ----- En-tête ----- */
+
+.entete {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  gap: 16px;
-  border-bottom: 2px solid var(--accent);
-  padding-bottom: 10px;
-  margin-bottom: 14px;
+  gap: 24px;
+  padding-bottom: 14px;
+  margin-bottom: 18px;
+  border-bottom: 1px solid var(--or-sombre);
+  position: relative;
+}
+
+.entete::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -4px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--or) 30%, var(--or) 70%, transparent);
+  opacity: 0.5;
 }
 
 h1 {
   margin: 0;
-  font-size: 1.6rem;
-  letter-spacing: 0.04em;
+  font-family: var(--titres);
+  font-weight: 700;
+  font-size: 1.7rem;
+  letter-spacing: 0.06em;
+  color: var(--or);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
 }
 
 .sous-titre {
-  margin: 2px 0 0;
+  margin: 4px 0 0;
   color: var(--clair-pale);
-  font-size: 0.9rem;
+  font-size: 1rem;
+  font-style: italic;
 }
 
-.jauges {
+.entete-droite {
   display: flex;
+  align-items: flex-end;
   gap: 18px;
-  font-size: 0.95rem;
-  white-space: nowrap;
 }
 
-.jauges strong {
-  color: var(--accent);
+.jauge {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto auto;
+  column-gap: 8px;
+  align-items: center;
+  min-width: 150px;
+  font-size: 0.85rem;
 }
+
+.jauge-libelle {
+  font-family: var(--titres);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--clair-pale);
+}
+
+.jauge-valeur {
+  text-align: right;
+  color: var(--or);
+  font-weight: 600;
+}
+
+.jauge-barre {
+  grid-column: 1 / -1;
+  height: 5px;
+  background: #3a2e24;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.jauge-remplissage {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, var(--or-sombre), var(--or));
+  transition: width 0.4s ease;
+}
+
+.langue {
+  font: inherit;
+  font-size: 0.8rem;
+  padding: 5px 10px;
+  background: none;
+  border: 1px solid var(--or-sombre);
+  color: var(--clair-pale);
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.langue:hover {
+  color: var(--or);
+  border-color: var(--or);
+}
+
+/* ----- Barre de modes et filtres ----- */
 
 .barre {
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 14px;
+  gap: 12px;
+  margin-bottom: 16px;
 }
 
-.onglets,
+.onglets {
+  display: inline-flex;
+  background: var(--bois);
+  border: 1px solid #4a3a2c;
+  border-radius: 6px;
+  padding: 3px;
+  gap: 2px;
+}
+
+.onglet {
+  font: inherit;
+  font-family: var(--titres);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  padding: 7px 18px;
+  background: none;
+  border: none;
+  color: var(--clair-pale);
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.15s, color 0.15s;
+}
+
+.onglet:hover {
+  color: var(--clair);
+}
+
+.onglet-actif {
+  background: var(--or);
+  color: #2a1f16;
+  font-weight: 700;
+}
+
 .filtres {
   display: flex;
   gap: 6px;
@@ -83,31 +197,24 @@ h1 {
   flex-wrap: wrap;
 }
 
-.onglet,
 .filtre {
   font: inherit;
-  padding: 7px 14px;
-  background: none;
-  border: 1px solid var(--clair-pale);
-  color: var(--clair);
-  cursor: pointer;
-  border-radius: 3px;
-}
-
-.onglet-actif {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: #fff;
-}
-
-.filtre {
   font-size: 0.85rem;
-  padding: 5px 10px;
+  padding: 5px 12px;
+  background: none;
+  border: 1px solid #4a3a2c;
+  color: var(--clair-pale);
+  cursor: pointer;
+  border-radius: 20px;
+}
+
+.filtre:hover {
+  color: var(--clair);
 }
 
 .filtre-actif {
-  border-color: var(--accent);
-  color: var(--accent);
+  border-color: var(--or);
+  color: var(--or);
 }
 
 .filtre:disabled {
@@ -115,76 +222,145 @@ h1 {
   cursor: not-allowed;
 }
 
-.aide {
+.interrupteur {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: 8px;
   font-size: 0.85rem;
   color: var(--clair-pale);
-  margin-left: 6px;
   cursor: pointer;
+  user-select: none;
 }
 
-.carte {
-  background: var(--papier);
+.interrupteur input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.interrupteur-piste {
+  width: 32px;
+  height: 18px;
+  border-radius: 9px;
+  background: #4a3a2c;
+  position: relative;
+  transition: background 0.15s;
+}
+
+.interrupteur-piste::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--clair);
+  transition: transform 0.15s;
+}
+
+.interrupteur input:checked + .interrupteur-piste {
+  background: var(--or);
+}
+
+.interrupteur input:checked + .interrupteur-piste::after {
+  transform: translateX(14px);
+}
+
+.interrupteur input:focus-visible + .interrupteur-piste {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* ----- La fiche de question ----- */
+
+.fiche {
+  background: linear-gradient(180deg, var(--papier) 0%, var(--papier-sombre) 100%);
   color: var(--encre);
-  border-radius: 4px;
-  padding: 18px 24px 20px;
-  min-height: 170px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45);
-  text-align: center;
+  border-radius: 6px;
+  padding: 16px 26px 22px;
+  min-height: 200px;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(255, 255, 255, 0.35);
+  border: 2px solid transparent;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.fiche-ok {
+  border-color: var(--ok);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.5), 0 0 0 3px rgba(63, 154, 95, 0.35);
+}
+
+.fiche-faute {
+  border-color: var(--faute);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.5), 0 0 0 3px rgba(194, 61, 61, 0.35);
 }
 
 .mode-aide {
-  margin: 0 0 6px;
-  font-size: 0.8rem;
+  margin: 0 0 10px;
+  font-family: var(--titres);
+  font-size: 0.7rem;
   color: var(--encre-pale);
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  text-align: center;
 }
 
-.invite-libelle {
-  margin: 8px 0 2px;
-  font-size: 0.75rem;
-  color: var(--encre-pale);
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-}
-
-.invite {
-  margin: 0;
-  font-size: 1.55rem;
-  font-weight: bold;
-  line-height: 1.25;
-  min-height: 2.5em;
-}
-
-.invite-plan {
-  color: var(--accent);
-}
-
-/* Le livre : sa couverture et son titre côte à côte. */
-.livre {
+.question {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 22px;
-  min-height: 150px;
+  gap: 28px;
 }
 
-.livre .invite {
-  min-height: 0;
-  text-align: left;
-  max-width: 420px;
+.question-plan {
+  justify-content: center;
+  text-align: center;
+}
+
+.question-texte {
+  flex: 1;
+  min-width: 0;
+}
+
+.livre-visuel {
+  display: flex;
+  align-items: flex-end;
+  flex: 0 0 auto;
+  filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.45));
 }
 
 .couverture,
 .tranche {
-  height: 150px;
+  height: 176px;
   width: auto;
-  flex: 0 0 auto;
-  filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.4));
 }
 
 .tranche {
-  margin-left: -10px;
+  margin-left: -8px;
+}
+
+.invite-libelle {
+  margin: 0 0 2px;
+  font-family: var(--titres);
+  font-size: 0.65rem;
+  color: var(--encre-pale);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.invite {
+  margin: 0;
+  font-size: 1.65rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.question-plan .invite {
+  font-family: var(--titres);
+  font-size: 1.9rem;
+  color: var(--or-sombre);
+  padding: 22px 0;
 }
 
 .saisie {
@@ -195,7 +371,7 @@ h1 {
 
 .curseur {
   font-family: 'Courier New', monospace;
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   letter-spacing: 0.15em;
   color: var(--accent);
 }
@@ -212,7 +388,7 @@ h1 {
 
 .ok {
   color: var(--ok);
-  font-weight: bold;
+  font-weight: 600;
 }
 
 .faute {
@@ -221,47 +397,70 @@ h1 {
 
 .faute em {
   color: var(--encre-pale);
-  font-size: 0.85rem;
+  font-size: 0.9rem;
 }
 
 .continuer,
 .lancer {
   font: inherit;
+  font-family: var(--titres);
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
   margin-top: 10px;
   padding: 9px 20px;
   background: var(--accent);
   border: none;
   color: #fff;
-  border-radius: 3px;
+  border-radius: 4px;
   cursor: pointer;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
+}
+
+.continuer:hover,
+.lancer:hover {
+  filter: brightness(1.08);
 }
 
 .chrono-accueil {
-  padding: 10px 0;
+  padding: 14px 0 6px;
+  text-align: center;
 }
 
 .chrono-bilan,
 .record {
   margin: 6px 0;
+  font-size: 1.05rem;
 }
 
 .chrono-hud {
-  margin: 0 0 4px;
+  margin: 0 0 6px;
   font-family: 'Courier New', monospace;
+  font-size: 0.9rem;
   color: var(--encre-pale);
 }
 
-/* La carte du jeu, avec les zones cliquables posées dessus. Sans l'aide, chaque
-   zone masque le nom de la catégorie d'un cache couleur parchemin et n'affiche
-   que l'identifiant ; avec l'aide, la carte se lit telle quelle. */
+/* ----- La carte ----- */
+
+.carte-bloc {
+  margin-top: 22px;
+}
+
+h2 {
+  margin: 0 0 8px;
+  font-family: var(--titres);
+  font-size: 0.75rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--clair-pale);
+  font-weight: 600;
+}
 
 .carte-plan {
   position: relative;
-  margin-top: 16px;
   padding: 0;
   border-radius: 6px;
   overflow: hidden;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.55), 0 0 0 1px var(--or-sombre), 0 0 0 4px #24190f;
   user-select: none;
   line-height: 0;
 }
@@ -271,9 +470,6 @@ h1 {
   width: 100%;
   height: auto;
 }
-
-/* Les zones sont invisibles : elles épousent les cadres d'identifiants dessinés
-   sur la carte et ne se colorent qu'au survol, à la saisie et à la réponse. */
 
 .zone {
   position: absolute;
@@ -293,92 +489,116 @@ h1 {
 }
 
 .zone-active {
-  box-shadow: 0 0 0 2px var(--accent), 0 0 10px rgba(200, 117, 47, 0.7);
+  box-shadow: 0 0 0 2px var(--accent), 0 0 10px rgba(208, 129, 47, 0.7);
 }
 
 .zone-attendue {
-  background: rgba(63, 143, 90, 0.55);
+  background: rgba(63, 154, 95, 0.55);
   box-shadow: 0 0 0 2px #2f7a4a;
 }
 
 .zone-faute {
-  background: rgba(184, 58, 58, 0.55);
+  background: rgba(194, 61, 61, 0.55);
   box-shadow: 0 0 0 2px #8f2a2a;
 }
 
 .zone-inactive {
-  background: rgba(24, 14, 8, 0.6);
+  background: rgba(20, 12, 8, 0.6);
   pointer-events: none;
 }
 
 .raccourcis {
   margin: 10px 0 0;
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   color: var(--clair-pale);
   text-align: center;
+  font-style: italic;
 }
+
+/* ----- Les étagères de maîtrise ----- */
 
 .stats {
-  margin-top: 28px;
+  margin-top: 30px;
 }
 
-h2 {
-  font-size: 0.85rem;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--clair-pale);
-  border-bottom: 1px solid #4a3a2e;
-  padding-bottom: 5px;
-}
-
-.stats-grille {
+.etageres {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 4px 18px;
-}
-
-.stat {
-  display: grid;
-  grid-template-columns: 34px 1fr 90px 52px;
-  align-items: center;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
   gap: 8px;
+}
+
+.etagere {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto auto;
+  column-gap: 8px;
+  row-gap: 5px;
+  align-items: center;
+  padding: 8px 10px;
+  background: var(--bois);
+  border: 1px solid #45362a;
+  border-radius: 5px;
   font-size: 0.8rem;
-  padding: 2px 0;
 }
 
-.stat-id {
-  font-weight: bold;
-  color: var(--accent);
+.etagere-plan-su {
+  border-color: var(--or-sombre);
 }
 
-.stat-cat {
+.etagere-id {
+  font-family: var(--titres);
+  font-weight: 700;
+  color: var(--or);
+}
+
+.etagere-cat {
+  color: var(--clair-pale);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.stat-barre {
-  height: 7px;
-  background: #3a2e26;
-  border-radius: 4px;
+.etagere-barre {
+  grid-column: 1 / -1;
+  height: 5px;
+  background: #1e1612;
+  border-radius: 3px;
   overflow: hidden;
 }
 
-.stat-barre-livres {
+.etagere-remplissage {
   display: block;
   height: 100%;
-  background: var(--accent);
+  background: linear-gradient(90deg, var(--or-sombre), var(--or));
   transition: width 0.3s;
 }
 
-.stat-plan {
-  font-size: 0.7rem;
+.etagere-plan {
+  grid-column: 1 / -1;
+  font-size: 0.68rem;
   color: var(--ok);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
 
+/* ----- Pied de page ----- */
+
 footer {
-  margin-top: 28px;
+  margin-top: 34px;
   text-align: center;
+  border-top: 1px solid #3a2e24;
+  padding-top: 16px;
+}
+
+.credits {
+  margin: 0 auto 10px;
+  max-width: 720px;
+  font-size: 0.8rem;
+  color: var(--clair-pale);
+}
+
+.credits a {
+  color: var(--or);
 }
 
 .effacer {
@@ -391,17 +611,49 @@ footer {
   cursor: pointer;
 }
 
-@media (max-width: 600px) {
-  header {
+/* ----- Petit écran ----- */
+
+@media (max-width: 680px) {
+  body {
+    font-size: 16px;
+  }
+
+  .entete {
     flex-direction: column;
     align-items: flex-start;
   }
 
-  .invite {
-    font-size: 1.2rem;
+  .entete-droite {
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 12px;
   }
 
-  .stat {
-    grid-template-columns: 34px 1fr 70px 0;
+  .jauge {
+    min-width: 0;
+    flex: 1 1 120px;
+  }
+
+  .question {
+    flex-direction: column;
+    text-align: center;
+    gap: 14px;
+  }
+
+  .tranche {
+    display: none;
+  }
+
+  .couverture {
+    height: 140px;
+  }
+
+  .invite {
+    font-size: 1.25rem;
+  }
+
+  .interrupteur {
+    margin-left: 0;
   }
 }

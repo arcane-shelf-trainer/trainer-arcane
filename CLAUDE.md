@@ -45,6 +45,13 @@ l'étagère (section 1A à 1N, 2A à 2Q) de chaque catégorie et de chacun des 4
   signées, puis en téléchargeant et réduisant les fichiers (WebP, 360 px de haut).
   Couverture et tranche s'affichent à côté du titre dans les modes Livres et Chrono.
 
+- Interface bilingue : tous les textes vivent dans `src/textes.ts` (français et anglais),
+  la langue suit le navigateur puis le choix mémorisé. Titres, catégories et
+  identifiants restent en anglais dans les deux langues.
+- Publication : `.github/workflows/pages.yml` construit et publie `dist/` sur GitHub
+  Pages à chaque poussée (activer une fois Settings > Pages > Source : GitHub Actions).
+  Le site est statique, `base: './'`, et fonctionne sur n'importe quel hébergeur.
+
 ## Règles techniques
 
 - Vite + React + TypeScript, aucune librairie supplémentaire. La logique pure vit dans
