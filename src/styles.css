@@ -251,13 +251,15 @@ h1 {
    zone masque le nom de la catégorie d'un cache couleur parchemin et n'affiche
    que l'identifiant ; avec l'aide, la carte se lit telle quelle. */
 
-.carte {
+.carte-plan {
   position: relative;
   margin-top: 16px;
+  padding: 0;
   border-radius: 6px;
   overflow: hidden;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
   user-select: none;
+  line-height: 0;
 }
 
 .carte-image {

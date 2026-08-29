@@ -26,7 +26,7 @@ export function Plan({
   surChoix: (section: string) => void
 }) {
   return (
-    <div className="carte" role="group" aria-label="Carte de la bibliothèque">
+    <div className="carte-plan" role="group" aria-label="Carte de la bibliothèque">
       <img
         className="carte-image"
         src={aide ? carte : carteMuette}
