@@ -57,5 +57,10 @@ l'étagère (section 1A à 1N, 2A à 2Q) de chaque catégorie et de chacun des 4
 - Vite + React + TypeScript, aucune librairie supplémentaire. La logique pure vit dans
   `src/jeu/`, React n'est que l'affichage dans `src/App.tsx`.
 - `npm test` (vitest) sur la logique, `npm run build` avant chaque commit.
+- Les zones de la carte ont toutes la même taille (`TAILLE` dans `src/jeu/plan.ts`),
+  centrée sur le cadre d'identifiant de chaque étagère (`CENTRES`, pixels de l'image).
+  Après toute retouche de la carte ou des zones : serveur lancé sur le port 5180, puis
+  `npm run test:carte` (Chrome headless via playwright-core) clique au centre de chaque
+  cadre à trois largeurs d'écran et exige 31/31 étagères reconnues.
 - Français, accents corrects, zéro emoji. Les titres et catégories restent en anglais :
   ce sont ceux du jeu.
