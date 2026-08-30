@@ -106,8 +106,8 @@ export const TEXTES = {
     sourcesIntro: 'Cet outil n’existerait pas sans le travail de ces personnes :',
     sources: [
       {
-        libelle: 'Arcane Librarian Book Catalogue',
-        url: 'https://docs.google.com/spreadsheets/d/1sJ6mWVzr3gadsEi66Oa0qrx_7OBQ0E1pZpunuGbHlD0/edit?gid=80450132',
+        libelle: 'Full book visual study guide (Arcane Librarian Book Catalogue)',
+        url: 'https://www.speedrun.com/Librarian_Tidy_Up_the_Arcane_Library/guides/dlw2n',
         detail: 'par coolsa, la feuille Google d’où viennent les 400 titres, leurs étagères, leurs séries et les images des livres, photographiés un à un en jeu',
       },
       {
@@ -235,8 +235,8 @@ export const TEXTES = {
     sourcesIntro: 'This tool would not exist without the work of these people:',
     sources: [
       {
-        libelle: 'Arcane Librarian Book Catalogue',
-        url: 'https://docs.google.com/spreadsheets/d/1sJ6mWVzr3gadsEi66Oa0qrx_7OBQ0E1pZpunuGbHlD0/edit?gid=80450132',
+        libelle: 'Full book visual study guide (Arcane Librarian Book Catalogue)',
+        url: 'https://www.speedrun.com/Librarian_Tidy_Up_the_Arcane_Library/guides/dlw2n',
         detail: 'by coolsa, the spreadsheet behind the 400 titles, their shelves, series sizes and book images, each photographed in game',
       },
       {
