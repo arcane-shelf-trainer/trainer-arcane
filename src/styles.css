@@ -1099,6 +1099,27 @@ footer {
   cursor: pointer;
 }
 
+/* ----- Écran moyen (tablette) : l'en-tête s'empile pour garder le titre lisible ----- */
+
+@media (max-width: 900px) {
+  .entete {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .entete-droite {
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .jauge {
+    min-width: 0;
+    flex: 1 1 120px;
+  }
+}
+
 /* ----- Petit écran ----- */
 
 @media (max-width: 680px) {
@@ -1161,9 +1182,30 @@ footer {
     min-height: 0;
   }
 
+  /* Sur téléphone, la scène en jeu vient après le texte : le titre et le retour ne
+     bougent pas quand elle apparaît. */
+  .livre-visuel {
+    display: contents;
+  }
+
   .livre-images {
+    order: 0;
     width: auto;
     min-height: 0;
+    align-self: center;
+  }
+
+  .question-texte {
+    order: 1;
+  }
+
+  .scene-bloc {
+    order: 2;
+    align-self: center;
+  }
+
+  .scene {
+    height: 140px;
   }
 
   .accueil {
