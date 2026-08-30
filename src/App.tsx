@@ -919,6 +919,14 @@ export function App() {
         </section>
         <p className="credits">{t.credits}</p>
         <div className="pied-actions">
+          <a
+            className="lien"
+            href="https://github.com/arcane-shelf-trainer/trainer-arcane/issues"
+            target="_blank"
+            rel="noreferrer"
+          >
+            {t.suggestions}
+          </a>
           <button className="lien" onClick={exporter}>
             {t.exporter}
           </button>
