@@ -90,7 +90,36 @@ export const TEXTES = {
     effacer: 'Effacer la progression',
     confirmerEffacer: 'Effacer toute la progression et les records ?',
     credits:
-      'Outil de fans, gratuit. Titres, couvertures et carte appartiennent aux auteurs du jeu ; carte d’après le guide Steam « Complete Guide (Map, All Floors, Shelves & Book Lists) ».',
+      'Outil de fans, gratuit, sans lien avec le studio. Titres, couvertures et carte appartiennent aux auteurs du jeu.',
+    sourcesTitre: 'Sources et remerciements',
+    sourcesIntro: 'Cet outil n’existerait pas sans le travail de ces personnes :',
+    sources: [
+      {
+        libelle: 'Arcane Librarian Book Catalogue',
+        url: 'https://docs.google.com/spreadsheets/d/1sJ6mWVzr3gadsEi66Oa0qrx_7OBQ0E1pZpunuGbHlD0/edit?gid=80450132',
+        detail: 'la feuille Google communautaire d’où viennent les 400 titres, leurs étagères, leurs séries et les images des livres',
+      },
+      {
+        libelle: 'Complete Guide (Map, All Floors, Shelves & Book Lists)',
+        url: 'https://steamcommunity.com/sharedfiles/filedetails/?id=3726876824',
+        detail: 'le guide Steam dont vient la carte des deux étages',
+      },
+      {
+        libelle: 'Speedrun trainer de Le N',
+        url: 'https://tutal-speedrun.nobodev.fr',
+        detail: 'l’autre entraîneur du jeu, qui a ouvert la voie ; essayez-le aussi',
+      },
+      {
+        libelle: 'Librarian Book Locations Guide',
+        url: 'https://librariangame.com/book-locations/',
+        detail: 'les mots-clés et les notes par catégorie affichés à la faute',
+      },
+      {
+        libelle: 'Librarian: Tidy Up the Arcane Library!',
+        url: 'https://store.steampowered.com/app/4197610/',
+        detail: 'le jeu, sur Steam',
+      },
+    ],
     langue: 'English',
   },
   en: {
@@ -179,7 +208,36 @@ export const TEXTES = {
     effacer: 'Reset progress',
     confirmerEffacer: 'Erase all progress and records?',
     credits:
-      'Free fan-made tool. Titles, covers and map belong to the game’s authors; map after the Steam guide “Complete Guide (Map, All Floors, Shelves & Book Lists)”.',
+      'Free fan-made tool, not affiliated with the studio. Titles, covers and map belong to the game’s authors.',
+    sourcesTitre: 'Sources and thanks',
+    sourcesIntro: 'This tool would not exist without the work of these people:',
+    sources: [
+      {
+        libelle: 'Arcane Librarian Book Catalogue',
+        url: 'https://docs.google.com/spreadsheets/d/1sJ6mWVzr3gadsEi66Oa0qrx_7OBQ0E1pZpunuGbHlD0/edit?gid=80450132',
+        detail: 'the community spreadsheet behind the 400 titles, their shelves, series sizes and book images',
+      },
+      {
+        libelle: 'Complete Guide (Map, All Floors, Shelves & Book Lists)',
+        url: 'https://steamcommunity.com/sharedfiles/filedetails/?id=3726876824',
+        detail: 'the Steam guide the two-floor map comes from',
+      },
+      {
+        libelle: 'Speedrun trainer by Le N',
+        url: 'https://tutal-speedrun.nobodev.fr',
+        detail: 'the other trainer for this game, which came first; try it too',
+      },
+      {
+        libelle: 'Librarian Book Locations Guide',
+        url: 'https://librariangame.com/book-locations/',
+        detail: 'the per-category keywords and notes shown after a mistake',
+      },
+      {
+        libelle: 'Librarian: Tidy Up the Arcane Library!',
+        url: 'https://store.steampowered.com/app/4197610/',
+        detail: 'the game, on Steam',
+      },
+    ],
     langue: 'Français',
   },
 }

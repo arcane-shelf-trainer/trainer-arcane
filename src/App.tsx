@@ -903,12 +903,21 @@ export function App() {
       </section>
 
       <footer>
-        <p className="credits">
-          {t.credits}{' '}
-          <a href="https://store.steampowered.com/app/4197610/" target="_blank" rel="noreferrer">
-            {t.jeu}
-          </a>
-        </p>
+        <section className="sources">
+          <h2>{t.sourcesTitre}</h2>
+          <p className="sources-intro">{t.sourcesIntro}</p>
+          <ul className="sources-liste">
+            {t.sources.map((s) => (
+              <li key={s.url}>
+                <a href={s.url} target="_blank" rel="noreferrer">
+                  {s.libelle}
+                </a>{' '}
+                <span className="sources-detail">— {s.detail}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+        <p className="credits">{t.credits}</p>
         <div className="pied-actions">
           <button className="lien" onClick={exporter}>
             {t.exporter}

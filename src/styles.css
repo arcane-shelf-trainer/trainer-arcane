@@ -971,6 +971,37 @@ footer {
   padding-top: 16px;
 }
 
+.sources {
+  text-align: left;
+  max-width: 760px;
+  margin: 0 auto 22px;
+}
+
+.sources-intro {
+  margin: 0 0 8px;
+  font-size: 0.95rem;
+  color: var(--clair-pale);
+}
+
+.sources-liste {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.sources-liste li {
+  margin: 4px 0;
+}
+
+.sources-liste a {
+  color: var(--or);
+}
+
+.sources-detail {
+  color: var(--clair-pale);
+}
+
 .credits {
   margin: 0 auto 10px;
   max-width: 720px;
