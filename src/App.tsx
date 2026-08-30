@@ -132,37 +132,43 @@ function jourLocal(d = new Date()): string {
 }
 
 // Le livre tel qu'on le voit en jeu. Selon l'affichage : couverture et tranche,
-// couverture seule, ou tranche seule ; à la réponse, la scène en jeu.
+// couverture seule, ou tranche seule. À la réponse, le livre reste à sa place et la
+// scène en jeu s'ajoute en dessous, en petit, pour ancrer le lieu.
 function Livre({
   titre,
   affichage,
   revele,
+  legendeScene,
 }: {
   titre: string
   affichage: Reglages['affichage']
   revele: boolean
+  legendeScene: string
 }) {
   const v = visuelsDe(titre)
   if (!v.couverture) return null
-  if (revele && v.scene) {
-    return (
-      <div className="livre-visuel">
-        <img className="scene" src={v.scene} alt="" draggable={false} />
-      </div>
-    )
-  }
+  const montrerCouverture = affichage !== 'tranche' || revele
+  const montrerTranche = (affichage !== 'couverture' || revele) && v.tranche
   return (
     <div className="livre-visuel">
-      {affichage !== 'tranche' && (
-        <img className="couverture" src={v.couverture} alt="" draggable={false} />
-      )}
-      {affichage !== 'couverture' && v.tranche && (
-        <img
-          className={`tranche${affichage === 'tranche' ? ' tranche-seule' : ''}`}
-          src={v.tranche}
-          alt=""
-          draggable={false}
-        />
+      <div className="livre-images">
+        {montrerCouverture && (
+          <img className="couverture" src={v.couverture} alt="" draggable={false} />
+        )}
+        {montrerTranche && (
+          <img
+            className={`tranche${affichage === 'tranche' && !revele ? ' tranche-seule' : ''}`}
+            src={v.tranche ?? undefined}
+            alt=""
+            draggable={false}
+          />
+        )}
+      </div>
+      {revele && v.scene && (
+        <figure className="scene-bloc">
+          <img className="scene" src={v.scene} alt="" draggable={false} />
+          <figcaption>{legendeScene}</figcaption>
+        </figure>
       )}
     </div>
   )
@@ -748,7 +754,12 @@ export function App() {
             className={`question${modeCarteSeule ? ' question-plan' : ''}${!montrerTitre ? ' question-compact' : ''}`}
           >
             {!modeCarteSeule && (
-              <Livre titre={question.invite} affichage={reglages.affichage} revele={resultat !== null} />
+              <Livre
+                titre={question.invite}
+                affichage={reglages.affichage}
+                revele={resultat !== null}
+                legendeScene={t.enJeu}
+              />
             )}
             <div className="question-texte">
               {chronoEnCours && chrono && (
