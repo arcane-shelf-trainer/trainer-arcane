@@ -108,22 +108,22 @@ export const TEXTES = {
       {
         libelle: 'Arcane Librarian Book Catalogue',
         url: 'https://docs.google.com/spreadsheets/d/1sJ6mWVzr3gadsEi66Oa0qrx_7OBQ0E1pZpunuGbHlD0/edit?gid=80450132',
-        detail: 'la feuille Google communautaire d’où viennent les 400 titres, leurs étagères, leurs séries et les images des livres',
+        detail: 'par coolsa, la feuille Google d’où viennent les 400 titres, leurs étagères, leurs séries et les images des livres, photographiés un à un en jeu',
       },
       {
         libelle: 'Complete Guide (Map, All Floors, Shelves & Book Lists)',
         url: 'https://steamcommunity.com/sharedfiles/filedetails/?id=3726876824',
-        detail: 'le guide Steam dont vient la carte des deux étages',
+        detail: 'par Monki, le guide Steam dont vient la carte des deux étages',
       },
       {
         libelle: 'Speedrun trainer de Le N',
         url: 'https://tutal-speedrun.nobodev.fr',
-        detail: 'l’autre entraîneur du jeu, qui a ouvert la voie ; essayez-le aussi',
+        detail: 'par Le N, l’autre entraîneur du jeu, qui a ouvert la voie ; essayez-le aussi',
       },
       {
         libelle: 'Librarian Book Locations Guide',
         url: 'https://librariangame.com/book-locations/',
-        detail: 'les mots-clés et les notes par catégorie affichés à la faute',
+        detail: 'par Librarian Game Guide, les mots-clés et les notes par catégorie affichés à la faute',
       },
       {
         libelle: 'Librarian: Tidy Up the Arcane Library!',
@@ -237,22 +237,22 @@ export const TEXTES = {
       {
         libelle: 'Arcane Librarian Book Catalogue',
         url: 'https://docs.google.com/spreadsheets/d/1sJ6mWVzr3gadsEi66Oa0qrx_7OBQ0E1pZpunuGbHlD0/edit?gid=80450132',
-        detail: 'the community spreadsheet behind the 400 titles, their shelves, series sizes and book images',
+        detail: 'by coolsa, the spreadsheet behind the 400 titles, their shelves, series sizes and book images, each photographed in game',
       },
       {
         libelle: 'Complete Guide (Map, All Floors, Shelves & Book Lists)',
         url: 'https://steamcommunity.com/sharedfiles/filedetails/?id=3726876824',
-        detail: 'the Steam guide the two-floor map comes from',
+        detail: 'by Monki, the Steam guide the two-floor map comes from',
       },
       {
         libelle: 'Speedrun trainer by Le N',
         url: 'https://tutal-speedrun.nobodev.fr',
-        detail: 'the other trainer for this game, which came first; try it too',
+        detail: 'by Le N, the other trainer for this game, which came first; try it too',
       },
       {
         libelle: 'Librarian Book Locations Guide',
         url: 'https://librariangame.com/book-locations/',
-        detail: 'the per-category keywords and notes shown after a mistake',
+        detail: 'by Librarian Game Guide, the per-category keywords and notes shown after a mistake',
       },
       {
         libelle: 'Librarian: Tidy Up the Arcane Library!',
