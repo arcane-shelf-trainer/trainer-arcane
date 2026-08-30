@@ -72,7 +72,7 @@ const TOMES: number[] = [3, 5, 10]
 const LONGUEURS_CHRONO = [20, 50, 400]
 const AFFICHAGES: Reglages['affichage'][] = ['complet', 'couverture', 'tranche']
 const PENALITE_MS = 3000
-const DELAI_CORRECT_MS = 900 // le temps de lire le retour et de voir la scène
+const DELAI_CORRECT_MS = 700 // le temps de lire le retour ; la scène en jeu n'apparaît qu'à la faute
 const DELAI_CORRECT_CHRONO_MS = 450
 const DELAI_FAUTE_CHRONO_MS = 1300
 const TIC_HORLOGE_MS = 15_000
@@ -801,7 +801,7 @@ export function App() {
               <Livre
                 titre={question.invite}
                 affichage={reglages.affichage}
-                revele={resultat !== null}
+                revele={resultat !== null && !resultat.correct}
                 legendeScene={t.enJeu}
               />
             )}
