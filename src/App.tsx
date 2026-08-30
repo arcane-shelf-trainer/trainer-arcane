@@ -506,7 +506,16 @@ export function App() {
   )
   const chronoEnCours = mode === 'chrono' && chrono !== null && chrono.fin === null
   const chronoFini = mode === 'chrono' && chrono !== null && chrono.fin !== null
-  const classeFiche = `fiche${resultat ? (resultat.correct ? ' fiche-ok' : ' fiche-faute') : ''}`
+  const modeLivre = mode === 'livres' || mode === 'tomes' || mode === 'chrono'
+  const classeFiche = `fiche${modeLivre ? ' fiche-livre' : ''}${resultat ? (resultat.correct ? ' fiche-ok' : ' fiche-faute') : ''}`
+
+  // Précharge la scène en jeu du livre affiché : à la réponse, elle apparaît sans délai.
+  useEffect(() => {
+    if (!question || !modeLivre) return
+    const v = visuelsDe(question.invite)
+    if (v.scene) new Image().src = v.scene
+    if (v.tranche) new Image().src = v.tranche
+  }, [question, modeLivre])
   const avecCarte = mode !== 'tomes' && (mode !== 'chrono' || chronoEnCours)
   const nomFiltreRecord = [
     t.filtres[filtre],

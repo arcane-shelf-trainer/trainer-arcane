@@ -36,8 +36,11 @@ self.addEventListener('fetch', (e) => {
     )
     return
   }
+  // La page elle-même se demande sans passer par le cache HTTP (GitHub Pages la garde
+  // dix minutes), pour que chaque visite voie la dernière version publiée.
+  const requete = e.request.mode === 'navigate' ? new Request(e.request, { cache: 'no-store' }) : e.request
   e.respondWith(
-    fetch(e.request)
+    fetch(requete)
       .then((rep) => {
         if (rep.ok && url.origin === location.origin) caches.open(CACHE).then((c) => c.put(e.request, rep.clone()))
         return rep

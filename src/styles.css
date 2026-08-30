@@ -287,6 +287,12 @@ h1 {
   transition: border-color 0.15s, box-shadow 0.15s;
 }
 
+/* Dans les modes à livre, la fiche réserve d'emblée la hauteur de la réponse
+   (scène en jeu, mots-clés, bouton) : rien ne bouge quand on répond. */
+.fiche-livre {
+  min-height: 400px;
+}
+
 .fiche-ok {
   border-color: var(--ok);
   box-shadow: 0 10px 26px rgba(0, 0, 0, 0.5), 0 0 0 3px rgba(63, 154, 95, 0.35);
@@ -1112,6 +1118,10 @@ footer {
 
   .onglets {
     flex-wrap: wrap;
+  }
+
+  .fiche-livre {
+    min-height: 0;
   }
 
   .onglet {
