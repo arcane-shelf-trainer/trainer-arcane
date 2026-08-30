@@ -17,6 +17,7 @@ export interface Reglages {
   carte: 'noms' | 'identifiants' | 'muette'
   quotaNouveaux: number
   longueurChrono: number
+  accueilVu: boolean
 }
 
 export interface Session {
@@ -30,6 +31,7 @@ export const REGLAGES_DEFAUT: Reglages = {
   carte: 'identifiants',
   quotaNouveaux: 10,
   longueurChrono: 20,
+  accueilVu: false,
 }
 
 function lire<T>(cle: string, defaut: T): T {

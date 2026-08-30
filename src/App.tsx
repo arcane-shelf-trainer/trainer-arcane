@@ -72,7 +72,8 @@ const TOMES: number[] = [3, 5, 10]
 const LONGUEURS_CHRONO = [20, 50, 400]
 const AFFICHAGES: Reglages['affichage'][] = ['complet', 'couverture', 'tranche']
 const PENALITE_MS = 3000
-const DELAI_CORRECT_MS = 450
+const DELAI_CORRECT_MS = 900 // le temps de lire le retour et de voir la scène
+const DELAI_CORRECT_CHRONO_MS = 450
 const DELAI_FAUTE_CHRONO_MS = 1300
 const TIC_HORLOGE_MS = 15_000
 
@@ -279,6 +280,7 @@ export function App() {
     [questions, cible],
   )
   const enSession = mode !== 'chrono' && reglages.entrainement === 'session' && !cible
+  const modeLivre = mode === 'livres' || mode === 'tomes' || mode === 'chrono'
 
   useEffect(() => sauvegarderProgres(progres), [progres])
   useEffect(() => sauvegarderRecords(records), [records])
@@ -297,7 +299,9 @@ export function App() {
     return () => window.clearInterval(id)
   }, [enSession])
 
-  const quotaRestant = Math.max(0, reglages.quotaNouveaux - session.nouveaux)
+  // Le quota de nouveaux par jour ne concerne que les livres : les 31 étagères des
+  // modes Plan, Situer et Étagère se découvrent d'un coup.
+  const quotaRestant = modeLivre ? Math.max(0, reglages.quotaNouveaux - session.nouveaux) : Infinity
 
   // Le paquet du moment : tout, ou seulement les dus et les nouveaux du jour.
   const deck = useMemo(() => {
@@ -308,6 +312,8 @@ export function App() {
   }, [enSession, clesBase, progres, horloge, quotaRestant])
   const deckRef = useRef(deck)
   deckRef.current = deck
+  // La question suivante est tirée à l'avance pour précharger ses images.
+  const prochaineRef = useRef<string | null>(null)
 
   const suivant = useCallback(() => {
     if (minuterie.current) window.clearTimeout(minuterie.current)
@@ -320,11 +326,23 @@ export function App() {
       setQuestion(null)
       return
     }
-    const cle = choisir(progresRef.current, candidats, Math.random(), questionRef.current?.cle)
+    const courante = questionRef.current?.cle
+    const preparee = prochaineRef.current
+    const cle =
+      preparee && preparee !== courante && candidats.includes(preparee)
+        ? preparee
+        : choisir(progresRef.current, candidats, Math.random(), courante)
     const q = parCle.get(cle) ?? null
     setQuestion(q)
     setChoixTitre(null)
     setOptions(q && cle.startsWith('etagere:') ? optionsPour(q.section, Math.random) : [])
+    const suivante = candidats.length > 1 ? choisir(progresRef.current, candidats, Math.random(), cle) : null
+    prochaineRef.current = suivante
+    const qs = suivante ? parCle.get(suivante) : null
+    if (suivante && qs && !suivante.startsWith('plan:') && !suivante.startsWith('situer:')) {
+      const v = visuelsDe(qs.invite)
+      for (const src of [v.couverture, v.tranche, v.scene]) if (src) new Image().src = src
+    }
   }, [parCle])
 
   // Nouveau mode, filtre ou réglage : on repart sur une question fraîche (hors chrono).
@@ -361,7 +379,9 @@ export function App() {
       const correct = reponse === q.reponse
       const premiereFois = fiche(progresRef.current, q.cle).vues === 0
       setProgres((p) => enregistrer(p, q.cle, correct, Date.now()))
-      if (premiereFois && mode !== 'chrono') setSession((s) => ({ ...s, nouveaux: s.nouveaux + 1 }))
+      if (premiereFois && (mode === 'livres' || mode === 'tomes')) {
+        setSession((s) => ({ ...s, nouveaux: s.nouveaux + 1 }))
+      }
       if (!correct && mode !== 'tomes') {
         const paire = `${q.reponse}>${reponse}`
         setConfusions((c) => ({ ...c, [paire]: (c[paire] ?? 0) + 1 }))
@@ -390,7 +410,7 @@ export function App() {
         setChrono({ ...chrono, faites, fautes })
         minuterie.current = window.setTimeout(
           suivant,
-          correct ? DELAI_CORRECT_MS : DELAI_FAUTE_CHRONO_MS,
+          correct ? DELAI_CORRECT_CHRONO_MS : DELAI_FAUTE_CHRONO_MS,
         )
         return
       }
@@ -451,7 +471,8 @@ export function App() {
       if (e.ctrlKey || e.metaKey || e.altKey) return
       const k = e.key
       if (resultat) {
-        if (!resultat.correct && (k === 'Enter' || k === ' ') && mode !== 'chrono') {
+        // Entrée ou Espace passe à la suite, faute ou non (le chrono enchaîne seul).
+        if ((k === 'Enter' || k === ' ') && mode !== 'chrono') {
           e.preventDefault()
           suivant()
         }
@@ -506,7 +527,6 @@ export function App() {
   )
   const chronoEnCours = mode === 'chrono' && chrono !== null && chrono.fin === null
   const chronoFini = mode === 'chrono' && chrono !== null && chrono.fin !== null
-  const modeLivre = mode === 'livres' || mode === 'tomes' || mode === 'chrono'
   const classeFiche = `fiche${modeLivre ? ' fiche-livre' : ''}${resultat ? (resultat.correct ? ' fiche-ok' : ' fiche-faute') : ''}`
 
   // Précharge la scène en jeu du livre affiché : à la réponse, elle apparaît sans délai.
@@ -688,6 +708,20 @@ export function App() {
         </div>
       </nav>
 
+      {!reglages.accueilVu && (
+        <section className="accueil">
+          <h2>{t.accueilTitre}</h2>
+          <ol className="accueil-etapes">
+            {t.accueilEtapes.map((e) => (
+              <li key={e}>{e}</li>
+            ))}
+          </ol>
+          <button className="filtre filtre-actif" onClick={() => setReglages({ ...reglages, accueilVu: true })}>
+            {t.accueilBouton}
+          </button>
+        </section>
+      )}
+
       <main className={classeFiche}>
         <p className="mode-aide">
           {t.modes[mode].aide}
@@ -760,6 +794,7 @@ export function App() {
 
         {question && (mode !== 'chrono' || chronoEnCours) && (
           <div
+            key={question.cle}
             className={`question${modeCarteSeule ? ' question-plan' : ''}${!montrerTitre ? ' question-compact' : ''}`}
           >
             {!modeCarteSeule && (

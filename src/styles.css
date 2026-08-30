@@ -317,6 +317,40 @@ h1 {
   display: flex;
   align-items: flex-start;
   gap: 28px;
+  animation: apparaitre 0.18s ease-out;
+}
+
+/* Le mot d'accueil, jusqu'au premier « Compris ». */
+.accueil {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 8px 22px;
+  margin-bottom: 14px;
+  padding: 12px 18px;
+  background: var(--bois);
+  border: 1px solid var(--or-sombre);
+  border-radius: 6px;
+}
+
+.accueil h2 {
+  margin: 0;
+  border: none;
+  padding: 0;
+  color: var(--or);
+}
+
+.accueil-etapes {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 0.92rem;
+  color: var(--clair);
+  line-height: 1.5;
+}
+
+.accueil-etapes li::marker {
+  color: var(--or);
+  font-family: var(--titres);
 }
 
 .question-plan {
@@ -340,6 +374,9 @@ h1 {
 .livre-images {
   display: flex;
   align-items: flex-end;
+  justify-content: center;
+  width: 196px; /* largeur fixe : le titre ne bouge pas quand la couverture arrive */
+  min-height: 176px;
   filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.45));
 }
 
@@ -1122,6 +1159,15 @@ footer {
 
   .fiche-livre {
     min-height: 0;
+  }
+
+  .livre-images {
+    width: auto;
+    min-height: 0;
+  }
+
+  .accueil {
+    grid-template-columns: 1fr;
   }
 
   .onglet {
