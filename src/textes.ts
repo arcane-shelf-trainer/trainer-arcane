@@ -15,7 +15,7 @@ export const TEXTES = {
     etagere: 'Étagère',
     exactEtagere: (titre: string) => `Exact : « ${titre} »`,
     fauteEtagere: (titreChoisi: string, section: string, categorie: string, titreAttendu: string) =>
-      `Non : « ${titreChoisi} » est en ${section} — ${categorie}. C’était « ${titreAttendu} »`,
+      `Non : « ${titreChoisi} » est en ${section} (${categorie}). C’était « ${titreAttendu} »`,
     raccourcisEtagere: 'Clavier : 1 à 4.',
     modes: {
       plan: { nom: 'Plan', aide: 'Une catégorie : quelle étagère ?' },
@@ -60,9 +60,9 @@ export const TEXTES = {
     categorie: 'Catégorie',
     titreLivre: 'Titre',
     serieDe: (n: number) => `Série de ${n} tomes`,
-    exact: (attendu: string, categorie: string) => `Exact : ${attendu} — ${categorie}`,
+    exact: (attendu: string, categorie: string) => `Exact : ${attendu} (${categorie})`,
     faute: (choisi: string, attendu: string, categorie: string) =>
-      `Non, ${choisi} : c’était ${attendu} — ${categorie}`,
+      `Non, ${choisi} : c’était ${attendu} (${categorie})`,
     exactTomes: (attendu: string) => `Exact : ${attendu} tomes`,
     fauteTomes: (choisi: string, attendu: string) => `Non, ${choisi} : c’était ${attendu} tomes`,
     motsCles: 'Mots-clés',
@@ -142,7 +142,7 @@ export const TEXTES = {
     etagere: 'Shelf',
     exactEtagere: (titre: string) => `Correct: “${titre}”`,
     fauteEtagere: (titreChoisi: string, section: string, categorie: string, titreAttendu: string) =>
-      `No: “${titreChoisi}” is in ${section} — ${categorie}. It was “${titreAttendu}”`,
+      `No: “${titreChoisi}” is in ${section} (${categorie}). It was “${titreAttendu}”`,
     raccourcisEtagere: 'Keyboard: 1 to 4.',
     modes: {
       plan: { nom: 'Map', aide: 'A category: which shelf?' },
@@ -187,9 +187,9 @@ export const TEXTES = {
     categorie: 'Category',
     titreLivre: 'Title',
     serieDe: (n: number) => `${n}-volume series`,
-    exact: (attendu: string, categorie: string) => `Correct: ${attendu} — ${categorie}`,
+    exact: (attendu: string, categorie: string) => `Correct: ${attendu} (${categorie})`,
     faute: (choisi: string, attendu: string, categorie: string) =>
-      `No, ${choisi}: it was ${attendu} — ${categorie}`,
+      `No, ${choisi}: it was ${attendu} (${categorie})`,
     exactTomes: (attendu: string) => `Correct: ${attendu} volumes`,
     fauteTomes: (choisi: string, attendu: string) => `No, ${choisi}: it was ${attendu} volumes`,
     motsCles: 'Keywords',

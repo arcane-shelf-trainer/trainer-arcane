@@ -82,7 +82,7 @@ function questionsPour(mode: Mode, filtre: Filtre, tomes: FiltreTomes): Question
     return SECTIONS.filter((s) => filtre === 'tous' || s.section.startsWith(filtre)).map((s) => ({
       cle: `${mode}:${s.section}`,
       invite:
-        mode === 'plan' ? s.categorie : mode === 'situer' ? s.section : `${s.section} — ${s.categorie}`,
+        mode === 'plan' ? s.categorie : mode === 'situer' ? s.section : `${s.section} · ${s.categorie}`,
       reponse: s.section,
       categorie: s.categorie,
       section: s.section,
@@ -808,8 +808,8 @@ export function App() {
             <div className="question-texte">
               {chronoEnCours && chrono && (
                 <p className="chrono-hud">
-                  {t.chronoTitre(chrono.faites + 1, reglages.longueurChrono)} —{' '}
-                  {formatSecondes(maintenant - chrono.debut, langue)} — {t.fautes(chrono.fautes)}
+                  {t.chronoTitre(chrono.faites + 1, reglages.longueurChrono)} ·{' '}
+                  {formatSecondes(maintenant - chrono.debut, langue)} · {t.fautes(chrono.fautes)}
                 </p>
               )}
               {montrerTitre && (
@@ -872,7 +872,7 @@ export function App() {
                     {mode === 'tomes' && (
                       <span className="saisie-detail">
                         {' '}
-                        — {resultat.section} {resultat.categorie}
+                        ({resultat.section} {resultat.categorie})
                       </span>
                     )}
                     {!resultat.correct && mode !== 'chrono' && <em> ({t.entreePourContinuer})</em>}
@@ -967,7 +967,10 @@ export function App() {
                 <a href={s.url} target="_blank" rel="noreferrer">
                   {s.libelle}
                 </a>{' '}
-                <span className="sources-detail">— {s.detail}</span>
+                <span className="sources-detail">
+                  {t.sep}
+                  {s.detail}
+                </span>
               </li>
             ))}
           </ul>

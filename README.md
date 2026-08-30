@@ -7,7 +7,7 @@ stop reading the wall maps.
 - **Map** mode: a category, which shelf?
 - **Locate** mode: a shelf code, click where it is on a fully blank map, from memory.
 - **Books** mode: a book (real cover and spine), which shelf? The series size (3, 5 or
-  10 volumes) is shown under the title, and a filter restricts the deck to one size —
+  10 volumes) is shown under the title, and a filter restricts the deck to one size:
   3-volume series earn skill points fastest in a speedrun.
 - **Shelf** mode: a shelf, which of four books belongs there? Keys 1 to 4. The shelf is
   highlighted on the map.
