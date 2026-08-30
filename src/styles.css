@@ -290,7 +290,7 @@ h1 {
 /* Dans les modes à livre, la fiche réserve d'emblée la hauteur de la réponse
    (scène en jeu, mots-clés, bouton) : rien ne bouge quand on répond. */
 .fiche-livre {
-  min-height: 446px;
+  min-height: 456px;
 }
 
 .fiche-ok {
