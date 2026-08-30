@@ -975,7 +975,13 @@ export function App() {
             ))}
           </ul>
         </section>
-        <p className="credits">{t.credits}</p>
+        <p className="credits">
+          {t.creePar}{' '}
+          <a href="https://github.com/Feuzz11" target="_blank" rel="noreferrer">
+            Feuzz11
+          </a>
+          , {t.contact}. {t.credits}
+        </p>
         <div className="pied-actions">
           <a
             className="lien"

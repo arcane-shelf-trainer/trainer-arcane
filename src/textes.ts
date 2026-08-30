@@ -100,6 +100,8 @@ export const TEXTES = {
     credits:
       'Outil de fans, gratuit, sans lien avec le studio. Titres, couvertures et carte appartiennent aux auteurs du jeu.',
     suggestions: 'Suggestions et signalements',
+    creePar: 'Créé par',
+    contact: 'contact via les issues GitHub',
     sourcesTitre: 'Sources et remerciements',
     sourcesIntro: 'Cet outil n’existerait pas sans le travail de ces personnes :',
     sources: [
@@ -227,6 +229,8 @@ export const TEXTES = {
     credits:
       'Free fan-made tool, not affiliated with the studio. Titles, covers and map belong to the game’s authors.',
     suggestions: 'Suggestions and reports',
+    creePar: 'Made by',
+    contact: 'contact through GitHub issues',
     sourcesTitre: 'Sources and thanks',
     sourcesIntro: 'This tool would not exist without the work of these people:',
     sources: [
